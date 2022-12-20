@@ -1,0 +1,31 @@
+{% extends '_base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block page_title %}Create a book{% endblock page_title %}
+
+
+{% block content %}
+
+<div class="container mt-4" dir="rtl">
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow my-3">
+                <h5 class="card-header bg-primary text-light px-5">فرم</h5>
+                <div class="px-5 pt-3 pb-5">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <br>
+                        <button type="submit" class="btn btn-bg btn-outline-dark mt-3">ساخت کتاب جدید</button>  
+                    </form>
+                    <br>
+                    <a href="{% url 'book_list' %}" class="btn btn-bg btn-outline-dark mt-3">برگشت به کتاب ها</a>    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

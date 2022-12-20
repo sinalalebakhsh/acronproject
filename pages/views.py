@@ -1,12 +1,16 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.views.generic.base import TemplateView
 
 
-def home_view(request):
-    return render(request, 'pages/home.html')
+class HomeView(TemplateView):
+    template_name = 'home.html'
 
-def manifest_consciousness(request):
-    return render(request, 'pages/manifest-consciousness.html')
+class SinaLaleBakhshPhoto(TemplateView):
+    template_name = 'pages/sinalalebakhsh_photo.html'
+
+
+class Manifest(TemplateView):
+    template_name = 'pages/manifest.html'
 
 
 
