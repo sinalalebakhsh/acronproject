@@ -1,0 +1,34 @@
+{% extends '_base.html' %}
+
+{% block page_title %}Delete:{{ book.title }}{% endblock page_title %}
+
+
+{% block content %}
+    
+<div class="container mt-4" dir="rtl">
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow my-3">
+                <h5 class="card-header bg-primary text-light px-5">ویرایش کتاب</h5>
+                <div class="px-5 pt-3 pb-5">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <h1>حذف این کتاب: {{ book.title }}</h1>
+                        <p>آیا مطمئن هستید که این کتاب حذف شود؟
+                            <h6>اسم کتاب:</h6> 
+                            <h4><b style="color:red;"> {{ book.title }}</b></h4>
+                        </p>
+ 
+                        <input type="submit" value="Delete" class="btn btn-bg btn-outline-danger mt-3">    
+                    </form>
+                    <br>
+                    <a href="{% url 'book_detail' book.id %}" class="btn btn-bg btn-outline-dark mt-3">برگشت</a>    
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

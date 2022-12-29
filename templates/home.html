@@ -1,0 +1,45 @@
+{% extends '_base.html' %}
+
+
+{% block page_title %}Home{% endblock page_title %}
+
+{% block content %}
+
+
+<div class="container" >
+    <div class="d-flex justify-content-center">
+        <div class="card col-xl-6  col-lg-6 col-md-8 col-sm-10 col-xs-6 m-sm-5 border rounded pt-4 shadow" 
+            dir="rtl">
+            {% load static %}
+            <img src="{% static 'pages/Posts.jpg' %}">
+            <div class="card-body">
+                <a href="{% url 'post_list'%}" class="text-decoration-none " style="color:#000000;">
+                    <h5 class="card-title">Posts</h5>
+                </a>
+                <a href="{% url 'post_list'%}" class="btn btn-bg btn-outline-danger">Click here</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div class="card col-xl-6  col-lg-6 col-md-8 col-sm-10 col-xs-6 m-sm-5 border rounded pt-4 shadow" 
+            dir="rtl">
+            {% load static %}
+            <img src="{% static 'pages/2.jpg' %}">
+            <div class="card-body">
+                <a href="{% url 'manifest'%}" class="text-decoration-none " style="color:#000000;">
+                    <h5 class="card-title">Manifest</h5>
+                </a>
+                <p class="card-text">جهان بینی ، برداشت از واقعیت و هرآنچه که نظرم می باشد در اینجاست</p>
+
+                <a href="{% url 'manifest' %}" class="btn btn-bg btn-outline-danger">Click here</a>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock content %}
+
+
+

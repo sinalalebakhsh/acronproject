@@ -1,0 +1,81 @@
+{% extends '_base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block styles %}
+<style>
+img {
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+</style>
+{% endblock styles %}
+
+{% block page_title %}Detail:{{ post.title }}{% endblock page_title %}
+
+
+{% block content %}
+
+
+<div>    
+    {% if post.cover %}
+        <img src="{{ post.cover.url }}" class="img-fluid mt-1" alt="..." style="width:70%">
+    {% else %}
+        <img src="/static/pages/sinalalebakhsh.jpg" class="img-fluid" alt="..." width="70%">
+    {% endif %}
+</div>
+
+
+<div class="container mt-1" dir="rtl">
+  
+    <div class="d-flex justify-content-center">
+        <div>
+            <h3>{{ post.title|capfirst }}</h3>
+            <h5 class="small my-1"><span class="text-muted">نویسنده: </span>{{ post.user }}</h5>
+            {% if post.user == user %}
+                {% comment %} <a href="{% url 'post_edit' post.id %}" class="btn btn-bg btn-outline-dark mt-3">ویرایش این کتاب</a>                            
+                <a href="{% url 'post_delete' post.id %}" class="btn btn-bg btn-outline-danger mt-3">حذف این کتاب</a>                             {% endcomment %}
+            {% endif %}
+            <a href="{% url 'post_list' %}" class="btn btn-bg btn-outline-dark mt-3">Back</a>                              
+        </div>
+    </div>    
+    <div class="d-flex justify-content-center">
+        <div class="my-3 p-5 w-sm-75 w-100">
+            <br>
+            <br>
+            {{ post.description|linebreaks }}
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="card shadow my-3 p-5 w-sm-75 w-100">
+            <h2 class="mb-5">Comments:</h2>
+            {% for comment in comments  %}
+            <div class="border-bottom mb-3">
+                <h5 class="mb-3">{{ comment.user.username }}</h5>
+                {% if comment.recommend %}
+                <p style="color:blue;">Like</p>
+                {% else %}
+                <p style="color:red;">Dislike</p>
+                {% endif %}
+                <p>
+                    {{ comment.text|linebreaks }}  
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="card shadow my-3 p-5 w-sm-75 w-100">
+            <h3>Comment</h3>
+            <form method="POST">
+                {% csrf_token %}
+                {{ comment_form|crispy }}
+                <button type="submit" class="btn btn-dark mt-3">Send</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

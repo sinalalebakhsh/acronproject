@@ -1,0 +1,11 @@
+.responsive {
+width: 100%;
+height: auto;
+}
+.responsive_plus{
+margin-top: 1%;
+width: 70%;
+display: block;
+margin-left: auto;
+margin-right: auto;
+}

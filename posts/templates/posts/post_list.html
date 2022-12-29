@@ -1,0 +1,95 @@
+{% extends '_base.html' %}
+
+{% block page_title %}Posts{% endblock page_title %}
+
+
+{% block content %}
+
+
+<div class="container" >
+    {% for post in posts  %}
+        <div class="d-flex justify-content-center">
+            <div class="card col-xl-6  col-lg-6 col-md-8 col-sm-10 col-xs-6 m-sm-5 border rounded pt-4 shadow" 
+                dir="rtl">
+                {% if post.cover %}
+                    <a href="{{ post.get_absolute_url }}">
+                        <img  src="{{ post.cover.url }}" class="img-fluid rounded-start" alt="..."  >
+                    </a>
+                {% else %}
+                    <a href="{{ post.get_absolute_url }}">
+                        <img  src="/static/pages/sinalalebakhsh.jpg" class="img-fluid rounded-start" alt="...">
+                    </a>
+                {% endif %}
+                <div class="card-body">
+                    <a href="{{ post.get_absolute_url }}" 
+                        class="text-decoration-none" 
+                        style="color:#000000;">
+                        <h3 class="card-title" ><strong>{{ post.title | capfirst }}</strong></h3>
+                        <p class="card-text pt-3">{{ post.description | truncatewords:8 }}
+                    </a>
+                    <a class="btn btn-bg btn-outline-danger" href="{{ post.get_absolute_url }}">Click here</a>
+                </div>
+            </div>
+        </div> 
+    {% endfor %}
+</div>
+
+{% comment %} 
+#########################################################################################################
+<div class="container mt-4">
+    <div class="flex-row-reverse justify-content-md-center">
+        {% for post in posts  %}
+        <div class="card m-2" style="max-width: 45%">
+            <div class="row g-0 h-100" dir="rtl">
+                    <div class="col-md-4">
+                        {% if post.cover %}
+                            <a href="{{ post.get_absolute_url }}">
+                                <img  src="{{ post.cover.url }}" class="img-fluid rounded-start" alt="..."  >
+                            </a>
+                        {% else %}
+                            <a href="{{ post.get_absolute_url }}">
+                                <img  src="/static/pages/sinalalebakhsh.jpg" class="img-fluid rounded-start" alt="...">
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-8 h-100">
+                        <div class="d-flex flex-column justify-content-between h-100">
+                            <div class="card-body">
+                                <a href="{{ post.get_absolute_url }}" 
+                                   class="text-decoration-none" 
+                                   style="color:#000000;">
+                                    <h3 class="card-title" ><strong>{{ post.title | capfirst }}</strong></h3>
+                                    <p class="card-text pt-3">{{ post.description | truncatewords:8 }}
+                                </a>
+                                    <a class="btn btn-bg btn-outline-danger" href="{{ post.get_absolute_url }}">Click here</a>
+                                </p>
+                                <p class="text-muted">by: {{ post.user }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div> {% endcomment %}
+
+<ul class="pagination justify-content-center mt-3">
+    {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+    {% else %}
+        <li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+    {% endif %}
+    
+    <li class="page-item"><a class="page-link" href="#">{{ page_obj.number }}</a></li>
+ 
+    {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+    {% else %}
+        <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+    {% endif %}
+  </ul> 
+
+
+
+
+{% endblock content %}

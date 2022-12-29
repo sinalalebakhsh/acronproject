@@ -1,0 +1,86 @@
+{% extends '_base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block page_title %}Detail:{{ book.title }}{% endblock page_title %}
+
+
+{% block content %}
+<div class="container mt-5" dir="rtl">
+        <div class="">
+            <div class="">
+                <div class="d-flex justify-content-center">
+                    <div class="row w-sm-75 w-100">
+                        <div class="col-xs-12 col-md-3 d-flex justify-content-center">
+                            <div>
+                                {% if book.cover %}
+                                    <img src="{{ book.cover.url }}" class="img-fluid rounded-start" alt="...">
+                                {% else %}
+                                    <img src="/static/pages/sinalalebakhsh.jpg" class="img-fluid rounded-start" alt="...">
+                                {% endif %}
+                             </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 text-center text-md-end mt-md-1 mt-4">
+                            <h1>{{ book.title|capfirst }}</h1>
+                            <h5 class="small my-1"><span class="text-muted">نویسنده: </span>{{ book.author }}</h5>
+                            <h5 class="small my-1"><span class="text-muted">ثبت: </span>{{ book.user }}</h5>
+                            {% comment %} <h5 class="small my-1"><span class="text-muted">مترجم: </span>الهام خرسندی</h5> {% endcomment %}
+                            {% comment %} <h5 class="small my-1"><span class="text-muted">انتشارات: </span>هوزمزد</h5> {% endcomment %}
+
+                            {% if book.user == user %}
+                                <a href="{% url 'book_edit' book.id %}" class="btn btn-bg btn-outline-dark mt-3">ویرایش این کتاب</a>                            
+                                <a href="{% url 'book_delete' book.id %}" class="btn btn-bg btn-outline-danger mt-3">حذف این کتاب</a>                            
+                            {% endif %}
+                            <a href="{% url 'book_list' %}" class="btn btn-bg btn-outline-dark mt-3">بازگشت</a>                            
+                            
+                        </div>
+                        <div class="col-xs-12 col-md-3 d-flex flex-column">
+                            <h3 class="align-self-center pt-2 text-muted align-self-md-end">قیمت: {{ book.price }}$ دلار</h3>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="d-flex justify-content-center">
+                    <div class="my-3 p-5 w-sm-75 w-100">
+                        <br>
+                        <br>
+                        {{ book.description|linebreaks }}
+                    </div>
+                </div>
+    
+                <div class="d-flex justify-content-center">
+                    <div class="card shadow my-3 p-5 w-sm-75 w-100">
+                        <h2 class="mb-5">نظرات:</h2>
+
+                        {% for comment in comments  %}
+                            <div class="border-bottom mb-3">
+                                <h5 class="mb-3">{{ comment.user.username }}</h5>
+                                {% if comment.recommend %}
+                                    <p style="color:blue;">این کتاب را توصیه میکنم</p>
+                                {% else %}
+                                    <p style="color:red;">این کتاب را توصیه نمیکنم</p>
+                                {% endif %}
+                                <p>
+                                    {{ comment.text|linebreaks }}  
+                                </p>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+    
+                <div class="d-flex justify-content-center">
+                    <div class="card shadow my-3 p-5 w-sm-75 w-100">
+                        <h3>نظر خود را وارد کنید:</h3>
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ comment_form|crispy }}
+                            <button type="submit" class="btn btn-dark mt-3">ارسال</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+{% endblock content %}
