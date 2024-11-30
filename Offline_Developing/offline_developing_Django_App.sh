@@ -1767,6 +1767,8 @@ git rm -r --cached .
 
 
 
+django-admin makemessages -l fa
+django-admin compilemessages
 
 
 

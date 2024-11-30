@@ -1,0 +1,16 @@
+# .env file
+
+# Django settings
+DJANGO_SECRET_KEY='this is will be here'
+DOCKER_COMPOSE_DJANGO_SECRET_KEY='this is will be here'
+DJANGO_DEBUG=True/False
+DOCKER_COMPOSE_DJANGO_DEBUG=True/False
+DJANGO_ALLOWED_HOSTS=0.0.0.0,127.0.0.1,localhost
+
+# PostgreSQL settings
+POSTGRES_DB=postgres
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=anythingYouWant
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
+
