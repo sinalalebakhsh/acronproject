@@ -1,0 +1,17 @@
+# .env file
+
+# Django settings
+DJANGO_SECRET_KEY='sample'
+DJANGO_DEBUG=sample
+DJANGO_ALLOWED_HOSTS=sample
+
+# PostgreSQL settings
+POSTGRESQL_DB_NAME=sample
+POSTGRESQL_DB_USER=sample
+POSTGRESQL_DB_PASS=sample
+POSTGRESQL_DB_HOST=sample
+POSTGRESQL_DB_PORT=sample
+
+# pgAdmin settings
+PGADMIN_DEFAULT_EMAIL=sample
+PGADMIN_DEFAULT_PASSWORD=sample

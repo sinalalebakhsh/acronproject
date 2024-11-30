@@ -1,0 +1,257 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>acronproject | SinaLalehbakhsh</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #3ac2c2;
+            color: #00ffe1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #000000;
+
+        }
+
+        nav {
+            background-color: #043b3b;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            text-align: left;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 24px;
+            color: #333;
+            border-bottom: 2px solid #ffffff;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .projects,
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            text-align: left;
+
+        }
+
+        .project,
+        .skill {
+            flex: 0 0 48%;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #eee;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .project img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .project h3,
+        .skill h3 {
+            margin-top: 0;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static 'img/icon.png' %}">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'css/_base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/vendor.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+
+<body >
+    
+    <div class="header-inner">
+        <header  style="text-align: center;">
+            <h1>Sina Lalehbakhsh</h1>
+        </header>
+
+            <nav>
+                <a href="/">Home</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </nav>
+    </div>
+
+    <div class="container">
+        <section id="about">
+            <div class="d-flex justify-content-between align-items-center flex-sm-row flex-column">
+                <h2  class="section-title">Sina Lalehbakhsh</h2>
+                <div class="d-flex justify-content-between align-items-center flex-sm-row flex-column p-4">
+                    <h1 class="page-title"></h1>
+                    <a href="/" class="btn btn-info">Back to home</a>
+                </div>
+            </div>
+            <p dir="ltr">Hello! I'm a Django developer with a strong background in Python and backend development. I have experience working with Docker and Nginx, and I am passionate about building scalable, efficient, and reliable web applications. Additionally, I have an intermediate proficiency in the English language, which helps me collaborate effectively in diverse teams.</p>
+        </section>
+        <!-- Main Content Wrapper Start -->
+        <div class="main-content-wrapper container-fluid">
+            <div class="shop-page-wrapper shop-fullwidth">
+                <div class="container-fluid shop-products">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="tab-content" id="product-tab-content">
+                                <div class="tab-pane fade show active" id="nav-all">
+                                    <div class="row xxl-block-grid-6 grid-space-20">
+                                        <img class="px-5" src="/static/img/SINA-min.jpg" style="max-height: 500px;">
+                                        <br>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main Content Wrapper Start -->
+
+        <section id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects">
+                <div class="project">
+                    <img src="/static/img/favicon.ico" alt="Acron Project">
+                    <h3><a href="https://www.acronproject.com" target="_blank">Acron Project</a></h3>
+                    <p>A web application created using the Django framework. This project utilizes REST APIs and
+                        integrates several modern technologies to deliver a robust and scalable solution for managing
+                        content and interactions efficiently.</p>
+                </div>
+                <div class="project">
+                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="Gocron Project">
+                    <h3><a href="https://github.com/sinalalebakhsh/Gocron" target="_blank">Gocron</a></h3>
+                    <p>Gocron is a command-line interface (CLI) API developed for learning the Go language. This project
+                        provides practical examples and allows users to interact with Go concepts through a simple
+                        keyword-based input system.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills">
+                <div class="skill">
+                    <h3>Django</h3>
+                    <p>Proficient in building robust web applications using the Django framework.</p>
+                </div>
+                <div class="skill">
+                    <h3>Python</h3>
+                    <p>Experienced in writing clean, efficient, and maintainable Python code.</p>
+                </div>
+                <div class="skill">
+                    <h3>Docker</h3>
+                    <p>Skilled in containerizing applications using Docker for easy deployment and scalability.</p>
+                </div>
+                <div class="skill">
+                    <h3>Nginx</h3>
+                    <p>Knowledgeable in configuring Nginx as a reverse proxy and load balancer for web applications.</p>
+                </div>
+                <div class="skill">
+                    <h3>Backend Development</h3>
+                    <p>Strong experience in backend development, including RESTful APIs and database management.</p>
+                </div>
+                <div class="skill">
+                    <h3>English Language</h3>
+                    <p>Intermediate proficiency in English, enabling effective communication and collaboration.</p>
+                </div>
+            </div>
+        </section>
+
+
+    </div>
+
+    <!-- Footer Start-->
+    <div class="container">
+        <div class="textwidget">
+            <a href="{% url 'sinalalehbakhsh' %}">
+                <img class="px-5" src="/static/img/SINA-min.jpg" style="max-height: 50px; margin-bottom: -15px;" alt="Logo">
+            </a>
+            <a href="/">
+                <img class="px-5" src="/static/img/favicon.ico" style="max-height: 50px; margin-bottom: -15px;" alt="Logo">
+            </a>
+        </div>
+        <br>
+
+        <ul class="footer-menu">
+            <li>
+                <a href="{% url 'about' %}" class="btn btn-info" style="color: #000000;">About</a>
+            </li>
+            <li>
+                <a href="{% url 'account_login' %}" class="btn btn-info" style="color: #000000;">Login</a>
+            </li>
+        </ul>
+
+        
+        <br>
+        <div style="  margin: auto;">
+            Sina Lalehbakhsh © | all rights reserved | 2024-۱۴۰۳
+        </div>
+    </div>
+    <!-- Footer End-->
+
+
+    <!-- JS Files -->
+    <script src="{% static 'js/vendor.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+
+</html>
