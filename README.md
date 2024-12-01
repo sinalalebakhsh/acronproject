@@ -12,6 +12,11 @@
 
 <br>
 
+در این سایت - کاربر - محدود شده است به ورود اجباری همانند اینستاگرام
+On this site - the user - is limited to mandatory login, like Instagram.
+
+<br>
+
 
 [acronproject.com]: http://acronproject.com/
 
