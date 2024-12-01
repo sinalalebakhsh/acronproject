@@ -223,13 +223,13 @@
                                 </div>
                                 <div class="mini-cart__product__content pt-2">
                                     <span class="mini-cart__product__title d-flex flex-row justify-content-between">
-                                        <a href="#"> محصول سماره یک </a>
+                                        <a href="#">{{ item.product_obj.title }}</a>
                                         <a href="#" class="">
                                             &#10060;
                                         </a>
                                     </span>
                                     <span class="mini-cart__product__quantity">
-                                        <span>۴۹,۰۰۰ تومان</span> &#215; <span>۱</span>
+                                        <span>{{ item.product_obj.price }}</span> &#215; <span>۱</span>
                                     </span>
                                 </div>
                             </li>
@@ -239,11 +239,11 @@
                     </ul>
                     <div class="mini-cart__total">
                         <span>جمع کل</span>
-                        <span class="ammount">۱۴۸,۰۰۰ تومان</span>
+                        <span class="ammount">{{ cart.get_total_price }} تومان</span>
                     </div>
                     <div class="mini-cart__buttons">
-                        <a href="{% url 'cart:cart_detail' %}" class="btn btn-fullwidth btn-bg-sand mb--20">مشاهده سبد خرید</a>
-                        <a href="checkout.html" class="btn btn-fullwidth btn-bg-sand">پرداخت</a>
+                        <a href="{% url 'cart:cart_detail' %}" class="btn btn-fullwidth btn-bg-sand mb--20">{% translate "Go to cart" %}</a>
+                        <a href="checkout.html" class="btn btn-fullwidth btn-bg-sand">{% translate "Checkout" %}</a>
                     </div>
                 </div>
             </div>
