@@ -11,7 +11,11 @@ class Product(models.Model):
         default=0
     )  # for Dollar use models.DecimalFields
     active = models.BooleanField(default=True)
-    # cover =
+    image = models.ImageField(verbose_name=_("Product Image"), upload_to="product/product_image/", blank=True)
+
+
+
+    
 
     datetime_created = models.DateTimeField(auto_now_add=True)
     dateTime_modified = models.DateTimeField(auto_now=True)
