@@ -1,10 +1,10 @@
 -i https://pypi.org/simple
 asgiref==3.8.1; python_version >= '3.8'
 certifi==2024.7.4; python_version >= '3.6'
-channels==4.1.0; python_version >= '3.8'
+channels==4.2.0; python_version >= '3.8'
 charset-normalizer==3.3.2; python_full_version >= '3.7.0'
 crispy-bootstrap4==2024.1; python_version >= '3.8'
-dj-database-url==2.2.0
+dj-database-url==2.3.0
 django==5.0.7; python_version >= '3.10'
 django-allauth==0.63.6; python_version >= '3.7'
 django-crispy-forms==2.3; python_version >= '3.8'
@@ -15,6 +15,7 @@ gunicorn==23.0.0; python_version >= '3.7'
 idna==3.7; python_version >= '3.5'
 marshmallow==3.21.3; python_version >= '3.8'
 packaging==24.1; python_version >= '3.8'
+pillow==11.0.0; python_version >= '3.9'
 polib==1.2.0
 psycopg2-binary==2.9.9; python_version >= '3.7'
 python-dotenv==1.0.1; python_version >= '3.8'

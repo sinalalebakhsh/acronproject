@@ -27,6 +27,7 @@ urllib3 = "==2.2.2"
 gunicorn = "*"
 dj-database-url = "*"
 channels = "*"
+pillow = "*"
 
 [dev-packages]
 
