@@ -1792,5 +1792,13 @@ django-admin compilemessages
 # -----------------------------------------------------------------------------------
 # Image Product عکس محصولات
 
+# 1:
+python manage.py makemigrations
+# Output:
+    # Migrations for 'products':
+    #   products/migrations/0004_product_image.py
+    #     - Add field image to product
+
+
 
 
