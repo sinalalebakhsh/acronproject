@@ -1808,3 +1808,9 @@ python manage.py migrate
       Applying products.0004_product_image... OK
 
 
+# 3:
+# add this is config/setting.py
+# media
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+
