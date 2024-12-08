@@ -60,7 +60,7 @@ Products
                                             <div class="product-inner">
                                                 <figure class="product-image">
                                                     <a href="{{ product.get_absolute_url }}">
-                                                        <img src="{% static 'img/SINA-Min-Magenta.jpg' %}"
+                                                        <img src="{{ product.image.url }}"
                                                             alt="Products">
                                                     </a>
                                                     <div class="ShoppingYar-product-action">

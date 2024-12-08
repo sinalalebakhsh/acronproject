@@ -1836,3 +1836,12 @@ urlpatterns = [
                                 src="{{ product.image.url }}"
                                 alt="">
                         {% endif %}
+
+
+# 6:
+# Add in products_list.html
+                                                        <img src="{{ product.image.url }}"
+
+
+
+
