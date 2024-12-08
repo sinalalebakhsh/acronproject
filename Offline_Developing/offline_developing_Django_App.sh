@@ -1795,10 +1795,16 @@ django-admin compilemessages
 # 1:
 python manage.py makemigrations
 # Output:
-    # Migrations for 'products':
-    #   products/migrations/0004_product_image.py
-    #     - Add field image to product
+    Migrations for 'products':
+      products/migrations/0004_product_image.py
+        - Add field image to product
 
-
+# 2:
+python manage.py migrate
+# Output:
+    Operations to perform:
+      Apply all migrations: account, accounts, admin, auth, contenttypes, products, sessions
+    Running migrations:
+      Applying products.0004_product_image... OK
 
 
