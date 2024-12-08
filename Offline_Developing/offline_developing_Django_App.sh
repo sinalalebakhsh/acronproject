@@ -1808,11 +1808,14 @@ python manage.py migrate
       Applying products.0004_product_image... OK
 
 
+
 # 3:
 # add this is config/setting.py
 # media
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+
+
 
 # 4:
 # add this in config/urls.py
@@ -1826,3 +1829,10 @@ urlpatterns = [
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
+# 5:
+# add in product_detail.html this condition
+                        {% if product.image %}
+                            <img class="m-auto" style="max-height: 400px;"
+                                src="{{ product.image.url }}"
+                                alt="">
+                        {% endif %}

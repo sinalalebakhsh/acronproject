@@ -36,9 +36,11 @@ Product Detail
             <div class="container">
                 <div class="row no-gutters mb--80">
                     <div class="col-12 col-sm-4 product-main-image d-flex ">
-                        <img class="m-auto" style="max-height: 400px;"
-                            src="{{ product.image.url }}"
-                            alt="">
+                        {% if product.image %}
+                            <img class="m-auto" style="max-height: 400px;"
+                                src="{{ product.image.url }}"
+                                alt="">
+                        {% endif %}
                     </div>
                     <div class="col-12 col-sm-8 product-main-details mt-md--50">
                         <div class="product-summary pl-lg--30 pl-md--0 text-right p-4">
