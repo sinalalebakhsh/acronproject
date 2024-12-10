@@ -60,8 +60,10 @@ Products
                                             <div class="product-inner">
                                                 <figure class="product-image">
                                                     <a href="{{ product.get_absolute_url }}">
-                                                        <img src="{{ product.image.url }}"
-                                                            alt="Products">
+                                                        {% if product.image %}
+                                                            <img src="{{ product.image.url }}"
+                                                                alt="Products">
+                                                        {% endif %}
                                                     </a>
                                                     <div class="ShoppingYar-product-action">
                                                         <div class="product-action d-flex">
