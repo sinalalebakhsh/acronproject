@@ -10,8 +10,18 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = UserChangeForm
     model = CustomUser
+
+    
+
     fieldsets = UserAdmin.fieldsets + (
         (None, {'fields': ('age',)}),
+    )
+
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('username', 'password1', 'password2', 'age'),
+        }),
     )
 
 
