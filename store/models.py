@@ -8,8 +8,6 @@ from django.db import models
 # description
 # price
 # add date and time
-
-
 class Product(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField()
@@ -20,6 +18,20 @@ class Product(models.Model):
     datetime_modified = models.DateTimeField(auto_now=True)
 
 
+# Customer:
+#   first_name
+#   last_name
+#   email
+#   phone_number
+#   birth_date
+class Customer(models.Model):
+    first_name = models.CharField(max_length=255) 
+    last_name = models.CharField(max_length=255) 
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=255)
+    birth_date = models.DateField(
 
 
 
+        
+    )
