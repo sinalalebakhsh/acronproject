@@ -39,7 +39,7 @@ class Order(models.Model):
         ('c','Canceled'),
     ]
     datetime_created = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=255, choices=ORDER_STATUS)
+    status = models.CharField(max_length=255, choices=ORDER_STATUS, default='u')
 
 
 
