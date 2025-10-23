@@ -13,7 +13,7 @@ class Product(models.Model):
     slug = models.SlugField()
     description = models.TextField()
     price = models.DecimalField(max_digits=6,decimal_places=2)
-    inventory = models.IntegerField()
+    inventory = models.IntegerField(default=0)
     datetime_created = models.DateTimeField(auto_now_add=True)
     datetime_modified = models.DateTimeField(auto_now=True)
 
