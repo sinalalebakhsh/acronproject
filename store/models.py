@@ -33,10 +33,13 @@ class Customer(models.Model):
 
 
 class Order(models.Model):
+    ORDER_STATUS_PAID = 'P'
+    ORDER_STATUS_UNPAID = 'U'
+    ORDER_STATUS_CANCELED = 'C'
     ORDER_STATUS = [
-        ('p','Paid'),
-        ('u','Unpaid'),
-        ('c','Canceled'),
+        (ORDER_STATUS_PAID ,'Paid'),
+        (ORDER_STATUS_UNPAID ,'Unpaid'),
+        (ORDER_STATUS_CANCELED ,'Canceled'),
     ]
     datetime_created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=255, choices=ORDER_STATUS, default='u')
