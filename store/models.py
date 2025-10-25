@@ -80,12 +80,24 @@ class OrderItem(models.Model):
 # Cart
 # When this cart is created ?
 #   datetime_created 
+class Cart(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
 
 # CartItem
 # What product ? - quantity ? - for what cart ?
+#   Cart -> foreign_key
 #   product => Foreign_Key
 #   quantity
-#   Cart -> foreign_key
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveSmallIntegerField()
+
+    class Meta:
+        unique_together = [['cart', 'product']]
+
 
 
 # Comment
