@@ -7,6 +7,11 @@ class Category(models.Model):
     description = models.CharField(max_length=500, blank=True)
     detetime_created = models.DateTimeField(auto_now_add=True)
 
+
+class Discount(models.Model):
+    discount = models.FloatField()
+    description = models.CharField(max_length=255)
+
 # Product
 # name
 # description
@@ -21,6 +26,7 @@ class Product(models.Model):
     inventory = models.IntegerField(default=0)
     datetime_created = models.DateTimeField(auto_now_add=True)
     datetime_modified = models.DateTimeField(auto_now=True)
+    discounts = models.ManyToManyField(Discount, blank=True)
 
 # Customer:
 #   first_name
@@ -41,9 +47,9 @@ class Address(models.Model):
     city = models.CharField(max_length=255)
     street = models.CharField(max_length=255)
 
-
+# Order
+# Who has created this order and when ?
 class Order(models.Model):
-    # customer => Foreign Key
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     ORDER_STATUS_PAID = 'P'
     ORDER_STATUS_UNPAID = 'U'
@@ -55,6 +61,32 @@ class Order(models.Model):
     ]
     datetime_created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=1, choices=ORDER_STATUS, default=ORDER_STATUS_UNPAID)
+
+
+# OrderItem
+# what product ? - quantity ? - for what order ?
+#   product => Foreign_Key
+#   quantity
+#   Order -> Foreign Key
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.PROTECT)
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)
+    quantity = models.PositiveSmallIntegerField()
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+
+    class Meta:
+        unique_together = [['order', 'product']]
+
+# Cart
+# When this cart is created ?
+#   datetime_created 
+
+# CartItem
+# What product ? - quantity ? - for what cart ?
+#   product => Foreign_Key
+#   quantity
+#   Cart -> foreign_key
+
 
 # Comment
 # name
@@ -77,6 +109,9 @@ class Comment(models.Model):
     body = models.TextField()
     datetime_created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=2, choices=COMMENT_STATUS, default=COMMENT_STATUS_NOT_APROCED)
+
+
+
 
 
 
