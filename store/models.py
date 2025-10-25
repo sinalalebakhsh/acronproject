@@ -43,7 +43,7 @@ class Order(models.Model):
         (ORDER_STATUS_CANCELED ,'Canceled'),
     ]
     datetime_created = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=255, choices=ORDER_STATUS, default='u')
+    status = models.CharField(max_length=255, choices=ORDER_STATUS, default=ORDER_STATUS_UNPAID)
 
 # Comment
 # name
@@ -54,16 +54,16 @@ class Comment(models.Model):
     # product => Foreign Key
     COMMENT_STATUS_WAITING = 'w'
     COMMENT_STATUS_APROVED = 'a'
-    COMMENT_STATUS_NOT_APROCED = 'n'
+    COMMENT_STATUS_NOT_APROCED = 'na'
     COMMENT_STATUS = [
-        (COMMENT_STATUS_WAITING,'waiting'),
-        (COMMENT_STATUS_APROVED,'aproved'),
-        (COMMENT_STATUS_NOT_APROCED,'not aproved'),
+        (COMMENT_STATUS_WAITING,'Waiting'),
+        (COMMENT_STATUS_APROVED,'Approved'),
+        (COMMENT_STATUS_NOT_APROCED,'Not Approved'),
     ]
-    name = ""
-    body = models.TextField(max_length=255)
+    name = models.CharField(max_length=255)
+    body = models.TextField()
     datetime_created = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=255, choices=COMMENT_STATUS, default='w')
+    status = models.CharField(max_length=2, choices=COMMENT_STATUS, default=COMMENT_STATUS_NOT_APROCED)
 
 
 
