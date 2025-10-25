@@ -6,6 +6,8 @@ class Category(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=500, blank=True)
     detetime_created = models.DateTimeField(auto_now_add=True)
+    top_product = models.ForeignKey('Product', on_delete=models.SET_NULL, null=True)
+
 
 
 class Discount(models.Model):
