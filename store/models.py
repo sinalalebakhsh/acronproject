@@ -35,6 +35,12 @@ class Customer(models.Model):
     phone_number = models.CharField(max_length=255)
     birth_date = models.DateField(null=True, blank=True)
 
+class Address(models.Model):
+    customer = models.OneToOneField(Customer, on_delete=models.CASCADE, primary_key=True)
+    province = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    street = models.CharField(max_length=255)
+
 
 class Order(models.Model):
     # customer => Foreign Key
