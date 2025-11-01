@@ -1,3 +1,4 @@
+# ORM Object Relational Maper
 """
 Django settings for config project.
 
