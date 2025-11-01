@@ -3,7 +3,7 @@ from django.db import models
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
     description = models.CharField(max_length=500, blank=True)
     detetime_created = models.DateTimeField(auto_now_add=True)
     top_product = models.ForeignKey('Product', on_delete=models.SET_NULL, null=True, related_name='+')
@@ -24,7 +24,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='products')
     slug = models.SlugField()
     description = models.TextField()
-    price = models.DecimalField(max_digits=6,decimal_places=2)
+    unit_price = models.DecimalField(max_digits=6,decimal_places=2)
     inventory = models.IntegerField(default=0)
     datetime_created = models.DateTimeField(auto_now_add=True)
     datetime_modified = models.DateTimeField(auto_now=True)
@@ -74,7 +74,7 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.PROTECT, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='order_items')
     quantity = models.PositiveSmallIntegerField()
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    unit_price = models.DecimalField(max_digits=6, decimal_places=2)
 
     class Meta:
         unique_together = [['order', 'product']]
@@ -112,17 +112,17 @@ class Comment(models.Model):
     # One Many
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments')
     COMMENT_STATUS_WAITING = 'w'
-    COMMENT_STATUS_APROVED = 'a'
-    COMMENT_STATUS_NOT_APROCED = 'na'
+    COMMENT_STATUS_APPROVED = 'a'
+    COMMENT_STATUS_NOT_APPROVED = 'na'
     COMMENT_STATUS = [
         (COMMENT_STATUS_WAITING,'Waiting'),
-        (COMMENT_STATUS_APROVED,'Approved'),
-        (COMMENT_STATUS_NOT_APROCED,'Not Approved'),
+        (COMMENT_STATUS_APPROVED,'Approved'),
+        (COMMENT_STATUS_NOT_APPROVED,'Not Approved'),
     ]
     name = models.CharField(max_length=255)
     body = models.TextField()
     datetime_created = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=2, choices=COMMENT_STATUS, default=COMMENT_STATUS_NOT_APROCED)
+    status = models.CharField(max_length=2, choices=COMMENT_STATUS, default=COMMENT_STATUS_NOT_APPROVED)
 
 
 

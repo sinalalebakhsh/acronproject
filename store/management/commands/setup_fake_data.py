@@ -123,6 +123,3 @@ class Command(BaseCommand):
                 )
                 all_cart_items.append(cart_item)
         print('DONE')
-
-
-
