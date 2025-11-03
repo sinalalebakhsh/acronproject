@@ -1,4 +1,12 @@
 # ORM Object Relational Maper
+'''
+    when once of these run, Django hit the sql
+    1. iteration
+    2. list()
+    3. slicing
+'''
+
+
 """
 Django settings for config project.
 
