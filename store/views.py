@@ -5,14 +5,9 @@ from .models import Product
 
 
 def show_data(request):
-    query_ = Product.objects.get(id=1)
+    queryset = Product.objects.filter(inventory__lt=5)
 
-    print("-------------------------------------------------------------------------")
-    print(query_.id)
-    print(query_.name)
-    print("-------------------------------------------------------------------------")
-
-    return render(request, 'hello.html')
+    return render(request, 'hello.html', {'products': list(queryset)})
 
 
 
