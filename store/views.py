@@ -5,9 +5,12 @@ from .models import Product
 
 
 def show_data(request):
-    qq = Product.objects.all()
+    query_ = Product.objects.get(id=1)
 
-    print(qq[1])
+    print("-------------------------------------------------------------------------")
+    print(query_.id)
+    print(query_.name)
+    print("-------------------------------------------------------------------------")
 
     return render(request, 'hello.html')
 

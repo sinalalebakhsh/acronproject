@@ -1,9 +1,16 @@
 # ORM Object Relational Maper
 '''
     when once of these run, Django hit the sql
+    query evaluation
     1. iteration
     2. list()
     3. slicing
+
+    exp:
+    query_ = Product.objects.all()
+    print(type(query_))
+    print(list(query_))
+
 '''
 
 
