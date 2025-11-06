@@ -1,13 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from .models import Product
+from .models import Product, OrderItem
 
 
 def show_data(request):
-    queryset = Product.objects.filter(inventory__lt=5)
+    queryset = Product.objects.all()
+    queryset = Product.objects.order_by('inventory')
+    # queryset = OrderItem.objects.all()
 
-    return render(request, 'hello.html', {'products': list(queryset)})
+    list(queryset)
+    return render(request, 'hello.html',)
 
 
 
