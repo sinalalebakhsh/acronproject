@@ -5,7 +5,7 @@ from .models import Product, OrderItem, Order
 
 
 def show_data(request):
-    queryset = Order.objects.filter(status=Order.ORDER_STATUS_UNPAID)
+    queryset = Order.objects.exclude(status=Order.ORDER_STATUS_UNPAID)
     
     list(queryset)
     return render(request, 'hello.html',)
