@@ -6,7 +6,7 @@ from .models import Product, OrderItem, Order
 
 
 def show_data(request):
-    queryset = OrderItem.objects.filter(product__id = F("id"))
+    queryset = Product.objects.all()[:10]
     
     list(queryset)
     return render(request, 'hello.html',)
