@@ -6,7 +6,7 @@ from .models import Product, OrderItem, Order
 
 
 def show_data(request):
-    queryset = Product.objects.filter(inventory__gt=90).latest('unit_price')
+    queryset = Product.objects.values('id', 'name', 'unit_price')
     
     list(queryset)
     return render(request, 'hello.html',)
