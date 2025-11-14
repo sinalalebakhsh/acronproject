@@ -6,9 +6,11 @@ from .models import Product, OrderItem, Order
 
 
 def show_data(request):
-    queryset = OrderItem.objects.values('product_id').distinct() # delete repetetive products if had to 
+    queryset_orderitems_products = OrderItem.objects.values('product_id').distinct() # delete repetetive products if had to 
     
-    # list(queryset)
+    queryset = Product.objects.filter(id__in=queryset_orderitems_products)
+
+    # list(queryset_orderitems_products)
     return render(request, 'hello.html', {'products': list(queryset)})
 
 
