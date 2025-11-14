@@ -6,10 +6,10 @@ from .models import Product, OrderItem, Order
 
 
 def show_data(request):
-    queryset = Product.objects.order_by('-inventory').values('name', 'inventory')
+    queryset = Product.objects.order_by('-inventory').values('id','name', 'inventory', 'unit_price')
     
-    list(queryset)
-    return render(request, 'hello.html',)
+    # list(queryset)
+    return render(request, 'hello.html', {'products': list(queryset)})
 
 
 
