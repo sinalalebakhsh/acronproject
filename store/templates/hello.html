@@ -10,10 +10,10 @@
 </head>
 <body>
     {% for ordered_item in ordered_items %}
+        <h2>name: {{ ordered_item.product }}</h2>
+        <p>id: {{ ordered_item.id }}</p>
         <h3>order: {{ ordered_item.order }}</h3>
-        {% comment %} <p>id: {{ ordered_item.id }}</p> {% endcomment %}
-        <p>name: {{ ordered_item.product }}</p>
-        {% comment %} <p>inventory: {{ ordered_item.inventory }}</p> {% endcomment %}
+        <p>inventory: {{ ordered_item.product.inventory }}</p>
         <h2>----------------------------------------------------------------</h2>
     {% endfor %}
 </body>

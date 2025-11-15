@@ -30,6 +30,8 @@ class Product(models.Model):
     datetime_modified = models.DateTimeField(auto_now=True)
     discounts = models.ManyToManyField(Discount, blank=True, related_name='products')
 
+    def __str__(self):
+        return self.name
     
 
 # Customer:
