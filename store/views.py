@@ -6,7 +6,7 @@ from .models import Product, OrderItem, Order
 
 
 def show_data(request):    
-    queryset = Product.objects.only('name', 'id')
+    queryset = Product.objects.defer('datetime_created')
 
     # list(queryset_orderitems_products)
     return render(request, 'hello.html', {'products': list(queryset)})
