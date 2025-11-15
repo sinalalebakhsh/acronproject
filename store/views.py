@@ -6,10 +6,10 @@ from .models import Product, OrderItem, Order
 
 
 def show_data(request):    
-    queryset = Product.objects.defer('datetime_created')
+    queryset = OrderItem.objects.select_related('order')
 
     # list(queryset_orderitems_products)
-    return render(request, 'hello.html', {'products': list(queryset)})
+    return render(request, 'hello.html', {'ordered_items': list(queryset)})
 
 
 

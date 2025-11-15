@@ -9,11 +9,11 @@
     <script src='main.js'></script>
 </head>
 <body>
-    {% for product in products %}
-        <h3>{{ product.name }}</h3>
-        <p>id: {{ product.id }}</p>
-        <p>price: ${{ product.unit_price }}</p>
-        {% comment %} <p>inventory: {{ product.inventory }}</p> {% endcomment %}
+    {% for ordered_item in ordered_items %}
+        <h3>order: {{ ordered_item.order }}</h3>
+        {% comment %} <p>id: {{ ordered_item.id }}</p> {% endcomment %}
+        <p>name: {{ ordered_item.product }}</p>
+        {% comment %} <p>inventory: {{ ordered_item.inventory }}</p> {% endcomment %}
         <h2>----------------------------------------------------------------</h2>
     {% endfor %}
 </body>

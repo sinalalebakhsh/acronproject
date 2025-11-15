@@ -66,6 +66,14 @@ class Order(models.Model):
     datetime_created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=1, choices=ORDER_STATUS, default=ORDER_STATUS_UNPAID)
 
+    def __str__(self):        
+        if self.status == 'P':
+            return 'Paid'
+        if self.status == 'U':
+            return 'Unpaid'
+        if self.status == 'C':
+            return 'Canceled'
+
 
 # OrderItem
 # what product ? - quantity ? - for what order ?
