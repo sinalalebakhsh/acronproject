@@ -13,7 +13,7 @@
         <h3>{{ product.name }}</h3>
         <p>id: {{ product.id }}</p>
         <p>price: ${{ product.unit_price }}</p>
-        <p>inventory: {{ product.inventory }}</p>
+        {% comment %} <p>inventory: {{ product.inventory }}</p> {% endcomment %}
         <h2>----------------------------------------------------------------</h2>
     {% endfor %}
 </body>
