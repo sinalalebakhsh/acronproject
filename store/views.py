@@ -7,7 +7,7 @@ from .models import Product, OrderItem, Order, Comment
 
 def show_data(request):    
     queryset = Comment.objects.prefetch_related('product').all()
-
+    # To PUSH
     # list(queryset_orderitems_products)
     return render(request, 'hello.html', {'comments': list(queryset)})
 
