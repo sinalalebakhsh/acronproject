@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "beardedbear.beardedtheme",
-        "ms-python.python"
+        "ms-python.python",
+        "beardedbear.beardedicons"
     ]
 }
