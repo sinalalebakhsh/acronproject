@@ -18,4 +18,17 @@ touch __pycache__/test.pyc
     ```
     https://dev.mysql.com/downloads/benchmarks.html
     ```
-    
+
+
+
+## Make it executable: git-automate.sh
+```
+chmod +x git-automate.sh
+```
+
+
+### Run it: 
+```
+./git-automate.sh
+```
+
