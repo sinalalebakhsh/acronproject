@@ -12,3 +12,10 @@ git rm -r --cached */__pycache__
 mkdir -p __pycache__
 touch __pycache__/test.pyc
 ```
+
+
+## pre installed
+    ```
+    https://dev.mysql.com/downloads/benchmarks.html
+    ```
+    
