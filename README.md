@@ -1,3 +1,25 @@
+## create fake data for sample:
+```
+python manage.py setup_fake_data
+```
+
+    ## result:
+        Deleting old data...
+        Creating new data...
+        Adding 100 categories...DONE
+        Adding 10 discounts...DONE
+        Adding 1000 product...DONE
+        Adding 100 customers...DONE
+        Adding customers addresses...DONE
+        Adding 30 orders...DONE
+        Adding order items...DONE
+        Adding product comments...DONE
+        Adding 100 carts...DONE
+        Adding cart items...DONE
+        (acronproject)
+
+
+
 ### prompts
 python manage.py sqlmigrate store 0001
 
@@ -40,4 +62,4 @@ commends:
 
 
 
-    
+
