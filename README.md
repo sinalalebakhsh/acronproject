@@ -32,4 +32,12 @@ chmod +x git-automate.sh
 ./git-automate.sh
 ```
 
-#
+# MySql Workbwnch:
+commends:
+
+    DROP DATABASE store;
+    CREATE DATABASE store;
+
+
+
+    
