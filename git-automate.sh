@@ -51,3 +51,6 @@ else
     echo "Commit failed!"
     exit 1
 fi
+
+
+clear
