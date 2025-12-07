@@ -15,6 +15,7 @@ python manage.py setup_fake_data
 ```
 
 result:
+
     Deleting old data...
     Creating new data...
     Adding 100 categories...DONE
