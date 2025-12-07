@@ -1,3 +1,14 @@
+# First steps:
+    1. migrate
+        ```
+        python manage.py migrate
+        ```
+
+    2.create fake data:
+        ```
+        python manage.py setup_fake_data
+        ```
+
 ## create fake data for sample:
 ```
 python manage.py setup_fake_data
@@ -59,7 +70,6 @@ commends:
 
     DROP DATABASE store;
     CREATE DATABASE store;
-
 
 
 
