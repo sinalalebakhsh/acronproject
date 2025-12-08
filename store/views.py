@@ -10,11 +10,7 @@ def show_data(request):
     queryset = Product.objects.all()
     # To PUSH
     # list(queryset_orderitems_products)
-    queryset_plus = Product.objects.aggregate(
-        id=Count('id'),
-        avrage=Avg('unit_price'),
-        max_inventory=Max('inventory'),
-        )
+    queryset_plus = Product.objects.filter(inventory__gt=10).aggregate(avregate_of_inventory_gt_10=Avg('unit_price'))
     
     return render(request, 'hello.html', {
         'order_items': list(queryset),
