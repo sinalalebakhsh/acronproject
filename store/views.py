@@ -10,7 +10,7 @@ def show_data(request):
     queryset = Product.objects.all()
     # To PUSH
     # list(queryset_orderitems_products)
-    queryset_plus = Product.objects.aggregate(Count('id'))
+    queryset_plus = Product.objects.aggregate(id=Count('id'))
     
     return render(request, 'hello.html', {
         'order_items': list(queryset),
