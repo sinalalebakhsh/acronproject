@@ -7,13 +7,10 @@ from .models import Product, OrderItem, Order, Comment
 
 
 def show_data(request):    
-    queryset = Product.objects.annotate(x=Value(1)).all()[:5]
+    queryset = OrderItem.objects.annotate(total_price=F('quantity') * F('unit_price')).all()
     
-       
-    return render(request, 'hello.html', {
-        
-
-        })
+    print(list(queryset))
+    return render(request, 'hello.html', { })
 
 
 
