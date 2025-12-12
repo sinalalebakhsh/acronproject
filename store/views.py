@@ -7,10 +7,11 @@ from .models import Product, OrderItem, Order, Comment, Customer
 
 
 def show_data(request):    
-    queryset = Customer.objects.annotate(fullname=Func(F('first_name'), Value(' '), F('last_name'),function='CONCAT')).defer('first_name', 'last_name')
-    
-    print(list(queryset))
-    return render(request, 'hello.html', { })
+    queryset = OrderItem.objects \
+                        .values('order_id') \
+                        .annotate(count=Count('order_id'))
+    print(queryset)
+    return render(request, 'hello.html')
 
 
 
