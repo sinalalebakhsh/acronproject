@@ -7,8 +7,8 @@ from .models import Product, OrderItem, Order, Comment, Customer
 
 
 def show_data(request):    
-    queryset = Order.objects \
-                        .annotate(items_count=Count('items'))
+    queryset = Customer.objects \
+                        .annotate(items_count=Count('orders'))
     print(queryset)
     return render(request, 'hello.html')
 
