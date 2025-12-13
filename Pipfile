@@ -9,6 +9,8 @@ django-debug-toolbar = "*"
 mysqlclient = "*"
 factory-boy = "*"
 faker = "*"
+jdatetime = "*"
+requests = "*"
 
 [dev-packages]
 
