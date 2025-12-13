@@ -9,27 +9,7 @@
     <script src='main.js'></script>
 </head>
 <body>
-    <h3>
-        aggregate.id  =  {{ aggregate.id }}
-    </h3>
-    <h3>
-        aggregate.avrage  =  {{ aggregate.avrage }}
-    </h3>
-    <h3>
-        aggregate.max_inventory  =  {{ aggregate.max_inventory }}
-    </h3>
-    <h3>
-        aggregate.avregate_of_inventory_gt_10  =  {{ aggregate.avregate_of_inventory_gt_10 }}
-    </h3>
 
-    {% for item in order_items %}
-        <h2>item name: {{ item.id }}</h2>
-        <p>product name:{{ item.product.order }} </p>
-        <p>status: {{ item.quantity  }}</p>
-        <h2>----------------------------------------------------------------</h2>
-    {% empty %}
-        <p>No items found in this order.</p>
-    {% endfor %}
 
 </body>
 </html>

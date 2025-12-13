@@ -6,14 +6,6 @@ import sys
 import requests
 from pathlib import Path
 
-# Optional: For Persian date (install with: pip install jdatetime)
-# import jdatetime
-
-# def get_persian_date():
-#     """Get Persian (Shamsi) date and time"""
-#     now = jdatetime.datetime.now()
-#     return now.strftime("%y.%m.%d %H:%M:%S")
-
 # Configuration
 CONFIG = {
     'initial_interval': 60,      # 1 minute in seconds
@@ -22,6 +14,8 @@ CONFIG = {
     'max_retries': 3,            # Maximum retries for failed operations
     'error_log_dir': 'git_auto_errors',
     'timeout': 10,               # Timeout for internet checks in seconds
+    'branch': 'main',            # Default branch (change to 'master' if needed)
+    'log_file': 'git_auto_log.txt',  # Log file name
 }
 
 def check_internet_connection():
@@ -173,6 +167,21 @@ def get_django_changes():
     except Exception as e:
         return f"Error checking changes: {str(e)}"
 
+def save_to_log_file(message, separator="="*60):
+    """Save message to log file with timestamp"""
+    try:
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        with open(CONFIG['log_file'], 'a', encoding='utf-8') as f:
+            f.write(f"\n{separator}\n")
+            f.write(f"[{timestamp}]\n")
+            f.write(f"{separator}\n")
+            f.write(f"{message}\n")
+        
+        print(f"✓ Log saved to {CONFIG['log_file']}")
+    except Exception as e:
+        print(f"✗ Error saving to log file: {str(e)}")
+
 def save_error_to_file(error_message):
     """Save error to txt file"""
     error_dir = CONFIG['error_log_dir']
@@ -188,22 +197,142 @@ def save_error_to_file(error_message):
         f.write(f"Platform: {sys.platform}\n")
     
     print(f"Error saved to file: {filename}")
+    
+    # Also save to main log file
+    save_to_log_file(f"ERROR: {error_message}")
+
+def get_git_info():
+    """Get comprehensive git information"""
+    git_info = {}
+    
+    try:
+        # Get current branch
+        branch_result = subprocess.run(
+            ['git', 'branch', '--show-current'],
+            capture_output=True,
+            text=True
+        )
+        git_info['branch'] = branch_result.stdout.strip()
+        
+        # Get remote URL
+        remote_result = subprocess.run(
+            ['git', 'remote', '-v'],
+            capture_output=True,
+            text=True
+        )
+        git_info['remote'] = remote_result.stdout.strip()
+        
+        # Get last 5 commits
+        log_result = subprocess.run(
+            ['git', 'log', '--oneline', '-5'],
+            capture_output=True,
+            text=True
+        )
+        git_info['recent_commits'] = log_result.stdout.strip()
+        
+        # Get git status
+        status_result = subprocess.run(
+            ['git', 'status', '--porcelain'],
+            capture_output=True,
+            text=True
+        )
+        git_info['status'] = status_result.stdout.strip()
+        
+        # Get git config user info
+        user_name = subprocess.run(
+            ['git', 'config', 'user.name'],
+            capture_output=True,
+            text=True
+        ).stdout.strip()
+        
+        user_email = subprocess.run(
+            ['git', 'config', 'user.email'],
+            capture_output=True,
+            text=True
+        ).stdout.strip()
+        
+        git_info['user'] = f"{user_name} <{user_email}>"
+        
+        # Get total commits
+        count_result = subprocess.run(
+            ['git', 'rev-list', '--count', 'HEAD'],
+            capture_output=True,
+            text=True
+        )
+        git_info['total_commits'] = count_result.stdout.strip()
+        
+        return git_info
+        
+    except Exception as e:
+        git_info['error'] = f"Error getting git info: {str(e)}"
+        return git_info
+
+def verify_git_push():
+    """Verify that push was successful by checking local vs remote"""
+    try:
+        # Get latest local commit
+        local_commit = subprocess.run(
+            ['git', 'rev-parse', 'HEAD'],
+            capture_output=True,
+            text=True
+        ).stdout.strip()
+        
+        # Get latest remote commit
+        remote_commit = subprocess.run(
+            ['git', 'ls-remote', 'origin', f'refs/heads/{CONFIG["branch"]}'],
+            capture_output=True,
+            text=True
+        ).stdout.split()[0].strip()
+        
+        # Get commit messages for comparison
+        local_msg = subprocess.run(
+            ['git', 'log', '--oneline', '-1'],
+            capture_output=True,
+            text=True
+        ).stdout.strip()
+        
+        print(f"\nPush Verification:")
+        print(f"  Local commit:  {local_commit[:8]}... - {local_msg}")
+        print(f"  Remote commit: {remote_commit[:8]}...")
+        
+        if local_commit == remote_commit:
+            print(f"  ✓ Push verified: Local and remote are synchronized")
+            return True, local_commit, remote_commit, local_msg
+        else:
+            print(f"  ⚠ Warning: Local and remote differ")
+            return False, local_commit, remote_commit, local_msg
+            
+    except Exception as e:
+        print(f"  ✗ Could not verify push: {str(e)}")
+        return False, None, None, str(e)
 
 def run_git_commands():
-    """Execute git commands"""
+    """Execute git commands with verification and logging"""
     try:
-        # Date and time
         current_time = datetime.datetime.now().strftime("%d.%m.%y %H:%M:%S")
+        full_timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        # Start log
+        log_content = []
+        log_content.append(f"GIT AUTO OPERATION STARTED")
+        log_content.append(f"Time: {full_timestamp}")
+        log_content.append("")
         
         # Check for changes
         changes_message = get_django_changes()
         
         if changes_message == "No changes found":
-            print(f"{current_time} - No changes to commit")
+            message = f"{current_time} - No changes to commit"
+            print(message)
+            log_content.append(message)
+            save_to_log_file("\n".join(log_content))
             return True
         
+        log_content.append("1. GIT ADD")
+        log_content.append("-" * 40)
+        
         # git add .
-        print("Running git add ...")
+        print("\n1. Running git add ...")
         add_result = subprocess.run(['git', 'add', '.'], 
                                    capture_output=True, 
                                    text=True)
@@ -211,11 +340,19 @@ def run_git_commands():
         if add_result.returncode != 0:
             raise Exception(f"Error in git add: {add_result.stderr}")
         
+        log_content.append(f"✓ git add completed")
+        log_content.append(f"Output: {add_result.stdout.strip()}")
+        log_content.append("")
+        print("   ✓ git add completed")
+        
+        log_content.append("2. GIT COMMIT")
+        log_content.append("-" * 40)
+        
         # Create commit message
         commit_msg = f"{current_time}\n{changes_message}"
         
         # git commit
-        print("Running git commit ...")
+        print("\n2. Running git commit ...")
         commit_result = subprocess.run(['git', 'commit', '-m', commit_msg], 
                                       capture_output=True, 
                                       text=True)
@@ -223,22 +360,118 @@ def run_git_commands():
         if commit_result.returncode != 0:
             raise Exception(f"Error in git commit: {commit_result.stderr}")
         
+        # Get commit hash for reference
+        commit_hash = subprocess.run(
+            ['git', 'rev-parse', '--short', 'HEAD'],
+            capture_output=True,
+            text=True
+        ).stdout.strip()
+        
+        commit_full_hash = subprocess.run(
+            ['git', 'rev-parse', 'HEAD'],
+            capture_output=True,
+            text=True
+        ).stdout.strip()
+        
+        log_content.append(f"✓ git commit completed")
+        log_content.append(f"Commit Hash: {commit_hash} ({commit_full_hash})")
+        log_content.append(f"Commit Message:\n{commit_msg}")
+        log_content.append(f"Output: {commit_result.stdout.strip()}")
+        log_content.append("")
+        print(f"   ✓ git commit completed (commit: {commit_hash})")
+        
+        log_content.append("3. GIT PUSH")
+        log_content.append("-" * 40)
+        
         # git push
-        print("Running git push ...")
-        push_result = subprocess.run(['git', 'push', '-u', 'origin'], 
+        print(f"\n3. Running git push to {CONFIG['branch']} branch...")
+        push_result = subprocess.run(['git', 'push', '-u', 'origin', CONFIG['branch']], 
                                     capture_output=True, 
                                     text=True)
         
         if push_result.returncode != 0:
             raise Exception(f"Error in git push: {push_result.stderr}")
         
-        print(f"{current_time} - Operation completed successfully")
-        print(f"Commit message:\n{commit_msg}")
+        log_content.append(f"✓ git push completed")
+        log_content.append(f"Branch: {CONFIG['branch']}")
+        log_content.append(f"Output: {push_result.stdout.strip()}")
+        log_content.append("")
+        print(f"   ✓ git push completed")
+        
+        log_content.append("4. PUSH VERIFICATION")
+        log_content.append("-" * 40)
+        
+        # Verify push
+        print("\n4. Verifying push...")
+        time.sleep(2)  # Wait a bit for sync
+        push_verified, local_commit, remote_commit, local_msg = verify_git_push()
+        
+        if push_verified:
+            log_content.append("✓ Push verified successfully")
+        else:
+            log_content.append("⚠ Push verification warning")
+        
+        if local_commit and remote_commit:
+            log_content.append(f"Local Commit:  {local_commit}")
+            log_content.append(f"Remote Commit: {remote_commit}")
+            log_content.append(f"Match: {'Yes' if local_commit == remote_commit else 'No'}")
+        
+        log_content.append("")
+        
+        log_content.append("5. GIT INFORMATION SUMMARY")
+        log_content.append("-" * 40)
+        
+        # Get comprehensive git info
+        git_info = get_git_info()
+        
+        if 'error' in git_info:
+            log_content.append(f"Error getting git info: {git_info['error']}")
+        else:
+            log_content.append(f"Current Branch: {git_info.get('branch', 'N/A')}")
+            log_content.append(f"Git User: {git_info.get('user', 'N/A')}")
+            log_content.append(f"Total Commits: {git_info.get('total_commits', 'N/A')}")
+            log_content.append("")
+            log_content.append("Remote URLs:")
+            log_content.append(git_info.get('remote', 'N/A'))
+            log_content.append("")
+            log_content.append("Recent Commits (last 5):")
+            log_content.append(git_info.get('recent_commits', 'N/A'))
+            log_content.append("")
+            log_content.append("Current Status:")
+            log_content.append(git_info.get('status', 'N/A') if git_info.get('status') else "Clean working directory")
+        
+        log_content.append("")
+        log_content.append("OPERATION COMPLETED SUCCESSFULLY")
+        log_content.append(f"Time: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        log_content.append(f"Commit: {commit_hash}")
+        
+        # Save all logs to file
+        save_to_log_file("\n".join(log_content))
+        
+        # Print summary to console
+        print(f"\n{current_time} - Operation completed successfully")
+        print(f"Commit: {commit_hash}")
+        print(f"Message preview: {commit_msg[:100]}...")
+        print(f"Push verified: {'Yes' if push_verified else 'Needs attention'}")
+        print(f"✓ All logs saved to {CONFIG['log_file']}")
+        
         return True
         
     except Exception as e:
         error_msg = f"Error executing git commands: {str(e)}"
-        print(error_msg)
+        print(f"\n✗ {error_msg}")
+        
+        # Save error to log file too
+        error_log = [
+            f"GIT AUTO OPERATION FAILED",
+            f"Time: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+            f"Error: {error_msg}",
+            "",
+            "Last Git Status:",
+            get_django_changes()
+        ]
+        save_to_log_file("\n".join(error_log))
+        
         save_error_to_file(error_msg)
         return False
 
@@ -261,51 +494,44 @@ def get_interval_info(check_count):
     
     return interval, interval_type
 
-def print_network_info():
-    """Print network information for debugging"""
-    print("\nNetwork Information:")
-    print(f"Platform: {sys.platform}")
-    
-    # Try to get IP configuration
+def print_git_info():
+    """Print git information for debugging"""
     try:
-        if sys.platform == 'win32':
-            ipconfig = subprocess.run(['ipconfig'], capture_output=True, text=True)
-            print("IP Config (first 10 lines):")
-            for line in ipconfig.stdout.split('\n')[:10]:
-                print(f"  {line}")
-        else:
-            ifconfig = subprocess.run(['ifconfig'], capture_output=True, text=True)
-            if ifconfig.returncode != 0:
-                ifconfig = subprocess.run(['ip', 'addr'], capture_output=True, text=True)
-            print("Network Config (first 10 lines):")
-            for line in ifconfig.stdout.split('\n')[:10]:
-                print(f"  {line}")
-    except:
-        print("  Could not retrieve network configuration")
-
-def test_internet_methods():
-    """Test all internet checking methods"""
-    print("\nTesting internet connection methods:")
-    
-    methods = [
-        ("Requests", check_via_requests),
-        ("Ping Google", check_via_ping_google),
-        ("Ping Cloudflare", check_via_ping_cloudflare),
-        ("NSLookup", check_via_nslookup),
-    ]
-    
-    results = []
-    for name, method in methods:
-        try:
-            result = method()
-            status = "✓" if result else "✗"
-            results.append(f"{name}: {status}")
-            print(f"  {name}: {status}")
-        except Exception as e:
-            results.append(f"{name}: Error - {str(e)}")
-            print(f"  {name}: Error - {str(e)}")
-    
-    return results
+        print("\nGit Information:")
+        
+        # Get current branch
+        branch_result = subprocess.run(
+            ['git', 'branch', '--show-current'],
+            capture_output=True,
+            text=True
+        )
+        current_branch = branch_result.stdout.strip()
+        print(f"  Current branch: {current_branch}")
+        
+        # Get remote URL
+        remote_result = subprocess.run(
+            ['git', 'remote', '-v'],
+            capture_output=True,
+            text=True
+        )
+        print(f"  Remote URLs:")
+        for line in remote_result.stdout.strip().split('\n'):
+            if line:
+                print(f"    {line}")
+        
+        # Get last few commits
+        log_result = subprocess.run(
+            ['git', 'log', '--oneline', '-3'],
+            capture_output=True,
+            text=True
+        )
+        print(f"  Recent commits:")
+        for line in log_result.stdout.strip().split('\n'):
+            if line:
+                print(f"    {line}")
+                
+    except Exception as e:
+        print(f"  Could not retrieve git info: {str(e)}")
 
 def main():
     """Main function"""
@@ -315,12 +541,40 @@ def main():
     print(f"  - After that: every {CONFIG['normal_interval']} seconds")
     print(f"  - Max retries: {CONFIG['max_retries']}")
     print(f"  - Timeout: {CONFIG['timeout']} seconds")
+    print(f"  - Target branch: {CONFIG['branch']}")
+    print(f"  - Log file: {CONFIG['log_file']}")
     
-    # Print network info for debugging
-    print_network_info()
+    # Initialize log file
+    try:
+        with open(CONFIG['log_file'], 'a', encoding='utf-8') as f:
+            f.write(f"\n{'='*80}\n")
+            f.write(f"GIT AUTO SCRIPT STARTED\n")
+            f.write(f"Time: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            f.write(f"Configuration: {CONFIG}\n")
+            f.write(f"{'='*80}\n")
+        print(f"✓ Log file initialized: {CONFIG['log_file']}")
+    except Exception as e:
+        print(f"✗ Error initializing log file: {str(e)}")
+    
+    # Print git info
+    print_git_info()
     
     # Test internet methods
-    test_results = test_internet_methods()
+    print("\nTesting internet connection methods:")
+    methods = [
+        ("Requests", check_via_requests),
+        ("Ping Google", check_via_ping_google),
+        ("Ping Cloudflare", check_via_ping_cloudflare),
+        ("NSLookup", check_via_nslookup),
+    ]
+    
+    for name, method in methods:
+        try:
+            result = method()
+            status = "✓" if result else "✗"
+            print(f"  {name}: {status}")
+        except Exception as e:
+            print(f"  {name}: Error - {str(e)}")
     
     print("\nStarting main loop...")
     
@@ -337,9 +591,9 @@ def main():
             interval, interval_type = get_interval_info(check_count)
             
             current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            print(f"\n{'='*50}")
+            print(f"\n{'='*60}")
             print(f"[{current_time}] Check #{check_count} (interval: {interval_type})")
-            print(f"{'='*50}")
+            print(f"{'='*60}")
             
             # Check internet with detailed logging
             print("Checking internet connection...")
@@ -359,12 +613,12 @@ def main():
                 if not success:
                     failed_operations_count += 1
                     if failed_operations_count >= CONFIG['max_retries']:
-                        print(f"Maximum retries ({CONFIG['max_retries']}) reached. Suspending operations.")
+                        print(f"\n⚠ Maximum retries ({CONFIG['max_retries']}) reached. Suspending operations.")
                         pending_operations = False
                         failed_operations_count = 0
                     else:
                         pending_operations = True
-                        print(f"Operation failed (attempt {failed_operations_count}/{CONFIG['max_retries']})")
+                        print(f"\n⚠ Operation failed (attempt {failed_operations_count}/{CONFIG['max_retries']})")
                 else:
                     failed_operations_count = 0  # Reset on success
                 
@@ -374,6 +628,16 @@ def main():
                 print("\nInternet connection: ✗ DISCONNECTED")
                 print("All connection methods failed.")
                 
+                # Save check without internet to log
+                no_internet_log = [
+                    f"CHECK #{check_count} - NO INTERNET",
+                    f"Time: {current_time}",
+                    f"Status: Internet disconnected",
+                    f"Pending operations: {'Yes' if pending_operations else 'No'}",
+                    f"Next check in: {interval_type}"
+                ]
+                save_to_log_file("\n".join(no_internet_log), separator="-"*40)
+                
                 # If internet is down and was previously down, suspend operations
                 if last_internet_status:
                     print("Internet disconnected, suspending operations...")
@@ -382,31 +646,65 @@ def main():
                 last_internet_status = False
             
             # Status summary
-            print(f"\nStatus Summary:")
-            print(f"  - Total checks: {check_count}")
+            print(f"\n{'─'*40}")
+            print(f"Status Summary:")
+            print(f"{'─'*40}")
+            print(f"  Total checks: {check_count}")
             if check_count <= CONFIG['initial_checks']:
-                print(f"  - Initial phase: {CONFIG['initial_checks'] - check_count} checks remaining")
+                print(f"  Phase: Initial ({CONFIG['initial_checks'] - check_count} remaining)")
             else:
-                print(f"  - Normal phase active")
-            print(f"  - Internet status: {'Connected' if has_internet else 'Disconnected'}")
-            print(f"  - Pending operations: {'Yes' if pending_operations else 'No'}")
-            print(f"  - Next check in: {interval_type}")
+                print(f"  Phase: Normal")
+            print(f"  Internet: {'Connected' if has_internet else 'Disconnected'}")
+            print(f"  Pending ops: {'Yes' if pending_operations else 'No'}")
+            print(f"  Failed attempts: {failed_operations_count}")
+            print(f"  Next check: {interval_type}")
+            print(f"{'─'*40}")
             
             # Wait for next check
-            print(f"\nWaiting {interval} seconds for next check...")
-            time.sleep(interval)
+            print(f"\n⏰ Waiting {interval} seconds for next check...")
+            for i in range(interval, 0, -10):
+                if i <= 10:
+                    print(f"   {i} seconds remaining...")
+                    time.sleep(1)
+                else:
+                    if i == interval or i % 30 == 0:
+                        print(f"   {i} seconds remaining...")
+                    time.sleep(10)
             
         except KeyboardInterrupt:
-            print(f"\n\n{'='*50}")
-            print("Script stopped by user.")
+            print(f"\n\n{'='*60}")
+            print("🛑 Script stopped by user.")
+            print(f"{'='*60}")
             print(f"Total checks performed: {check_count}")
             print(f"Last check time: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
             print(f"Final internet status: {'Connected' if last_internet_status else 'Disconnected'}")
-            print(f"{'='*50}")
+            print(f"Pending operations: {'Yes' if pending_operations else 'No'}")
+            
+            # Save shutdown info to log
+            shutdown_log = [
+                f"SCRIPT STOPPED BY USER",
+                f"Time: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+                f"Total checks performed: {check_count}",
+                f"Final internet status: {'Connected' if last_internet_status else 'Disconnected'}",
+                f"Pending operations: {'Yes' if pending_operations else 'No'}",
+                f"Log file: {CONFIG['log_file']}"
+            ]
+            save_to_log_file("\n".join(shutdown_log))
+            
             break
         except Exception as e:
             error_msg = f"Unexpected error: {str(e)}"
-            print(f"\nError: {error_msg}")
+            print(f"\n⚠ Error: {error_msg}")
+            
+            # Save error to log
+            error_log = [
+                f"UNEXPECTED ERROR IN MAIN LOOP",
+                f"Time: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+                f"Error: {error_msg}",
+                f"Check count: {check_count}"
+            ]
+            save_to_log_file("\n".join(error_log))
+            
             save_error_to_file(error_msg)
             
             # Wait appropriate interval even on error
@@ -428,7 +726,18 @@ if __name__ == "__main__":
         print("Please install it using: pip install requests")
         sys.exit(1)
     
+    # Check git configuration
+    try:
+        branch_result = subprocess.run(
+            ['git', 'branch', '--show-current'],
+            capture_output=True,
+            text=True
+        )
+        if branch_result.stdout.strip():
+            CONFIG['branch'] = branch_result.stdout.strip()
+    except:
+        pass
+    
     main()
 
 
-    
