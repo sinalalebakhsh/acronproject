@@ -16,6 +16,8 @@ CONFIG = {
     'timeout': 10,               # Timeout for internet checks in seconds
     'branch': 'main',            # Default branch (change to 'master' if needed)
     'log_file': 'git_auto_log.txt',  # Log file name
+    'max_log_lines': 2000,       # Maximum lines in log file
+    'log_rotation_size': 1000,   # Keep last 1000 lines when rotating
 }
 
 def check_internet_connection():
@@ -167,9 +169,61 @@ def get_django_changes():
     except Exception as e:
         return f"Error checking changes: {str(e)}"
 
-def save_to_log_file(message, separator="="*60):
-    """Save message to log file with timestamp"""
+def rotate_log_file_if_needed():
+    """Rotate log file if it exceeds maximum lines"""
+    log_file = CONFIG['log_file']
+    
+    # If log file doesn't exist yet, no need to rotate
+    if not os.path.exists(log_file):
+        return
+    
     try:
+        # Count lines in current log file
+        with open(log_file, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+        
+        total_lines = len(lines)
+        
+        # Check if we need to rotate
+        if total_lines >= CONFIG['max_log_lines']:
+            print(f"⚠ Log file has {total_lines} lines (max: {CONFIG['max_log_lines']}). Rotating...")
+            
+            # Keep only the last N lines
+            keep_lines = CONFIG['log_rotation_size']
+            if keep_lines < total_lines:
+                lines_to_keep = lines[-keep_lines:]
+                
+                # Write rotated log
+                with open(log_file, 'w', encoding='utf-8') as f:
+                    f.writelines(lines_to_keep)
+                
+                print(f"✓ Log file rotated. Kept last {keep_lines} lines.")
+                
+                # Create rotation marker
+                rotation_marker = [
+                    f"\n{'='*80}\n",
+                    f"LOG FILE ROTATED\n",
+                    f"Time: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n",
+                    f"Previous size: {total_lines} lines\n",
+                    f"New size: {len(lines_to_keep)} lines\n",
+                    f"Rotation threshold: {CONFIG['max_log_lines']} lines\n",
+                    f"{'='*80}\n\n"
+                ]
+                
+                with open(log_file, 'a', encoding='utf-8') as f:
+                    f.writelines(rotation_marker)
+            else:
+                print(f"Log file has {total_lines} lines, no rotation needed.")
+    
+    except Exception as e:
+        print(f"✗ Error rotating log file: {str(e)}")
+
+def save_to_log_file(message, separator="="*60):
+    """Save message to log file with timestamp and auto-rotation"""
+    try:
+        # Rotate log file if needed BEFORE adding new content
+        rotate_log_file_if_needed()
+        
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
         with open(CONFIG['log_file'], 'a', encoding='utf-8') as f:
@@ -179,6 +233,15 @@ def save_to_log_file(message, separator="="*60):
             f.write(f"{message}\n")
         
         print(f"✓ Log saved to {CONFIG['log_file']}")
+        
+        # Check current log size after writing
+        try:
+            with open(CONFIG['log_file'], 'r', encoding='utf-8') as f:
+                current_lines = len(f.readlines())
+            print(f"  Current log size: {current_lines} lines")
+        except:
+            pass
+            
     except Exception as e:
         print(f"✗ Error saving to log file: {str(e)}")
 
@@ -533,6 +596,39 @@ def print_git_info():
     except Exception as e:
         print(f"  Could not retrieve git info: {str(e)}")
 
+def check_log_file_status():
+    """Check and report log file status"""
+    log_file = CONFIG['log_file']
+    
+    if os.path.exists(log_file):
+        try:
+            with open(log_file, 'r', encoding='utf-8') as f:
+                lines = f.readlines()
+            
+            line_count = len(lines)
+            file_size = os.path.getsize(log_file) / 1024  # Size in KB
+            
+            print(f"\nLog File Status:")
+            print(f"  File: {log_file}")
+            print(f"  Lines: {line_count} / {CONFIG['max_log_lines']}")
+            print(f"  Size: {file_size:.2f} KB")
+            
+            if line_count >= CONFIG['max_log_lines'] * 0.8:
+                print(f"  ⚠ Warning: Log file is {line_count/CONFIG['max_log_lines']*100:.1f}% full")
+            
+            # Show last log entry timestamp if available
+            if lines:
+                last_lines = lines[-10:]  # Last 10 lines
+                for line in reversed(last_lines):
+                    if 'Time:' in line:
+                        print(f"  Last entry: {line.strip().replace('Time:', '').strip()}")
+                        break
+            
+        except Exception as e:
+            print(f"  Could not check log file: {str(e)}")
+    else:
+        print(f"\nLog File Status: {log_file} does not exist yet.")
+
 def main():
     """Main function"""
     print("=== Automatic Git Script for Django Project ===\n")
@@ -543,14 +639,23 @@ def main():
     print(f"  - Timeout: {CONFIG['timeout']} seconds")
     print(f"  - Target branch: {CONFIG['branch']}")
     print(f"  - Log file: {CONFIG['log_file']}")
+    print(f"  - Max log lines: {CONFIG['max_log_lines']}")
+    print(f"  - Keep after rotation: {CONFIG['log_rotation_size']} lines")
     
-    # Initialize log file
+    # Check log file status
+    check_log_file_status()
+    
+    # Initialize log file with rotation check
     try:
+        rotate_log_file_if_needed()
+        
         with open(CONFIG['log_file'], 'a', encoding='utf-8') as f:
             f.write(f"\n{'='*80}\n")
             f.write(f"GIT AUTO SCRIPT STARTED\n")
             f.write(f"Time: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write(f"Configuration: {CONFIG}\n")
+            f.write(f"Max log lines: {CONFIG['max_log_lines']}\n")
+            f.write(f"Rotation size: {CONFIG['log_rotation_size']} lines\n")
             f.write(f"{'='*80}\n")
         print(f"✓ Log file initialized: {CONFIG['log_file']}")
     except Exception as e:
@@ -658,6 +763,11 @@ def main():
             print(f"  Pending ops: {'Yes' if pending_operations else 'No'}")
             print(f"  Failed attempts: {failed_operations_count}")
             print(f"  Next check: {interval_type}")
+            
+            # Check log file size periodically (every 10 checks)
+            if check_count % 10 == 0:
+                check_log_file_status()
+            
             print(f"{'─'*40}")
             
             # Wait for next check
@@ -680,6 +790,9 @@ def main():
             print(f"Final internet status: {'Connected' if last_internet_status else 'Disconnected'}")
             print(f"Pending operations: {'Yes' if pending_operations else 'No'}")
             
+            # Check final log status
+            check_log_file_status()
+            
             # Save shutdown info to log
             shutdown_log = [
                 f"SCRIPT STOPPED BY USER",
@@ -687,7 +800,8 @@ def main():
                 f"Total checks performed: {check_count}",
                 f"Final internet status: {'Connected' if last_internet_status else 'Disconnected'}",
                 f"Pending operations: {'Yes' if pending_operations else 'No'}",
-                f"Log file: {CONFIG['log_file']}"
+                f"Log file: {CONFIG['log_file']}",
+                f"Max log lines configured: {CONFIG['max_log_lines']}"
             ]
             save_to_log_file("\n".join(shutdown_log))
             
