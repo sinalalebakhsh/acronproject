@@ -1,9 +1,0 @@
-Error time: 2025-12-14 14:01:52.118466
-Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-
-Config: {'initial_interval': 60, 'normal_interval': 300, 'initial_checks': 3, 'max_retries': 3, 'error_log_dir': 'git_auto_errors', 'timeout': 10, 'branch': 'main', 'log_file': 'git_auto_log.txt', 'max_log_lines': 2000, 'log_rotation_size': 1000}
-Platform: win32
