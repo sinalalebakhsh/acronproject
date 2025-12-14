@@ -73,4 +73,11 @@ commends:
     CREATE DATABASE store;
 
 
+# پاک کردن کامل کش gitignore
+bash
 
+```
+    git rm -r --cached .
+    git add .
+    git commit -m "Clear gitignore cache"
+```
