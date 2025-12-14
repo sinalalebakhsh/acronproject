@@ -4,7 +4,9 @@ import datetime
 import os
 import sys
 import requests
+import threading
 from pathlib import Path
+import signal
 
 # Configuration
 CONFIG = {
@@ -18,8 +20,10 @@ CONFIG = {
     'log_file': 'git_auto_log.txt',  # Log file name
     'max_log_lines': 2000,       # Maximum lines in log file
     'log_rotation_size': 1000,   # Keep last 1000 lines when rotating
-    'force_run_file': 'force_git_run.flag',  # File to trigger immediate run
 }
+
+# Global flag for immediate execution
+IMMEDIATE_EXECUTION_FLAG = False
 
 def check_internet_connection():
     """Check internet connection using multiple methods"""
@@ -169,35 +173,6 @@ def get_django_changes():
         
     except Exception as e:
         return f"Error checking changes: {str(e)}"
-
-def check_force_run_flag():
-    """Check if force run flag file exists"""
-    flag_file = CONFIG['force_run_file']
-    if os.path.exists(flag_file):
-        try:
-            with open(flag_file, 'r') as f:
-                content = f.read().strip()
-            
-            # Remove the flag file after reading
-            os.remove(flag_file)
-            print(f"\n🚨 FORCE RUN FLAG DETECTED! Triggering immediate git operation...")
-            return True
-        except:
-            return False
-    return False
-
-def create_force_run_flag():
-    """Create a force run flag file (can be called from another script or manually)"""
-    flag_file = CONFIG['force_run_file']
-    try:
-        with open(flag_file, 'w') as f:
-            f.write(f"Force run requested at: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-        print(f"✓ Force run flag created: {flag_file}")
-        print("The script will execute git operations immediately on next check.")
-        return True
-    except Exception as e:
-        print(f"✗ Error creating force run flag: {str(e)}")
-        return False
 
 def rotate_log_file_if_needed():
     """Rotate log file if it exceeds maximum lines"""
@@ -372,15 +347,15 @@ def verify_git_push():
         print(f"  ✗ Could not verify push: {str(e)}")
         return False, None, None, str(e)
 
-def run_git_commands(force_run=False):
+def run_git_commands(immediate=False):
     """Execute git commands with verification and logging"""
     try:
         current_time = datetime.datetime.now().strftime("%d.%m.%y %H:%M:%S")
         full_timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         
         log_content = []
-        if force_run:
-            log_content.append(f"🚨 FORCE GIT OPERATION STARTED (Manual Trigger)")
+        if immediate:
+            log_content.append(f"🚨 IMMEDIATE GIT OPERATION STARTED (Manual Trigger)")
         else:
             log_content.append(f"GIT AUTO OPERATION STARTED")
         log_content.append(f"Time: {full_timestamp}")
@@ -501,8 +476,8 @@ def run_git_commands(force_run=False):
             log_content.append(git_info.get('status', 'N/A') if git_info.get('status') else "Clean working directory")
         
         log_content.append("")
-        if force_run:
-            log_content.append("🚨 FORCE OPERATION COMPLETED SUCCESSFULLY")
+        if immediate:
+            log_content.append("🚨 IMMEDIATE OPERATION COMPLETED SUCCESSFULLY")
         else:
             log_content.append("OPERATION COMPLETED SUCCESSFULLY")
         log_content.append(f"Time: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
@@ -511,8 +486,8 @@ def run_git_commands(force_run=False):
         save_to_log_file("\n".join(log_content))
         
         print(f"\n{current_time} - Operation completed successfully")
-        if force_run:
-            print(f"🚨 FORCE RUN - Manual trigger executed")
+        if immediate:
+            print(f"🚨 IMMEDIATE RUN - Manual trigger executed")
         print(f"Commit: {commit_hash}")
         print(f"Message preview: {commit_msg[:100]}...")
         print(f"Push verified: {'Yes' if push_verified else 'Needs attention'}")
@@ -615,6 +590,127 @@ def check_log_file_status():
         except Exception as e:
             print(f"  Could not check log file: {str(e)}")
 
+def execute_immediate_git_operation():
+    """Execute git operations immediately (can be called from another thread or terminal)"""
+    global IMMEDIATE_EXECUTION_FLAG
+    IMMEDIATE_EXECUTION_FLAG = True
+    print(f"\n{'!'*60}")
+    print("🚨 IMMEDIATE GIT OPERATION TRIGGERED!")
+    print(f"{'!'*60}")
+
+def check_command_input():
+    """Check for user input commands in a separate thread"""
+    while True:
+        try:
+            # Simple input checking for Windows compatibility
+            if sys.platform == 'win32':
+                # For Windows, we'll use a simpler approach
+                # You can still type commands but they won't show until Enter is pressed
+                pass
+            else:
+                # For Unix/Linux/Mac
+                import select
+                rlist, _, _ = select.select([sys.stdin], [], [], 0.5)
+                if rlist:
+                    command = sys.stdin.readline().strip().lower()
+                    if command in ['run', 'execute', 'now', 'git', 'push']:
+                        execute_immediate_git_operation()
+                        print(f"Command received: '{command}' - Immediate execution triggered!")
+        except ImportError:
+            # select might not work on all Windows setups
+            pass
+        except Exception as e:
+            print(f"Error in command input thread: {str(e)}")
+        
+        time.sleep(1)
+
+def setup_interactive_mode():
+    """Setup interactive mode for receiving commands"""
+    print(f"\n{'='*60}")
+    print("🎮 INTERACTIVE MODE ENABLED")
+    print(f"{'='*60}")
+    print("You can now trigger immediate git operations by:")
+    print("1. Pressing 'r' or 'R' during wait periods")
+    print("2. Creating a file named 'force_git_run.flag'")
+    print("3. The script will check for commands every second")
+    print(f"{'='*60}\n")
+    
+    # Start command checking thread
+    try:
+        command_thread = threading.Thread(target=check_command_input, daemon=True)
+        command_thread.start()
+        return command_thread
+    except:
+        return None
+
+def signal_handler(signum, frame):
+    """Handle signals for immediate execution"""
+    print(f"\n📡 Signal {signum} received - Triggering immediate git operation!")
+    execute_immediate_git_operation()
+
+def setup_signal_handlers():
+    """Setup signal handlers for immediate execution"""
+    try:
+        # SIGUSR1 for Unix/Linux/Mac
+        if hasattr(signal, 'SIGUSR1'):
+            signal.signal(signal.SIGUSR1, signal_handler)
+            print(f"✓ Signal handler set up: Use 'kill -SIGUSR1 {os.getpid()}' to trigger")
+    except:
+        pass
+
+def check_force_run_file():
+    """Check if force run file exists"""
+    force_file = 'force_git_run.flag'
+    if os.path.exists(force_file):
+        try:
+            os.remove(force_file)
+            print(f"\n📄 Force run file detected - Triggering immediate execution!")
+            execute_immediate_git_operation()
+            return True
+        except:
+            return False
+    return False
+
+def get_user_input_during_wait(wait_seconds):
+    """Get user input during wait period with timeout"""
+    print(f"\n💡 Press 'r' + Enter to trigger immediate execution")
+    
+    start_time = time.time()
+    while time.time() - start_time < wait_seconds:
+        # Check force run file
+        check_force_run_file()
+        
+        # Check global flag
+        global IMMEDIATE_EXECUTION_FLAG
+        if IMMEDIATE_EXECUTION_FLAG:
+            return True
+            
+        # Check for keyboard input (non-blocking)
+        try:
+            import msvcrt  # Windows
+            if msvcrt.kbhit():
+                key = msvcrt.getch().decode('utf-8', errors='ignore').lower()
+                if key == 'r':
+                    execute_immediate_git_operation()
+                    return True
+        except ImportError:
+            try:
+                # Unix/Linux/Mac
+                import select
+                rlist, _, _ = select.select([sys.stdin], [], [], 0.1)
+                if rlist:
+                    line = sys.stdin.readline().strip().lower()
+                    if line in ['r', 'run', 'execute', 'now', 'git', 'push']:
+                        execute_immediate_git_operation()
+                        return True
+            except:
+                pass
+        
+        # Sleep a bit to prevent CPU overload
+        time.sleep(0.1)
+    
+    return False
+
 def main():
     """Main function"""
     print("=== Automatic Git Script for Django Project ===\n")
@@ -626,9 +722,13 @@ def main():
     print(f"  - Target branch: {CONFIG['branch']}")
     print(f"  - Log file: {CONFIG['log_file']}")
     print(f"  - Max log lines: {CONFIG['max_log_lines']}")
-    print(f"  - Force run flag file: {CONFIG['force_run_file']}")
-    print(f"\n💡 To trigger immediate git operation, create file: {CONFIG['force_run_file']}")
-    print(f"   You can use: 'python -c \"import sys; sys.path.insert(0, '.'); from git_auto import create_force_run_flag; create_force_run_flag()\"'")
+    print(f"  - Keep after rotation: {CONFIG['log_rotation_size']} lines")
+    
+    # Setup interactive mode
+    command_thread = setup_interactive_mode()
+    
+    # Setup signal handlers
+    setup_signal_handlers()
     
     check_log_file_status()
     
@@ -637,12 +737,15 @@ def main():
         
         with open(CONFIG['log_file'], 'a', encoding='utf-8') as f:
             f.write(f"\n{'='*80}\n")
-            f.write(f"GIT AUTO SCRIPT STARTED\n")
+            f.write(f"GIT AUTO SCRIPT STARTED (Interactive Mode)\n")
             f.write(f"Time: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
             f.write(f"Configuration: {CONFIG}\n")
-            f.write(f"Force run file: {CONFIG['force_run_file']}\n")
+            f.write(f"PID: {os.getpid()}\n")
+            f.write(f"Interactive command: Press 'r' during wait\n")
+            f.write(f"Force run file: force_git_run.flag\n")
             f.write(f"{'='*80}\n")
         print(f"✓ Log file initialized: {CONFIG['log_file']}")
+        print(f"📝 Process ID (PID): {os.getpid()}")
     except Exception as e:
         print(f"✗ Error initializing log file: {str(e)}")
     
@@ -677,13 +780,18 @@ def main():
             
             interval, interval_type = get_interval_info(check_count)
             
-            current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            current_time = datetime.datetime.now().strftime("%Y-%m-d %H:%M:%S")
             print(f"\n{'='*60}")
             print(f"[{current_time}] Check #{check_count} (interval: {interval_type})")
             print(f"{'='*60}")
             
-            # Check for force run flag FIRST
-            force_run = check_force_run_flag()
+            # Check for immediate execution flag
+            global IMMEDIATE_EXECUTION_FLAG
+            immediate_execution = IMMEDIATE_EXECUTION_FLAG
+            if immediate_execution:
+                print(f"\n🚨 IMMEDIATE EXECUTION TRIGGERED!")
+                # Reset the flag
+                IMMEDIATE_EXECUTION_FLAG = False
             
             # Check internet
             print("Checking internet connection...")
@@ -696,9 +804,9 @@ def main():
                     print("Internet connected! Executing pending operations...")
                     pending_operations = False
                 
-                # Execute git commands (force run or normal)
-                if force_run or (not pending_operations and has_internet):
-                    success = run_git_commands(force_run=force_run)
+                # Execute git commands (immediate or normal)
+                if immediate_execution or (not pending_operations and has_internet):
+                    success = run_git_commands(immediate=immediate_execution)
                     
                     if not success:
                         failed_operations_count += 1
@@ -728,9 +836,9 @@ def main():
                 ]
                 save_to_log_file("\n".join(no_internet_log), separator="-"*40)
                 
-                # If force run was requested but no internet, keep it pending
-                if force_run:
-                    print("⚠ Force run requested but no internet. Will execute when internet is available.")
+                # If immediate execution was requested but no internet, keep it pending
+                if immediate_execution:
+                    print("⚠ Immediate execution requested but no internet. Will execute when internet is available.")
                     pending_operations = True
                 
                 if last_internet_status:
@@ -751,7 +859,7 @@ def main():
             print(f"  Internet: {'Connected' if has_internet else 'Disconnected'}")
             print(f"  Pending ops: {'Yes' if pending_operations else 'No'}")
             print(f"  Failed attempts: {failed_operations_count}")
-            print(f"  Force run triggered: {'Yes' if force_run else 'No'}")
+            print(f"  Immediate trigger: {'Yes' if immediate_execution else 'No'}")
             print(f"  Next check: {interval_type}")
             
             if check_count % 10 == 0:
@@ -759,16 +867,15 @@ def main():
             
             print(f"{'─'*40}")
             
-            # Wait for next check
+            # Wait for next check with interactive input
             print(f"\n⏰ Waiting {interval} seconds for next check...")
-            for i in range(interval, 0, -10):
-                if i <= 10:
-                    print(f"   {i} seconds remaining...")
-                    time.sleep(1)
-                else:
-                    if i == interval or i % 30 == 0:
-                        print(f"   {i} seconds remaining...")
-                    time.sleep(10)
+            print("💡 Press 'r' and Enter to trigger immediate execution")
+            
+            # Use interactive wait function
+            immediate_triggered = get_user_input_during_wait(interval)
+            
+            if immediate_triggered:
+                print("🚨 Breaking wait for immediate execution...")
             
         except KeyboardInterrupt:
             print(f"\n\n{'='*60}")
@@ -814,17 +921,13 @@ def main():
 if __name__ == "__main__":
     # Check for command line arguments
     if len(sys.argv) > 1:
-        if sys.argv[1] == '--force' or sys.argv[1] == '-f':
-            print("🚨 Force run triggered via command line")
-            create_force_run_flag()
-            print("Flag created. If script is running, it will execute immediately.")
-            print("If script is not running, start it and it will detect the flag.")
-            sys.exit(0)
-        elif sys.argv[1] == '--help' or sys.argv[1] == '-h':
+        if sys.argv[1] == '--help' or sys.argv[1] == '-h':
             print("Usage:")
-            print("  python git_auto.py                    # Start normally")
-            print("  python git_auto.py --force  or -f     # Create force run flag")
+            print("  python git_auto.py                    # Start with interactive mode")
             print("  python git_auto.py --help   or -h     # Show this help")
+            print("\nInteractive commands (while script is running):")
+            print("  1. Press 'r' during wait periods")
+            print("  2. Create file: force_git_run.flag")
             sys.exit(0)
     
     # Check if git exists in project
@@ -853,5 +956,6 @@ if __name__ == "__main__":
         pass
     
     main()
+
 
 
