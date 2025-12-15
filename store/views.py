@@ -6,7 +6,7 @@ from django.db.models import ExpressionWrapper, DecimalField
 
 
 
-from .models import Category
+from .models import Category, Product
 
 
 def show_data(request):    
@@ -14,7 +14,8 @@ def show_data(request):
     category = Category(id=100)
     category.title= 'Cars'
     category.description= 'cars are good.'
-    
+    category.top_product= Product.objects.get(id=1)
+    category.save()
 
     return render(request, 'hello.html')
 
