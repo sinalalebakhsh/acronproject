@@ -6,11 +6,15 @@ from django.db.models import ExpressionWrapper, DecimalField
 
 
 
-from .models import Product, OrderItem, Order, Comment, Customer
+from .models import Category
 
 
 def show_data(request):    
 
+    category = Category(id=100)
+    category.title= 'Cars'
+    category.description= 'cars are good.'
+    
 
     return render(request, 'hello.html')
 
