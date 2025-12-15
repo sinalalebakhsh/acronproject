@@ -91,7 +91,7 @@ class OrderItem(models.Model):
     class Meta:
         unique_together = [['order', 'product']]
 
-    SINA_ = models.Manager()
+
 # Cart
 # When this cart is created ?
 #   datetime_created 
@@ -114,6 +114,8 @@ class CartItem(models.Model):
         unique_together = [['cart', 'product']]
 
 
+class CommentManager(models.Manager):
+    def get
 
 # Comment
 # name
