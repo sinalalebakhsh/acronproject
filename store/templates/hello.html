@@ -13,8 +13,8 @@
 
     {% for item in query %}
         <h2>item name: {{ item.id }}</h2>
-        <p>orders_customer:{{ item.orders_customer }} </p>
-        <p>status: {{ item.quantity  }}</p>
+        <p>orders_customer:{{ item.body }} </p>
+        <p>status: {{ item.status  }}</p>
         <h2>----------------------------------------------------------------</h2>
     {% empty %}
         <p>No items found in this order.</p>

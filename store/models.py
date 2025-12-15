@@ -115,7 +115,8 @@ class CartItem(models.Model):
 
 
 class CommentManager(models.Manager):
-    def get
+    def get_approved(self):
+        return self.get_queryset().filter(status=Comment.COMMENT_STATUS_APPROVED)
 
 # Comment
 # name
@@ -140,6 +141,7 @@ class Comment(models.Model):
     status = models.CharField(max_length=2, choices=COMMENT_STATUS, default=COMMENT_STATUS_NOT_APPROVED)
 
 
+    objects = CommentManager()
 
 
 
