@@ -10,13 +10,8 @@ from .models import Category, Product
 
 
 def show_data(request):    
-    # UPDATE
 
-    # category = Category.objects.get(pk=97)
-    # category.title= 'Cars'
-    # category.description= 'cars are good.'
-    # category.top_product__id= Product.objects.get(id=2)
-    # category.save()
+    # DELETE
 
     category = Category.objects.filter(pk=96).update(title='AAAA')
 
