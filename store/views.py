@@ -14,11 +14,11 @@ def show_data(request):
     # DELETE
 
 
-    Category.objects.filter(pk=93).delete()
+    Category.objects.filter(pk=80).delete()
 
 
-    cat_ = Category(pk=94)
-    cat_.delete()
+    # cat = Category(pk=94)
+    # cat.delete()
 
     return render(request, 'hello.html')
 
