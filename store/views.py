@@ -17,6 +17,9 @@ def show_data(request):
     Category.objects.filter(pk=93).delete()
 
 
+    cat_ = Category(pk=94)
+    cat_.delete()
+
     return render(request, 'hello.html')
 
 
