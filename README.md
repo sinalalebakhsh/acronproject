@@ -73,7 +73,7 @@ commends:
     CREATE DATABASE store;
 
 
-# پاک کردن کامل کش gitignore
+## پاک کردن کامل کش gitignore
 bash
 
 ```
@@ -81,3 +81,10 @@ bash
     git add .
     git commit -m "Clear gitignore cache"
 ```
+
+
+## in MySQL Workbench
+```
+    SELECT * FROM store.store_comment order by id DESC;
+```
+
