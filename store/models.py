@@ -113,10 +113,16 @@ class CartItem(models.Model):
     class Meta:
         unique_together = [['cart', 'product']]
 
-
+# از این کلاس استفاده نشده
 class CommentManager(models.Manager):
     def get_approved(self):
         return self.get_queryset().filter(status=Comment.COMMENT_STATUS_APPROVED)
+
+class ApprovedCommentManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(status=Comment.COMMENT_STATUS_APPROVED)
+
+
 
 # Comment
 # name
@@ -141,7 +147,9 @@ class Comment(models.Model):
     status = models.CharField(max_length=2, choices=COMMENT_STATUS, default=COMMENT_STATUS_NOT_APPROVED)
 
 
-    objects = CommentManager()
+    objects = models.Manager()
+    approved = ApprovedCommentManager()
+
 
 
 
