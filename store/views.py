@@ -10,10 +10,10 @@ from .models import Product, OrderItem, Order, Comment, Customer
 
 
 def show_data(request):    
-    product_1 = Product.objects.get(id=1)
+    # product_1 = Product.objects.get(id=1)
 
     Comment.objects.create(
-        product=product_1,
+        product_id=1,
         name='SINA LALEHBAKHSH',
         body='Sina is DjangoDeveloper and DevOps Engineer',
     )
