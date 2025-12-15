@@ -10,14 +10,15 @@ from .models import Product, OrderItem, Order, Comment, Customer
 
 
 def show_data(request):    
-    queryset = Comment.approved.all()
+    product_1 = Product.objects.get(id=1)
 
+    Comment.objects.create(
+        product=product_1,
+        name='SINA LALEHBAKHSH',
+        body='Sina is DjangoDeveloper and DevOps Engineer',
+    )
 
-
-
-    print(queryset)
-
-    return render(request, 'hello.html', {"query": list(queryset)})
+    return render(request, 'hello.html')
 
 
 
