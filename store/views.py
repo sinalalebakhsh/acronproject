@@ -12,11 +12,14 @@ from .models import Category, Product
 def show_data(request):    
 
     # UPDATE
+    # category = Category.objects.get(pk=97)
+    # category.title= 'Cars'
+    # category.description= 'cars are good.'
+    # category.top_product__id= Product.objects.get(id=2)
+    # category.save()
+
     category = Category.objects.get(pk=97)
-    category.title= 'Cars'
-    category.description= 'cars are good.'
-    category.top_product__id= Product.objects.get(id=2)
-    category.save()
+
 
     return render(request, 'hello.html')
 
