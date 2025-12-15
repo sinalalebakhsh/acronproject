@@ -158,7 +158,7 @@ class Comment(models.Model):
     status = models.CharField(max_length=2, choices=COMMENT_STATUS, default=COMMENT_STATUS_NOT_APPROVED)
 
 
-    objects = models.Manager()
+    objects = CommentManager()
     approved = ApprovedCommentManager()
 
 
