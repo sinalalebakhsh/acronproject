@@ -13,6 +13,8 @@ def show_data(request):
 
     # DELETE
 
+    
+
     category = Category.objects.filter(pk=96).update(title='AAAA')
 
 
