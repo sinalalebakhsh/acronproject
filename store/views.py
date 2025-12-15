@@ -10,7 +10,7 @@ from .models import Product, OrderItem, Order, Comment, Customer
 
 
 def show_data(request):    
-    queryset = OrderItem.SINA.annotate(
+    queryset = OrderItem.SINA_.annotate(
         total_price=ExpressionWrapper(F('unit_price') * 0.5, output_field=DecimalField())
     )
 
