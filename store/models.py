@@ -53,6 +53,12 @@ class Address(models.Model):
     city = models.CharField(max_length=255)
     street = models.CharField(max_length=255)
 
+
+class UnpaidOrderManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(status=Order.ORDER_STATUS_UNPAID)
+
+
 # Order
 # Who has created this order and when ?
 class Order(models.Model):
@@ -67,6 +73,11 @@ class Order(models.Model):
     ]
     datetime_created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=1, choices=ORDER_STATUS, default=ORDER_STATUS_UNPAID)
+
+
+    objects = models.Manager()
+    unpaid_orders = UnpaidOrderManager()
+
 
     def __str__(self):        
         if self.status == 'P':
