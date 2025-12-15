@@ -10,8 +10,8 @@ from .models import Category, Product
 
 
 def show_data(request):    
-
     # UPDATE
+
     # category = Category.objects.get(pk=97)
     # category.title= 'Cars'
     # category.description= 'cars are good.'
