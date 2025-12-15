@@ -12,10 +12,10 @@ from .models import Category, Product
 def show_data(request):    
 
     # UPDATE
-    category = Category(id=100)
+    category = Category(id=99)
     category.title= 'Cars'
     category.description= 'cars are good.'
-    category.top_product= Product.objects.get(id=1)
+    category.top_product__id= Product.objects.get(id=2)
     category.detetime_created= timezone.now()
     category.save()
 
