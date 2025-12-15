@@ -10,7 +10,7 @@ from .models import Product, OrderItem, Order, Comment, Customer
 
 
 def show_data(request):    
-    queryset = Comment.objects.get_approved()
+    queryset = Comment.approved.all()
 
 
 
