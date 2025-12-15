@@ -11,6 +11,7 @@ from .models import Category, Product
 
 def show_data(request):    
 
+    # UPDATE
     category = Category(id=100)
     category.title= 'Cars'
     category.description= 'cars are good.'
