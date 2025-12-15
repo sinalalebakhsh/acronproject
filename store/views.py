@@ -18,7 +18,7 @@ def show_data(request):
     # category.top_product__id= Product.objects.get(id=2)
     # category.save()
 
-    category = Category.objects.get(pk=97)
+    category = Category.objects.filter(pk=96).update(title='AAAA')
 
 
     return render(request, 'hello.html')
