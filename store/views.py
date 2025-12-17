@@ -11,20 +11,7 @@ from .models import Category, Product
 
 def show_data(request):    
 
-    # cat = Category()
-    # cat.title='SINA'
-    # cat.description='LALEBAKHSH'
-    # cat.save()
-
-    # DELETE
-
-
-    Category.objects.filter(pk=101).delete()
-
-
-    cat = Category(pk=102)
-    cat.delete()
-
+   
     return render(request, 'hello.html')
 
 
