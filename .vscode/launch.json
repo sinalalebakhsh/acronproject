@@ -3,10 +3,13 @@
   "configurations": [
     {
       "name": "Django Debug",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "program": "${workspaceFolder}/manage.py",
-      "args": ["runserver"],
+      "args": [
+        "runserver",
+        "9000",
+    ],
       "django": true,
       "justMyCode": true
     }
