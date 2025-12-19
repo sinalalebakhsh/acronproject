@@ -19,12 +19,12 @@ def show_data(request):
     new_category.title = 'A'
     new_category.description = 'aaa'
 
-    product_1 = Product()
-    product_1.name = 'product_1'
-    product_1.category = new_category
-    product_1.description = 'product_1.description'
-    product_1.unit_price = 1000
-    product_1.inventory = 10
+    p1 = Product()
+    p1.name = 'p1'
+    p1.category = new_category
+    p1.description = 'p1.description'
+    p1.unit_price = 1000
+    p1.inventory = 10
 
     product_2 = Product()
     product_2.name = 'product_2'
@@ -39,7 +39,7 @@ def show_data(request):
     new_order.save()
     
     order_items_1 = OrderItem()
-    order_items_1.product = product_1
+    order_items_1.product = p1
 
     order_items_2 = OrderItem()
     order_items_2.product = product_2
