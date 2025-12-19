@@ -22,7 +22,7 @@ def show_data(request):
     new_category.description = 'aaa'
     new_category.top_product_id = 1
     new_category.save()
-    
+
     p1 = Product()
     p1.name = 'p1'
     p1.category = new_category
@@ -30,6 +30,7 @@ def show_data(request):
     p1.description = 'p1.description'
     p1.unit_price = 1000
     p1.inventory = 1
+    p1.save()
 
     p2 = Product()
     p2.name = 'p2'
@@ -38,6 +39,8 @@ def show_data(request):
     p2.description = 'p2.description'
     p2.unit_price = 2000
     p2.inventory = 2
+    p2.save()
+    
     # ساخت Order بسیار ساده برای customer با id=1
     new_order = Order()
     new_order.customer_id = 1
