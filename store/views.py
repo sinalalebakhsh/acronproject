@@ -76,6 +76,8 @@ def show_data(request):
         order_items_3.product_id += 3
     """
 
+    # UPDATE
+    
     return render(request, 'hello.html')
 
 
