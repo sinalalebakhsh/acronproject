@@ -15,10 +15,14 @@ from .models import (
 
 
 def show_data(request):    
+    cat = Category.objects.create(title='Z', description='ZZZZ',top_product_id=1)
+
     new_category = Category()
     new_category.title = 'A'
     new_category.description = 'aaa'
-
+    new_category.top_product_id = 1
+    new_category.save()
+    
     p1 = Product()
     p1.name = 'p1'
     p1.category = new_category
