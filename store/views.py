@@ -77,7 +77,9 @@ def show_data(request):
     """
 
     # UPDATE
-    Product.objects.filter(name=)
+    Product.objects.filter(name='p1').update(name='p1-one')
+
+    
     return render(request, 'hello.html')
 
 
