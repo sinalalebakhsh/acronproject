@@ -55,30 +55,30 @@ def show_data(request):
         unit_price=p2.unit_price,
     )
 
-    order_item_1 = OrderItem.objects.create(
+    order_item_3 = OrderItem.objects.create(
         order=order,
-        product=p1,
-        quantity=10,
-        unit_price=p1.unit_price,
+        product_id=1,
+        quantity=30,
+        unit_price=1000,
     )
 
 
 
-    order_items_1 = OrderItem()
-    order_items_1.order = order
-    order_items_1.product = p1
-    order_items_1.quantity = 10
-    order_items_1.unit_price = p1.unit_price
+    # order_items_1 = OrderItem()
+    # order_items_1.order = order
+    # order_items_1.product = p1
+    # order_items_1.quantity = 10
+    # order_items_1.unit_price = p1.unit_price
 
 
-    order_items_2 = OrderItem()
-    order_items_2.product = p2
-    order_items_2.product += p2
+    # order_items_2 = OrderItem()
+    # order_items_2.product = p2
+    # order_items_2.product += p2
 
-    order_items_3 = OrderItem()
-    order_items_3.product_id = 3
-    order_items_3.product_id += 3
-    order_items_3.product_id += 3
+    # order_items_3 = OrderItem()
+    # order_items_3.product_id = 3
+    # order_items_3.product_id += 3
+    # order_items_3.product_id += 3
 
     return render(request, 'hello.html')
 
