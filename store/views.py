@@ -32,15 +32,32 @@ def show_data(request):
     p2.category = new_category
     p2.slug = 'p-2'
     p2.description = 'p2.description'
-    p2.unit_price = 1000
-    p2.inventory = 1
+    p2.unit_price = 2000
+    p2.inventory = 2
     # ساخت Order بسیار ساده برای customer با id=1
     new_order = Order()
     new_order.customer_id = 1
     new_order.save()
     
+    order = Order.objects.create(customer_id=1)
+
+    order_item_1 = OrderItem.objects.create(
+        order=order,
+        product=p1,
+        quantity=10,
+        unit_price=p1.unit_price,
+    )
+
+
+
+
+
     order_items_1 = OrderItem()
+    order_items_1.order = order
     order_items_1.product = p1
+    order_items_1.quantity = 10
+    order_items_1.unit_price = p1.unit_price
+
 
     order_items_2 = OrderItem()
     order_items_2.product = p2
