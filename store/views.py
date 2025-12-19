@@ -48,7 +48,19 @@ def show_data(request):
         unit_price=p1.unit_price,
     )
 
+    order_item_2 = OrderItem.objects.create(
+        order=order,
+        product=p2,
+        quantity=20,
+        unit_price=p2.unit_price,
+    )
 
+    order_item_1 = OrderItem.objects.create(
+        order=order,
+        product=p1,
+        quantity=10,
+        unit_price=p1.unit_price,
+    )
 
 
 
