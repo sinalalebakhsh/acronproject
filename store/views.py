@@ -77,7 +77,7 @@ def show_data(request):
     """
 
     # UPDATE
-    
+    Product.objects.filter(name=)
     return render(request, 'hello.html')
 
 
