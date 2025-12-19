@@ -64,6 +64,7 @@ def show_data(request):
 
 
 
+
     # order_items_1 = OrderItem()
     # order_items_1.order = order
     # order_items_1.product = p1
