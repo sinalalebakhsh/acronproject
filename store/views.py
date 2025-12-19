@@ -6,12 +6,50 @@ from django.db.models import ExpressionWrapper, DecimalField
 
 from django.utils import timezone
 
-from .models import Category, Product
+from .models import (
+    Category, 
+    Product,
+    Order,
+    OrderItem,
+    )
 
 
 def show_data(request):    
+    new_category = Category()
+    new_category.title = 'A'
+    new_category.description = 'aaa'
 
-   
+    product_1 = Product()
+    product_1.name = 'product_1'
+    product_1.category = new_category
+    product_1.description = 'product_1.description'
+    product_1.unit_price = 1000
+    product_1.inventory = 10
+
+    product_2 = Product()
+    product_2.name = 'product_2'
+    product_2.category = new_category
+    product_2.description = 'product_2.description'
+    product_2.unit_price = 2200
+    product_2.inventory = 220
+    
+    # ساخت Order بسیار ساده برای customer با id=1
+    new_order = Order()
+    new_order.customer_id = 1
+    new_order.save()
+    
+    order_items_1 = OrderItem()
+    order_items_1.product = product_1
+
+    order_items_2 = OrderItem()
+    order_items_2.product = product_2
+    order_items_2.product += product_2
+
+    order_items_3 = OrderItem()
+    order_items_3.product_id = 3
+    order_items_3.product_id += 3
+    order_items_3.product_id += 3
+
     return render(request, 'hello.html')
 
 

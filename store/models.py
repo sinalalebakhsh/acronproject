@@ -62,7 +62,7 @@ class UnpaidOrderManager(models.Manager):
 # Order
 # Who has created this order and when ?
 class Order(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='orders')
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='orders') 
     ORDER_STATUS_PAID = 'P'
     ORDER_STATUS_UNPAID = 'U'
     ORDER_STATUS_CANCELED = 'C'
