@@ -22,9 +22,10 @@ def show_data(request):
     p1 = Product()
     p1.name = 'p1'
     p1.category = new_category
+    p1.slug = 'p-1'
     p1.description = 'p1.description'
     p1.unit_price = 1000
-    p1.inventory = 10
+    p1.inventory = 1
 
     product_2 = Product()
     product_2.name = 'product_2'
