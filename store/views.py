@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.db.models import Q, F, Value, Func
 from django.db.models import Count, Avg, Max
 from django.db.models import ExpressionWrapper, DecimalField
+from django.db import transaction
 
 from django.utils import timezone
 
@@ -76,10 +77,14 @@ def show_data(request):
         order_items_3.product_id += 3
     """
 
-    # UPDATE
-    Product.objects.filter(name='p1').update(name='p1-one')
+    """
+        # UPDATE
+        Product.objects.filter(name='p1').update(name='p1-one')
+    """
 
-    
+    with transaction.atomic():
+         
+
     return render(request, 'hello.html')
 
 
