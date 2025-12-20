@@ -15,6 +15,7 @@ from .models import (
     )
 
 
+@transaction.a
 def show_data(request):    
     # CREATE
     """
@@ -82,15 +83,15 @@ def show_data(request):
         Product.objects.filter(name='p1').update(name='p1-one')
     """
 
-    with transaction.atomic():
-        order = Order.objects.create(customer_id=1) 
+    # with transaction.atomic():
+    order = Order.objects.create(customer_id=1) 
 
-        order_item1 = OrderItem.objects.create(
-            order=order,
-            product_id=1,
-            quantity=10,
-            unit_price=1000,
-        )
+    order_item1 = OrderItem.objects.create(
+        order=order,
+        product_id=1,
+        quantity=10,
+        unit_price=1000,
+    )
 
     return render(request, 'hello.html')
 
