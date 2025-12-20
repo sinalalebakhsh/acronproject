@@ -15,7 +15,7 @@ from .models import (
     )
 
 
-@transaction.a
+@transaction.atomic()
 def show_data(request):    
     # CREATE
     """
