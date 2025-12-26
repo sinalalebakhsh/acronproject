@@ -76,13 +76,9 @@ def show_data(request):
         order_items_3.product_id = 3
         order_items_3.product_id += 3
         order_items_3.product_id += 3
-    """
 
-    """
-        # UPDATE
-        Product.objects.filter(name='p1').update(name='p1-one')
-    """
-
+    # UPDATE
+    Product.objects.filter(name='p1').update(name='p1-one')
     # with transaction.atomic():
     order = Order.objects.create(customer_id=1) 
 
@@ -92,6 +88,9 @@ def show_data(request):
         quantity=10,
         unit_price=1000,
     )
+    """
+    query
+
 
     return render(request, 'hello.html')
 
