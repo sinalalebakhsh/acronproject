@@ -94,9 +94,15 @@ def show_data(request):
         Prefetch(
             'items',
             queryset=OrderItem.objects.select_related('product')
+        ) 
+    ) \
+        .annotate(
+            items_count=Count('items')
         )
-    )
 
+    for order in queryset:
+        for order_item in order.items.all():
+            print(order_item.product.name)
 
     return render(request, 'hello.html')
 
