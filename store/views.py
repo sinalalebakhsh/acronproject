@@ -4,7 +4,7 @@ from django.db.models import Q, F, Value, Func
 from django.db.models import Count, Avg, Max
 from django.db.models import ExpressionWrapper, DecimalField
 from django.db import transaction
-from django.db.
+from django.db.models import Prefetch
 
 from django.utils import timezone
 
@@ -91,7 +91,10 @@ def show_data(request):
     )
     """
     queryset = Order.objects.prefetch_related(
-
+        Prefetch(
+            'items',
+            queryset=OrderItem.objects.select_related('product')
+        )
     )
 
 
