@@ -16,7 +16,7 @@ class Discount(models.Model):
     description = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.discount
+        return f'{self.discount}'
 
 # Product
 # name
