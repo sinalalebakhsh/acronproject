@@ -7,7 +7,7 @@ from .models import Category
 
 class Product_Admin(admin.ModelAdmin):
     list_display = ['id', 'name', 'inventory', 'unit_price']
-
+    list_editable = ['name', 'inventory', 'unit_price']
 
 
 

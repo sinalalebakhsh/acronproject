@@ -15,6 +15,9 @@ class Discount(models.Model):
     discount = models.FloatField()
     description = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.discount
+
 # Product
 # name
 # description
