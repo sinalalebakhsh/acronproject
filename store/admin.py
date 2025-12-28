@@ -1,8 +1,12 @@
 from django.contrib import admin
 
-from .models import Product
-from .models import Category
-from .models import Order
+from .models import (
+    Product,
+    Category,
+    Order,
+    Order,
+    Comment,
+)
 
 
 @admin.register(Product)
@@ -39,7 +43,11 @@ class Category_Admin(admin.ModelAdmin):
 # admin.site.register(Category)
 
 
-
+@admin.register(Comment)
+class Comment_Admin(admin.ModelAdmin):
+    list_display = ['id','product','name','status','datetime_created', 'objects','approved']
+    list_editable = ['',]
+    list_per_page = ['',]
 
 
 
