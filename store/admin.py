@@ -7,15 +7,19 @@ from .models import Order
 
 @admin.register(Product)
 class Product_Admin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'inventory', 'unit_price']
+    list_display = ['id', 'name', 'inventory', 'unit_price', 'datetime_created']
     list_editable = ['name', 'inventory', 'unit_price']
     list_per_page = 20
+    ordering = ['-datetime_created']
 # admin.site.register(Product, Product_Admin)
 
 
 @admin.register(Order)
 class Order_Admin(admin.ModelAdmin):
-    list_display = ['id', 'customer', 'status']
+    list_display = ['id', 'customer', 'status', 'datetime_created']
+    list_editable = ['status']
+    list_per_page = 20
+    ordering = ['-datetime_created']
 
 
 
