@@ -19,8 +19,6 @@ class Product_Admin(admin.ModelAdmin):
             return 'equal with 10'
         else:
             return 'greater than 10'
-
-
 # admin.site.register(Product, Product_Admin)
 
 
@@ -32,8 +30,9 @@ class Order_Admin(admin.ModelAdmin):
     ordering = ['-datetime_created']
 
 
-
-admin.site.register(Category)
+@admin.register(Category):
+class 
+# admin.site.register(Category)
 
 
 
