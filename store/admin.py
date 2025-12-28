@@ -46,8 +46,9 @@ class Category_Admin(admin.ModelAdmin):
 @admin.register(Comment)
 class Comment_Admin(admin.ModelAdmin):
     list_display = ['id','product','name','status','datetime_created', 'objects','approved']
-    list_editable = ['',]
-    list_per_page = ['',]
+    list_editable = ['product']
+    list_per_page = 20
+    ordering = ['-datetime_created']
 
 
 

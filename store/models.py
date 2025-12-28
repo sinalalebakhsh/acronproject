@@ -136,6 +136,9 @@ class CommentManager(models.Manager):
     def get_approved(self):
         return self.get_queryset().filter(status=Comment.COMMENT_STATUS_APPROVED)
 
+    def __str__(self):
+        return Comment.COMMENT_STATUS_APPROVED
+
 class ApprovedCommentManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(status=Comment.COMMENT_STATUS_APPROVED)
