@@ -15,6 +15,7 @@ class Product_Admin(admin.ModelAdmin):
     list_editable = ['name', 'inventory', 'unit_price']
     list_per_page = 20
     ordering = ['-datetime_created']
+    list_select_related = ['category']
 
     def product_category(self, product):
         return product.category.title
