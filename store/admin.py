@@ -31,7 +31,8 @@ class Order_Admin(admin.ModelAdmin):
 
 
 @admin.register(Category):
-class Cate
+class Category_Admin(admin.ModelAdmin):
+    list_display = ['id', 'title', 'datetime_created', 'top']
 # admin.site.register(Category)
 
 
