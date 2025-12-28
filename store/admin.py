@@ -31,7 +31,7 @@ class Order_Admin(admin.ModelAdmin):
 
 
 @admin.register(Category):
-class 
+class Cate
 # admin.site.register(Category)
 
 
