@@ -17,6 +17,7 @@ class Product_Admin(admin.ModelAdmin):
     ordering = ['-datetime_created']
     list_select_related = ['category']
 
+    @admin.display(ordering='category__title')
     def product_category(self, product):
         return product.category.title
 
