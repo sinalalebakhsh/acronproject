@@ -1,0 +1,1304 @@
+Time: 2025-12-30 20:43:19
+Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+Last Git Status:
+Django project changes:
+
+Modified files:
+- git_auto_version
+
+============================================================
+[2025-12-30 20:43:20]
+============================================================
+ERROR: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+============================================================
+[2025-12-30 20:44:14]
+============================================================
+GIT AUTO OPERATION FAILED - Version 1.8.30
+Time: 2025-12-30 20:44:13
+Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+Last Git Status:
+Django project changes:
+
+Modified files:
+- git_auto_version
+
+============================================================
+[2025-12-30 20:44:14]
+============================================================
+ERROR: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+============================================================
+[2025-12-30 20:49:07]
+============================================================
+GIT AUTO OPERATION FAILED - Version 1.8.31
+Time: 2025-12-30 20:49:07
+Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+Last Git Status:
+Django project changes:
+
+Modified files:
+- git_auto_version
+
+============================================================
+[2025-12-30 20:49:08]
+============================================================
+ERROR: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+============================================================
+[2025-12-30 20:54:01]
+============================================================
+GIT AUTO OPERATION FAILED - Version 1.8.32
+Time: 2025-12-30 20:54:01
+Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+Last Git Status:
+Django project changes:
+
+Modified files:
+- git_auto_version
+
+============================================================
+[2025-12-30 20:54:01]
+============================================================
+ERROR: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+============================================================
+[2025-12-30 20:58:54]
+============================================================
+GIT AUTO OPERATION FAILED - Version 1.8.33
+Time: 2025-12-30 20:58:54
+Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+Last Git Status:
+Django project changes:
+
+Modified files:
+- git_auto_version
+
+============================================================
+[2025-12-30 20:58:54]
+============================================================
+ERROR: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+============================================================
+[2025-12-30 21:03:47]
+============================================================
+GIT AUTO OPERATION FAILED - Version 1.8.34
+Time: 2025-12-30 21:03:47
+Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+Last Git Status:
+Django project changes:
+
+Modified files:
+- git_auto_version
+
+============================================================
+[2025-12-30 21:03:47]
+============================================================
+ERROR: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+============================================================
+[2025-12-30 21:08:40]
+============================================================
+GIT AUTO OPERATION FAILED - Version 1.8.35
+Time: 2025-12-30 21:08:40
+Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+Last Git Status:
+Django project changes:
+
+Modified files:
+- git_auto_version
+
+============================================================
+[2025-12-30 21:08:40]
+============================================================
+ERROR: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+============================================================
+[2025-12-30 21:13:33]
+============================================================
+GIT AUTO OPERATION FAILED - Version 1.8.36
+Time: 2025-12-30 21:13:33
+Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+Last Git Status:
+Django project changes:
+
+Modified files:
+- git_auto_version
+
+============================================================
+[2025-12-30 21:13:33]
+============================================================
+ERROR: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+============================================================
+[2025-12-30 21:18:26]
+============================================================
+GIT AUTO OPERATION FAILED - Version 1.8.37
+Time: 2025-12-30 21:18:26
+Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+Last Git Status:
+Django project changes:
+
+Modified files:
+- git_auto_version
+
+============================================================
+[2025-12-30 21:18:26]
+============================================================
+ERROR: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+============================================================
+[2025-12-30 21:23:19]
+============================================================
+GIT AUTO OPERATION FAILED - Version 1.8.38
+Time: 2025-12-30 21:23:19
+Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+Last Git Status:
+Django project changes:
+
+Modified files:
+- git_auto_version
+
+============================================================
+[2025-12-30 21:23:19]
+============================================================
+ERROR: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+============================================================
+[2025-12-30 21:28:12]
+============================================================
+GIT AUTO OPERATION FAILED - Version 1.8.39
+Time: 2025-12-30 21:28:11
+Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+Last Git Status:
+Django project changes:
+
+Modified files:
+- git_auto_version
+
+============================================================
+[2025-12-30 21:28:12]
+============================================================
+ERROR: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+============================================================
+[2025-12-30 21:33:04]
+============================================================
+GIT AUTO OPERATION FAILED - Version 1.8.40
+Time: 2025-12-30 21:33:04
+Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+Last Git Status:
+Django project changes:
+
+Modified files:
+- git_auto_version
+
+============================================================
+[2025-12-30 21:33:05]
+============================================================
+ERROR: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+============================================================
+[2025-12-30 21:37:57]
+============================================================
+GIT AUTO OPERATION FAILED - Version 1.8.41
+Time: 2025-12-30 21:37:57
+Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+Last Git Status:
+Django project changes:
+
+Modified files:
+- git_auto_version
+
+============================================================
+[2025-12-30 21:37:57]
+============================================================
+ERROR: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+============================================================
+[2025-12-30 21:42:50]
+============================================================
+GIT AUTO OPERATION FAILED - Version 1.8.42
+Time: 2025-12-30 21:42:50
+Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+Last Git Status:
+Django project changes:
+
+Modified files:
+- git_auto_version
+
+============================================================
+[2025-12-30 21:42:51]
+============================================================
+ERROR: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+============================================================
+[2025-12-30 21:47:43]
+============================================================
+GIT AUTO OPERATION FAILED - Version 1.8.43
+Time: 2025-12-30 21:47:43
+Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+Last Git Status:
+Django project changes:
+
+Modified files:
+- git_auto_version
+
+============================================================
+[2025-12-30 21:47:43]
+============================================================
+ERROR: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+============================================================
+[2025-12-30 21:52:36]
+============================================================
+GIT AUTO OPERATION FAILED - Version 1.8.44
+Time: 2025-12-30 21:52:36
+Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+Last Git Status:
+Django project changes:
+
+Modified files:
+- git_auto_version
+
+============================================================
+[2025-12-30 21:52:36]
+============================================================
+ERROR: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+============================================================
+[2025-12-30 21:57:29]
+============================================================
+GIT AUTO OPERATION FAILED - Version 1.8.45
+Time: 2025-12-30 21:57:29
+Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+Last Git Status:
+Django project changes:
+
+Modified files:
+- git_auto_version
+
+============================================================
+[2025-12-30 21:57:29]
+============================================================
+ERROR: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+============================================================
+[2025-12-30 22:02:23]
+============================================================
+GIT AUTO OPERATION FAILED - Version 1.8.46
+Time: 2025-12-30 22:02:23
+Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+Last Git Status:
+Django project changes:
+
+Modified files:
+- git_auto_version
+
+============================================================
+[2025-12-30 22:02:23]
+============================================================
+ERROR: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+============================================================
+[2025-12-30 22:07:17]
+============================================================
+GIT AUTO OPERATION FAILED - Version 1.8.47
+Time: 2025-12-30 22:07:16
+Error: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+Last Git Status:
+Django project changes:
+
+Modified files:
+- git_auto_version
+
+============================================================
+[2025-12-30 22:07:17]
+============================================================
+ERROR: Error executing git commands: Error in git push: ssh: Could not resolve hostname github.com: No such host is known. 
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+
+============================================================
+[2025-12-30 22:12:23]
+============================================================
+GIT AUTO OPERATION STARTED - Version 1.8.47
+Time: 2025-12-30 22:12:12
+
+1. GIT ADD
+----------------------------------------
+✓ git add completed
+
+2. GIT COMMIT
+----------------------------------------
+✓ git commit completed
+Version: 1.8.48
+Commit Hash: 46f745d
+Commit Message:
+Version 1.8.48 - 30.12.25 22:12:12
+Django project changes:
+
+Modified files:
+- git_auto_version
+Output: [main 46f745d] Version 1.8.48 - 30.12.25 22:12:12 Django project changes:
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+3. GIT PUSH
+----------------------------------------
+✓ git push completed
+Branch: main
+Output: branch 'main' set up to track 'origin/main'.
+
+4. PUSH VERIFICATION
+----------------------------------------
+✓ Push verified successfully
+Local Commit:  46f745da4440261568027ece5ea66152a362a0e7
+Remote Commit: 46f745da4440261568027ece5ea66152a362a0e7
+Match: Yes
+
+5. GIT INFORMATION SUMMARY
+----------------------------------------
+Current Branch: main
+Git User: Sina Lalebakhsh <lalebakhshsina@gmail.com>
+
+Remote URLs:
+origin	git@github.com:sinalalebakhsh/acronproject.git (fetch)
+origin	git@github.com:sinalalebakhsh/acronproject.git (push)
+
+Recent Commits (last 5):
+46f745d Version 1.8.48 - 30.12.25 22:12:12 Django project changes:
+ea5f5d9 Version 1.8.47 - 30.12.25 22:07:15 Django project changes:
+851daf3 Version 1.8.46 - 30.12.25 22:02:21 Django project changes:
+5c09f5f Version 1.8.45 - 30.12.25 21:57:28 Django project changes:
+af18468 Version 1.8.44 - 30.12.25 21:52:35 Django project changes:
+
+OPERATION COMPLETED SUCCESSFULLY
+Version: 1.8.48
+Time: 2025-12-30 22:12:23
+Commit: 46f745d
+
+============================================================
+[2025-12-30 22:17:29]
+============================================================
+GIT AUTO OPERATION STARTED - Version 1.8.48
+Time: 2025-12-30 22:17:18
+
+1. GIT ADD
+----------------------------------------
+✓ git add completed
+
+2. GIT COMMIT
+----------------------------------------
+✓ git commit completed
+Version: 1.8.49
+Commit Hash: b676de8
+Commit Message:
+Version 1.8.49 - 30.12.25 22:17:18
+Django project changes:
+
+Modified files:
+- git_auto_version
+Output: [main b676de8] Version 1.8.49 - 30.12.25 22:17:18 Django project changes:
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+3. GIT PUSH
+----------------------------------------
+✓ git push completed
+Branch: main
+Output: branch 'main' set up to track 'origin/main'.
+
+4. PUSH VERIFICATION
+----------------------------------------
+✓ Push verified successfully
+Local Commit:  b676de869e71ba322fe961613e51ee090826683c
+Remote Commit: b676de869e71ba322fe961613e51ee090826683c
+Match: Yes
+
+5. GIT INFORMATION SUMMARY
+----------------------------------------
+Current Branch: main
+Git User: Sina Lalebakhsh <lalebakhshsina@gmail.com>
+
+Remote URLs:
+origin	git@github.com:sinalalebakhsh/acronproject.git (fetch)
+origin	git@github.com:sinalalebakhsh/acronproject.git (push)
+
+Recent Commits (last 5):
+b676de8 Version 1.8.49 - 30.12.25 22:17:18 Django project changes:
+46f745d Version 1.8.48 - 30.12.25 22:12:12 Django project changes:
+ea5f5d9 Version 1.8.47 - 30.12.25 22:07:15 Django project changes:
+851daf3 Version 1.8.46 - 30.12.25 22:02:21 Django project changes:
+5c09f5f Version 1.8.45 - 30.12.25 21:57:28 Django project changes:
+
+OPERATION COMPLETED SUCCESSFULLY
+Version: 1.8.49
+Time: 2025-12-30 22:17:29
+Commit: b676de8
+
+============================================================
+[2025-12-30 22:22:34]
+============================================================
+GIT AUTO OPERATION STARTED - Version 1.8.49
+Time: 2025-12-30 22:22:24
+
+1. GIT ADD
+----------------------------------------
+✓ git add completed
+
+2. GIT COMMIT
+----------------------------------------
+✓ git commit completed
+Version: 1.8.50
+Commit Hash: fa1e1e0
+Commit Message:
+Version 1.8.50 - 30.12.25 22:22:24
+Django project changes:
+
+Modified files:
+- git_auto_version
+- store/admin.py
+Output: [main fa1e1e0] Version 1.8.50 - 30.12.25 22:22:24 Django project changes:
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+3. GIT PUSH
+----------------------------------------
+✓ git push completed
+Branch: main
+Output: branch 'main' set up to track 'origin/main'.
+
+4. PUSH VERIFICATION
+----------------------------------------
+✓ Push verified successfully
+Local Commit:  fa1e1e0cc19de977c75f458e7e438a781c98b95c
+Remote Commit: fa1e1e0cc19de977c75f458e7e438a781c98b95c
+Match: Yes
+
+5. GIT INFORMATION SUMMARY
+----------------------------------------
+Current Branch: main
+Git User: Sina Lalebakhsh <lalebakhshsina@gmail.com>
+
+Remote URLs:
+origin	git@github.com:sinalalebakhsh/acronproject.git (fetch)
+origin	git@github.com:sinalalebakhsh/acronproject.git (push)
+
+Recent Commits (last 5):
+fa1e1e0 Version 1.8.50 - 30.12.25 22:22:24 Django project changes:
+b676de8 Version 1.8.49 - 30.12.25 22:17:18 Django project changes:
+46f745d Version 1.8.48 - 30.12.25 22:12:12 Django project changes:
+ea5f5d9 Version 1.8.47 - 30.12.25 22:07:15 Django project changes:
+851daf3 Version 1.8.46 - 30.12.25 22:02:21 Django project changes:
+
+OPERATION COMPLETED SUCCESSFULLY
+Version: 1.8.50
+Time: 2025-12-30 22:22:34
+Commit: fa1e1e0
+
+============================================================
+[2025-12-30 22:27:41]
+============================================================
+GIT AUTO OPERATION STARTED - Version 1.8.50
+Time: 2025-12-30 22:27:31
+
+1. GIT ADD
+----------------------------------------
+✓ git add completed
+
+2. GIT COMMIT
+----------------------------------------
+✓ git commit completed
+Version: 1.8.51
+Commit Hash: e0f54e7
+Commit Message:
+Version 1.8.51 - 30.12.25 22:27:31
+Django project changes:
+
+Modified files:
+- tore/admin.py
+Output: [main e0f54e7] Version 1.8.51 - 30.12.25 22:27:31 Django project changes:
+ 1 file changed, 2 insertions(+)
+
+3. GIT PUSH
+----------------------------------------
+✓ git push completed
+Branch: main
+Output: branch 'main' set up to track 'origin/main'.
+
+4. PUSH VERIFICATION
+----------------------------------------
+✓ Push verified successfully
+Local Commit:  e0f54e75c812ef0f6dcd0267facdeb7e7be6a741
+Remote Commit: e0f54e75c812ef0f6dcd0267facdeb7e7be6a741
+Match: Yes
+
+5. GIT INFORMATION SUMMARY
+----------------------------------------
+Current Branch: main
+Git User: Sina Lalebakhsh <lalebakhshsina@gmail.com>
+
+Remote URLs:
+origin	git@github.com:sinalalebakhsh/acronproject.git (fetch)
+origin	git@github.com:sinalalebakhsh/acronproject.git (push)
+
+Recent Commits (last 5):
+e0f54e7 Version 1.8.51 - 30.12.25 22:27:31 Django project changes:
+ec244c9 prefetch related
+fa1e1e0 Version 1.8.50 - 30.12.25 22:22:24 Django project changes:
+b676de8 Version 1.8.49 - 30.12.25 22:17:18 Django project changes:
+46f745d Version 1.8.48 - 30.12.25 22:12:12 Django project changes:
+
+OPERATION COMPLETED SUCCESSFULLY
+Version: 1.8.51
+Time: 2025-12-30 22:27:41
+Commit: e0f54e7
+
+============================================================
+[2025-12-30 22:32:41]
+============================================================
+GIT AUTO OPERATION STARTED - Version 1.8.51
+Time: 2025-12-30 22:32:40
+
+30.12.25 22:32:40 - No changes to commit
+
+============================================================
+[2025-12-30 22:37:44]
+============================================================
+GIT AUTO OPERATION STARTED - Version 1.8.51
+Time: 2025-12-30 22:37:34
+
+1. GIT ADD
+----------------------------------------
+✓ git add completed
+
+2. GIT COMMIT
+----------------------------------------
+✓ git commit completed
+Version: 1.8.52
+Commit Hash: c221fd6
+Commit Message:
+Version 1.8.52 - 30.12.25 22:37:34
+Django project changes:
+
+Modified files:
+- tore/admin.py
+Output: [main c221fd6] Version 1.8.52 - 30.12.25 22:37:34 Django project changes:
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+3. GIT PUSH
+----------------------------------------
+✓ git push completed
+Branch: main
+Output: branch 'main' set up to track 'origin/main'.
+
+4. PUSH VERIFICATION
+----------------------------------------
+✓ Push verified successfully
+Local Commit:  c221fd663230761f75a1af1828baa587ddad7567
+Remote Commit: c221fd663230761f75a1af1828baa587ddad7567
+Match: Yes
+
+5. GIT INFORMATION SUMMARY
+----------------------------------------
+Current Branch: main
+Git User: Sina Lalebakhsh <lalebakhshsina@gmail.com>
+
+Remote URLs:
+origin	git@github.com:sinalalebakhsh/acronproject.git (fetch)
+origin	git@github.com:sinalalebakhsh/acronproject.git (push)
+
+Recent Commits (last 5):
+c221fd6 Version 1.8.52 - 30.12.25 22:37:34 Django project changes:
+986a6c6 decorator: @admin.display(ordering='items__count')
+e0f54e7 Version 1.8.51 - 30.12.25 22:27:31 Django project changes:
+ec244c9 prefetch related
+fa1e1e0 Version 1.8.50 - 30.12.25 22:22:24 Django project changes:
+
+OPERATION COMPLETED SUCCESSFULLY
+Version: 1.8.52
+Time: 2025-12-30 22:37:44
+Commit: c221fd6
+
+============================================================
+[2025-12-30 22:42:48]
+============================================================
+GIT AUTO OPERATION STARTED - Version 1.8.52
+Time: 2025-12-30 22:42:38
+
+1. GIT ADD
+----------------------------------------
+✓ git add completed
+
+2. GIT COMMIT
+----------------------------------------
+✓ git commit completed
+Version: 1.8.53
+Commit Hash: 9840a6e
+Commit Message:
+Version 1.8.53 - 30.12.25 22:42:38
+Django project changes:
+
+Modified files:
+- git_auto_version
+Output: [main 9840a6e] Version 1.8.53 - 30.12.25 22:42:38 Django project changes:
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+3. GIT PUSH
+----------------------------------------
+✓ git push completed
+Branch: main
+Output: branch 'main' set up to track 'origin/main'.
+
+4. PUSH VERIFICATION
+----------------------------------------
+✓ Push verified successfully
+Local Commit:  9840a6e3f17a4254e454b07afbf92d35ccd8d43e
+Remote Commit: 9840a6e3f17a4254e454b07afbf92d35ccd8d43e
+Match: Yes
+
+5. GIT INFORMATION SUMMARY
+----------------------------------------
+Current Branch: main
+Git User: Sina Lalebakhsh <lalebakhshsina@gmail.com>
+
+Remote URLs:
+origin	git@github.com:sinalalebakhsh/acronproject.git (fetch)
+origin	git@github.com:sinalalebakhsh/acronproject.git (push)
+
+Recent Commits (last 5):
+9840a6e Version 1.8.53 - 30.12.25 22:42:38 Django project changes:
+c221fd6 Version 1.8.52 - 30.12.25 22:37:34 Django project changes:
+986a6c6 decorator: @admin.display(ordering='items__count')
+e0f54e7 Version 1.8.51 - 30.12.25 22:27:31 Django project changes:
+ec244c9 prefetch related
+
+OPERATION COMPLETED SUCCESSFULLY
+Version: 1.8.53
+Time: 2025-12-30 22:42:48
+Commit: 9840a6e
+
+============================================================
+[2025-12-30 22:47:50]
+============================================================
+GIT AUTO OPERATION STARTED - Version 1.8.53
+Time: 2025-12-30 22:47:41
+
+1. GIT ADD
+----------------------------------------
+✓ git add completed
+
+2. GIT COMMIT
+----------------------------------------
+✓ git commit completed
+Version: 1.8.54
+Commit Hash: b5df2dd
+Commit Message:
+Version 1.8.54 - 30.12.25 22:47:41
+Django project changes:
+
+Modified files:
+- git_auto_version
+Output: [main b5df2dd] Version 1.8.54 - 30.12.25 22:47:41 Django project changes:
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+3. GIT PUSH
+----------------------------------------
+✓ git push completed
+Branch: main
+Output: branch 'main' set up to track 'origin/main'.
+
+4. PUSH VERIFICATION
+----------------------------------------
+✓ Push verified successfully
+Local Commit:  b5df2dd190bd284bcf92dd3f4bc20bd627891f26
+Remote Commit: b5df2dd190bd284bcf92dd3f4bc20bd627891f26
+Match: Yes
+
+5. GIT INFORMATION SUMMARY
+----------------------------------------
+Current Branch: main
+Git User: Sina Lalebakhsh <lalebakhshsina@gmail.com>
+
+Remote URLs:
+origin	git@github.com:sinalalebakhsh/acronproject.git (fetch)
+origin	git@github.com:sinalalebakhsh/acronproject.git (push)
+
+Recent Commits (last 5):
+b5df2dd Version 1.8.54 - 30.12.25 22:47:41 Django project changes:
+9840a6e Version 1.8.53 - 30.12.25 22:42:38 Django project changes:
+c221fd6 Version 1.8.52 - 30.12.25 22:37:34 Django project changes:
+986a6c6 decorator: @admin.display(ordering='items__count')
+e0f54e7 Version 1.8.51 - 30.12.25 22:27:31 Django project changes:
+
+OPERATION COMPLETED SUCCESSFULLY
+Version: 1.8.54
+Time: 2025-12-30 22:47:50
+Commit: b5df2dd
+
+============================================================
+[2025-12-30 22:52:53]
+============================================================
+GIT AUTO OPERATION STARTED - Version 1.8.54
+Time: 2025-12-30 22:52:44
+
+1. GIT ADD
+----------------------------------------
+✓ git add completed
+
+2. GIT COMMIT
+----------------------------------------
+✓ git commit completed
+Version: 1.8.55
+Commit Hash: 5892156
+Commit Message:
+Version 1.8.55 - 30.12.25 22:52:44
+Django project changes:
+
+Modified files:
+- git_auto_version
+Output: [main 5892156] Version 1.8.55 - 30.12.25 22:52:44 Django project changes:
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+3. GIT PUSH
+----------------------------------------
+✓ git push completed
+Branch: main
+Output: branch 'main' set up to track 'origin/main'.
+
+4. PUSH VERIFICATION
+----------------------------------------
+✓ Push verified successfully
+Local Commit:  58921568b28c599a27f4583e17e2b53d94a98e95
+Remote Commit: 58921568b28c599a27f4583e17e2b53d94a98e95
+Match: Yes
+
+5. GIT INFORMATION SUMMARY
+----------------------------------------
+Current Branch: main
+Git User: Sina Lalebakhsh <lalebakhshsina@gmail.com>
+
+Remote URLs:
+origin	git@github.com:sinalalebakhsh/acronproject.git (fetch)
+origin	git@github.com:sinalalebakhsh/acronproject.git (push)
+
+Recent Commits (last 5):
+5892156 Version 1.8.55 - 30.12.25 22:52:44 Django project changes:
+b5df2dd Version 1.8.54 - 30.12.25 22:47:41 Django project changes:
+9840a6e Version 1.8.53 - 30.12.25 22:42:38 Django project changes:
+c221fd6 Version 1.8.52 - 30.12.25 22:37:34 Django project changes:
+986a6c6 decorator: @admin.display(ordering='items__count')
+
+OPERATION COMPLETED SUCCESSFULLY
+Version: 1.8.55
+Time: 2025-12-30 22:52:53
+Commit: 5892156
+
+================================================================================
+LOG FILE ROTATED
+Time: 2025-12-30 22:57:56
+Previous size: 2042 lines
+New size: 1000 lines
+Rotation threshold: 2000 lines
+================================================================================
+
+
+============================================================
+[2025-12-30 22:57:56]
+============================================================
+GIT AUTO OPERATION STARTED - Version 1.8.55
+Time: 2025-12-30 22:57:47
+
+1. GIT ADD
+----------------------------------------
+✓ git add completed
+
+2. GIT COMMIT
+----------------------------------------
+✓ git commit completed
+Version: 1.8.56
+Commit Hash: ffb837e
+Commit Message:
+Version 1.8.56 - 30.12.25 22:57:47
+Django project changes:
+
+Modified files:
+- git_auto_version
+Output: [main ffb837e] Version 1.8.56 - 30.12.25 22:57:47 Django project changes:
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+3. GIT PUSH
+----------------------------------------
+✓ git push completed
+Branch: main
+Output: branch 'main' set up to track 'origin/main'.
+
+4. PUSH VERIFICATION
+----------------------------------------
+✓ Push verified successfully
+Local Commit:  ffb837e4245ac683d9db85e74c8c86c9042b8e75
+Remote Commit: ffb837e4245ac683d9db85e74c8c86c9042b8e75
+Match: Yes
+
+5. GIT INFORMATION SUMMARY
+----------------------------------------
+Current Branch: main
+Git User: Sina Lalebakhsh <lalebakhshsina@gmail.com>
+
+Remote URLs:
+origin	git@github.com:sinalalebakhsh/acronproject.git (fetch)
+origin	git@github.com:sinalalebakhsh/acronproject.git (push)
+
+Recent Commits (last 5):
+ffb837e Version 1.8.56 - 30.12.25 22:57:47 Django project changes:
+5892156 Version 1.8.55 - 30.12.25 22:52:44 Django project changes:
+b5df2dd Version 1.8.54 - 30.12.25 22:47:41 Django project changes:
+9840a6e Version 1.8.53 - 30.12.25 22:42:38 Django project changes:
+c221fd6 Version 1.8.52 - 30.12.25 22:37:34 Django project changes:
+
+OPERATION COMPLETED SUCCESSFULLY
+Version: 1.8.56
+Time: 2025-12-30 22:57:56
+Commit: ffb837e
+
+============================================================
+[2025-12-30 23:03:01]
+============================================================
+GIT AUTO OPERATION STARTED - Version 1.8.56
+Time: 2025-12-30 23:02:51
+
+1. GIT ADD
+----------------------------------------
+✓ git add completed
+
+2. GIT COMMIT
+----------------------------------------
+✓ git commit completed
+Version: 1.8.57
+Commit Hash: 20a7200
+Commit Message:
+Version 1.8.57 - 30.12.25 23:02:51
+Django project changes:
+
+Modified files:
+- git_auto_version
+Output: [main 20a7200] Version 1.8.57 - 30.12.25 23:02:51 Django project changes:
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+3. GIT PUSH
+----------------------------------------
+✓ git push completed
+Branch: main
+Output: branch 'main' set up to track 'origin/main'.
+
+4. PUSH VERIFICATION
+----------------------------------------
+✓ Push verified successfully
+Local Commit:  20a720094d455fc95ee19e3dfef75314eafc6bdf
+Remote Commit: 20a720094d455fc95ee19e3dfef75314eafc6bdf
+Match: Yes
+
+5. GIT INFORMATION SUMMARY
+----------------------------------------
+Current Branch: main
+Git User: Sina Lalebakhsh <lalebakhshsina@gmail.com>
+
+Remote URLs:
+origin	git@github.com:sinalalebakhsh/acronproject.git (fetch)
+origin	git@github.com:sinalalebakhsh/acronproject.git (push)
+
+Recent Commits (last 5):
+20a7200 Version 1.8.57 - 30.12.25 23:02:51 Django project changes:
+ffb837e Version 1.8.56 - 30.12.25 22:57:47 Django project changes:
+5892156 Version 1.8.55 - 30.12.25 22:52:44 Django project changes:
+b5df2dd Version 1.8.54 - 30.12.25 22:47:41 Django project changes:
+9840a6e Version 1.8.53 - 30.12.25 22:42:38 Django project changes:
+
+OPERATION COMPLETED SUCCESSFULLY
+Version: 1.8.57
+Time: 2025-12-30 23:03:01
+Commit: 20a7200
+
+============================================================
+[2025-12-30 23:08:05]
+============================================================
+GIT AUTO OPERATION STARTED - Version 1.8.57
+Time: 2025-12-30 23:07:55
+
+1. GIT ADD
+----------------------------------------
+✓ git add completed
+
+2. GIT COMMIT
+----------------------------------------
+✓ git commit completed
+Version: 1.8.58
+Commit Hash: 88de4cd
+Commit Message:
+Version 1.8.58 - 30.12.25 23:07:55
+Django project changes:
+
+Modified files:
+- git_auto_version
+Output: [main 88de4cd] Version 1.8.58 - 30.12.25 23:07:55 Django project changes:
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+3. GIT PUSH
+----------------------------------------
+✓ git push completed
+Branch: main
+Output: branch 'main' set up to track 'origin/main'.
+
+4. PUSH VERIFICATION
+----------------------------------------
+✓ Push verified successfully
+Local Commit:  88de4cd1eced8a05ee6e42138d87c6785334e794
+Remote Commit: 88de4cd1eced8a05ee6e42138d87c6785334e794
+Match: Yes
+
+5. GIT INFORMATION SUMMARY
+----------------------------------------
+Current Branch: main
+Git User: Sina Lalebakhsh <lalebakhshsina@gmail.com>
+
+Remote URLs:
+origin	git@github.com:sinalalebakhsh/acronproject.git (fetch)
+origin	git@github.com:sinalalebakhsh/acronproject.git (push)
+
+Recent Commits (last 5):
+88de4cd Version 1.8.58 - 30.12.25 23:07:55 Django project changes:
+20a7200 Version 1.8.57 - 30.12.25 23:02:51 Django project changes:
+ffb837e Version 1.8.56 - 30.12.25 22:57:47 Django project changes:
+5892156 Version 1.8.55 - 30.12.25 22:52:44 Django project changes:
+b5df2dd Version 1.8.54 - 30.12.25 22:47:41 Django project changes:
+
+OPERATION COMPLETED SUCCESSFULLY
+Version: 1.8.58
+Time: 2025-12-30 23:08:05
+Commit: 88de4cd
+
+============================================================
+[2025-12-30 23:13:11]
+============================================================
+GIT AUTO OPERATION STARTED - Version 1.8.58
+Time: 2025-12-30 23:13:00
+
+1. GIT ADD
+----------------------------------------
+✓ git add completed
+
+2. GIT COMMIT
+----------------------------------------
+✓ git commit completed
+Version: 1.8.59
+Commit Hash: 4323358
+Commit Message:
+Version 1.8.59 - 30.12.25 23:13:00
+Django project changes:
+
+Modified files:
+- git_auto_version
+Output: [main 4323358] Version 1.8.59 - 30.12.25 23:13:00 Django project changes:
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+3. GIT PUSH
+----------------------------------------
+✓ git push completed
+Branch: main
+Output: branch 'main' set up to track 'origin/main'.
+
+4. PUSH VERIFICATION
+----------------------------------------
+✓ Push verified successfully
+Local Commit:  43233582510272dda8df3aa444f995c8dd6efab4
+Remote Commit: 43233582510272dda8df3aa444f995c8dd6efab4
+Match: Yes
+
+5. GIT INFORMATION SUMMARY
+----------------------------------------
+Current Branch: main
+Git User: Sina Lalebakhsh <lalebakhshsina@gmail.com>
+
+Remote URLs:
+origin	git@github.com:sinalalebakhsh/acronproject.git (fetch)
+origin	git@github.com:sinalalebakhsh/acronproject.git (push)
+
+Recent Commits (last 5):
+4323358 Version 1.8.59 - 30.12.25 23:13:00 Django project changes:
+88de4cd Version 1.8.58 - 30.12.25 23:07:55 Django project changes:
+20a7200 Version 1.8.57 - 30.12.25 23:02:51 Django project changes:
+ffb837e Version 1.8.56 - 30.12.25 22:57:47 Django project changes:
+5892156 Version 1.8.55 - 30.12.25 22:52:44 Django project changes:
+
+OPERATION COMPLETED SUCCESSFULLY
+Version: 1.8.59
+Time: 2025-12-30 23:13:11
+Commit: 4323358
+
+============================================================
+[2025-12-30 23:18:17]
+============================================================
+GIT AUTO OPERATION STARTED - Version 1.8.59
+Time: 2025-12-30 23:18:07
+
+1. GIT ADD
+----------------------------------------
+✓ git add completed
+
+2. GIT COMMIT
+----------------------------------------
+✓ git commit completed
+Version: 1.8.60
+Commit Hash: 971a1da
+Commit Message:
+Version 1.8.60 - 30.12.25 23:18:07
+Django project changes:
+
+Added files:
+- README__Farsi.md
+
+Modified files:
+- git_auto_version
+- README.md
+Output: [main 971a1da] Version 1.8.60 - 30.12.25 23:18:07 Django project changes:
+ 3 files changed, 251 insertions(+), 224 deletions(-)
+ create mode 100644 README__Farsi.md
+
+3. GIT PUSH
+----------------------------------------
+✓ git push completed
+Branch: main
+Output: branch 'main' set up to track 'origin/main'.
+
+4. PUSH VERIFICATION
+----------------------------------------
+✓ Push verified successfully
+Local Commit:  971a1daa9c57ca904f7df4c57f972c83ed969c4f
+Remote Commit: 971a1daa9c57ca904f7df4c57f972c83ed969c4f
+Match: Yes
+
+5. GIT INFORMATION SUMMARY
+----------------------------------------
+Current Branch: main
+Git User: Sina Lalebakhsh <lalebakhshsina@gmail.com>
+
+Remote URLs:
+origin	git@github.com:sinalalebakhsh/acronproject.git (fetch)
+origin	git@github.com:sinalalebakhsh/acronproject.git (push)
+
+Recent Commits (last 5):
+971a1da Version 1.8.60 - 30.12.25 23:18:07 Django project changes:
+4323358 Version 1.8.59 - 30.12.25 23:13:00 Django project changes:
+88de4cd Version 1.8.58 - 30.12.25 23:07:55 Django project changes:
+20a7200 Version 1.8.57 - 30.12.25 23:02:51 Django project changes:
+ffb837e Version 1.8.56 - 30.12.25 22:57:47 Django project changes:
+
+OPERATION COMPLETED SUCCESSFULLY
+Version: 1.8.60
+Time: 2025-12-30 23:18:17
+Commit: 971a1da
