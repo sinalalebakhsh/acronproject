@@ -50,7 +50,9 @@ class Order_Admin(admin.ModelAdmin):
     
     @admin.display(ordering='items__count')
     def all_items_number(self, order):
-        return order.items.count()
+        return order.items__count
+        # خط بالا و پاینن ، تفاوتی با هم ندارند
+        # return order.items.count()
 
 
     
