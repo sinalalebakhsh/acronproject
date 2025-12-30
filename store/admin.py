@@ -41,8 +41,14 @@ class Order_Admin(admin.ModelAdmin):
     ordering = ['-datetime_created']
 
     def get_queryset(self, request):
-        return super().get_queryset(request).prefetch_related('items')
+        return super()\
+            .get_queryset(request)\
+            .prefetch_related('items')\
+            .annotate(
+                items__count=Count('items')
+            )
     
+    @admin.display(ordering='items__count')
     def all_items_number(self, order):
         return order.items.count()
 
