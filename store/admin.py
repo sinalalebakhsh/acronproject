@@ -33,11 +33,15 @@ class Product_Admin(admin.ModelAdmin):
 
 @admin.register(Order)
 class Order_Admin(admin.ModelAdmin):
-    list_display = ['id', 'customer', 'status', 'datetime_created']
+    list_display = ['id', 'customer', 'status', 'datetime_created', 'all_items_number']
     list_editable = ['status']
     list_per_page = 20
     ordering = ['-datetime_created']
 
+    def all_items_number(self, order):
+        return order.items.count()
+
+    
 
 @admin.register(Category)
 class Category_Admin(admin.ModelAdmin):
