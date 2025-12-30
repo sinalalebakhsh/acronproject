@@ -1,3 +1,5 @@
+.git_auto_version
+
 __pycache__/
 *.pyc
 *.pyo

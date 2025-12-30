@@ -1,7 +1,10 @@
 
 
+# Select Related:
 
 
+
+# Prefetch Related 
 ```
 @admin.register(Order)
 class Order_Admin(admin.ModelAdmin):

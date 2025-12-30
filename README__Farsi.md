@@ -136,18 +136,25 @@ python manage.py migrate
 bash
 
 # حذف فایل‌های __pycache__ از کش git
+```
 git rm -r --cached */__pycache__
+```
+
 
 # پاک کردن کامل کش gitignore و بازنگری فایل‌ها
+```
 git rm -r --cached .
 git add .
 git commit -m "Clear gitignore cache"
+```
 
 اسکریپت خودکار Git
 bash
 
 # دادن مجوز اجرا به اسکریپت
+```
 chmod +x git-automate.sh
+```
 
 # اجرای اسکریپت
 ./git-automate.sh
