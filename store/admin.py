@@ -38,8 +38,12 @@ class Order_Admin(admin.ModelAdmin):
     list_per_page = 20
     ordering = ['-datetime_created']
 
+    def get_queryset(self, request):
+        return super().get_queryset(request)
+    
     def all_items_number(self, order):
         return order.items.count()
+
 
     
 
