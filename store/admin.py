@@ -8,6 +8,7 @@ from .models import (
     Order,
     Order,
     Comment,
+    Customer,
 )
 
 
@@ -101,3 +102,5 @@ class Comment_Admin(admin.ModelAdmin):
 
 
 
+@admin.register(Customer)
+    
