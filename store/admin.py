@@ -100,7 +100,19 @@ class Comment_Admin(admin.ModelAdmin):
     list_per_page = 20
     ordering = ['-datetime_created']
 
-
+    def get_queryset(self, request):
+        return super()\
+            .get_queryset(request)\
+            .prefetch_related('product')\
+            .annotate(
+                product__count=Count('product')
+            )
+    
+    @admin.display(ordering='product__count')
+    def all_product_number(self, order):
+        return order.product__count
+        # خط بالا و پاینن ، تفاوتی با هم ندارند
+        # return order.product.count()
 
 @admin.register(Customer)
 class Customer_Admin(admin.ModelAdmin):
