@@ -84,7 +84,7 @@ class Product_Admin(admin.ModelAdmin):
         # خط بالا و پاینن ، تفاوتی با هم ندارند
         # return product.comments.count()
        url = (
-           reverse
+           reverse('admin:store_comment_changelist')
        )
        return format_html('<a href="https://github.com/sinalalebakhsh">{}</a>', product.comments_count)
 
