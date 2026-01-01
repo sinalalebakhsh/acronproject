@@ -103,16 +103,16 @@ class Comment_Admin(admin.ModelAdmin):
     def get_queryset(self, request):
         return super()\
             .get_queryset(request)\
-            .prefetch_related('product')\
+            .prefetch_related('items')\
             .annotate(
-                product__count=Count('product')
+                items__count=Count('items')
             )
     
-    @admin.display(ordering='product__count')
-    def all_product_number(self, order):
-        return order.product__count
+    @admin.display(ordering='items__count')
+    def all_items_number(self, order):
+        return order.items__count
         # خط بالا و پاینن ، تفاوتی با هم ندارند
-        # return order.product.count()
+        # return order.items.count()
 
 @admin.register(Customer)
 class Customer_Admin(admin.ModelAdmin):
