@@ -108,7 +108,7 @@ class Customer_Admin(admin.ModelAdmin):
     list_editable = ['email','birth_date']
     list_per_page = 20
     ordering = ['id']
-    
+    search_fields = ['first_name', 'last_name']
 
 
 
