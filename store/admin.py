@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db.models import Count
 from django.urls import reverse
 from django.utils.html import format_html
-
+from django.utils.http import urlencode
 
 
 from .models import (
@@ -85,6 +85,10 @@ class Product_Admin(admin.ModelAdmin):
         # return product.comments.count()
        url = (
            reverse('admin:store_comment_changelist')
+           + '?'
+           + urlencode({
+               'product__id': product.id
+           })
        )
        return format_html('<a href="https://github.com/sinalalebakhsh">{}</a>', product.comments_count)
 
