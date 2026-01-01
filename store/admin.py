@@ -57,7 +57,23 @@ class Product_Admin(admin.ModelAdmin):
             return 'equal with 10'
         else:
             return 'greater than 10'
+
+    def get_queryset(self, request):
+        return super()\
+            .get_queryset(request)\
+            .prefetch_related('comments')\
+            .annotate(
+                comments__count=Count('comments')
+            )
+    
+    @admin.display(ordering='comments')
+    def all_comments_number(self, order):
+        return order.name__count
+        # خط بالا و پاینن ، تفاوتی با هم ندارند
+        # return order.name.count()
+
 # admin.site.register(Product, Product_Admin)
+
 
 
 @admin.register(Order)
@@ -95,24 +111,12 @@ class Category_Admin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class Comment_Admin(admin.ModelAdmin):
-    list_display = ['id','product','name','status','datetime_created', 'all_comments_number']
+    list_display = ['id','product','name','status','datetime_created']
     list_editable = ['product']
     list_per_page = 20
     ordering = ['-datetime_created']
 
-    def get_queryset(self, request):
-        return super()\
-            .get_queryset(request)\
-            .prefetch_related('comments')\
-            .annotate(
-                comments__count=Count('comments')
-            )
-    
-    @admin.display(ordering='name__count')
-    def all_comments_number(self, order):
-        return order.name__count
-        # خط بالا و پاینن ، تفاوتی با هم ندارند
-        # return order.name.count()
+
 
 @admin.register(Customer)
 class Customer_Admin(admin.ModelAdmin):
