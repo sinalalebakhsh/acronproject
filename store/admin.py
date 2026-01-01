@@ -11,6 +11,20 @@ from .models import (
 )
 
 
+
+class Inventory_Filter(admin.SimpleListFilter):
+    title = 'Critical Inventory Status'
+    parameter_name = 'inventory'
+
+    def lookups(self, request, model_admin):
+        return [
+            ('<10', 'less than 10'),
+            (''),
+            (),
+        ]
+
+
+
 @admin.register(Product)
 class Product_Admin(admin.ModelAdmin):
     list_display = ['id', 'name', 'inventory', 'inventory_status', 'unit_price', 'datetime_created', 'product_category']
