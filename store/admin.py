@@ -27,10 +27,9 @@ class Inventory_Filter(admin.SimpleListFilter):
         if self.value() == '<10':
             return queryset.filter(inventory__lt=10)
         if self.value() == '==10':
-            return queryset.filter(inventory__lt=11,)
-        if self.value() == '<10':
-            return queryset.filter(inventory__lt=3)
-        return super().queryset(request, queryset)
+            return queryset.filter(inventory__lt=11, inventory__gt=9)
+        if self.value() == '>10':
+            return queryset.filter(inventory__gt=10)
 
 
 
@@ -41,7 +40,7 @@ class Product_Admin(admin.ModelAdmin):
     list_per_page = 20
     ordering = ['-datetime_created']
     list_select_related = ['category']
-    list_filter = ['datetime_created', 'category']
+    list_filter = ['datetime_created', 'category', Inventory_Filter]
 #   list_filter = ['datetime_created', 'category']
 
 
