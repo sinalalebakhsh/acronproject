@@ -83,8 +83,14 @@ class Product_Admin(admin.ModelAdmin):
         # return product.comments_count
         # خط بالا و پاینن ، تفاوتی با هم ندارند
         # return product.comments.count()
-       
+       url = (
+           reverse
+       )
        return format_html('<a href="https://github.com/sinalalebakhsh">{}</a>', product.comments_count)
+
+
+
+
     @admin.display(ordering='category__title')
     def product_category(self, product):
         return product.category.title
