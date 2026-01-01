@@ -18,10 +18,13 @@ class Inventory_Filter(admin.SimpleListFilter):
 
     def lookups(self, request, model_admin):
         return [
-            ('<10', 'less than 10'),
-            (''),
-            (),
+            ('<10', 'High'),
+            ('==10', 'Medium'),
+            ('>10', 'OK'),
         ]
+    
+    def queryset(self, request, queryset):
+        return super().queryset(request, queryset)
 
 
 
