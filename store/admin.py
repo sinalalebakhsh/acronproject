@@ -18,6 +18,9 @@ class Product_Admin(admin.ModelAdmin):
     list_per_page = 20
     ordering = ['-datetime_created']
     list_select_related = ['category']
+    list_filter = ['datetime_created']
+
+
 
     @admin.display(ordering='category__title')
     def product_category(self, product):
