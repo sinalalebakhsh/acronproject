@@ -74,8 +74,8 @@ class Product_Admin(admin.ModelAdmin):
             )
     
     @admin.display(ordering='comments')
-    def all_comments_number(self, order):
-        return order.comments
+    def all_comments_number(self, product):
+        return product.comments__count
         # خط بالا و پاینن ، تفاوتی با هم ندارند
         # return order.name.count()
 
