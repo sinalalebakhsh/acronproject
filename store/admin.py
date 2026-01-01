@@ -95,7 +95,7 @@ class Category_Admin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class Comment_Admin(admin.ModelAdmin):
-    list_display = ['id','product','name','status','datetime_created']
+    list_display = ['id','product','name','status','datetime_created', 'all_comments_number']
     list_editable = ['product']
     list_per_page = 20
     ordering = ['-datetime_created']
@@ -103,16 +103,16 @@ class Comment_Admin(admin.ModelAdmin):
     def get_queryset(self, request):
         return super()\
             .get_queryset(request)\
-            .prefetch_related('items')\
+            .prefetch_related('comments')\
             .annotate(
-                items__count=Count('items')
+                comments__count=Count('comments')
             )
     
-    @admin.display(ordering='items__count')
-    def all_items_number(self, order):
-        return order.items__count
+    @admin.display(ordering='name__count')
+    def all_comments_number(self, order):
+        return order.name__count
         # خط بالا و پاینن ، تفاوتی با هم ندارند
-        # return order.items.count()
+        # return order.name.count()
 
 @admin.register(Customer)
 class Customer_Admin(admin.ModelAdmin):
