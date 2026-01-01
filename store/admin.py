@@ -41,8 +41,7 @@ class Product_Admin(admin.ModelAdmin):
         'id', 
         'name', 
         'inventory', 
-        'unit_price', 
-
+        'unit_price',
         'all_comments_number',
     ]
 
