@@ -77,10 +77,24 @@ class Product_Admin(admin.ModelAdmin):
     
     @admin.display(description='All Comments Number', ordering='comments_count')
     def all_comments_number(self, product):
-        return product.comments_count
+        # return product.comments_count
         # خط بالا و پاینن ، تفاوتی با هم ندارند
         # return product.comments.count()
+       
+        # اگر کامنت نداشت
+        if product.comments_count == 0:
+            return format_html('<span style="color:#999;">0</span>')
 
+        url = (
+            reverse('admin:store_comment_changelist')
+            + f'?product__id__exact={product.id}'
+        )
+
+        return format_html(
+            '<a href="{}" style="font-weight:600;">{}</a>',
+            url,
+            product.comments_count
+        )
 
     @admin.display(ordering='category__title')
     def product_category(self, product):
