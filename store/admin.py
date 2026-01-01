@@ -19,7 +19,7 @@ class Product_Admin(admin.ModelAdmin):
     ordering = ['-datetime_created']
     list_select_related = ['category']
     list_filter = ['datetime_created', 'category']
-
+#   list_filter = ['datetime_created', 'category']
 
 
     @admin.display(ordering='category__title')
