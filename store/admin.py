@@ -53,13 +53,13 @@ class Product_Admin(admin.ModelAdmin):
 #   list_filter = ['datetime_created', 'category']
 
 
-    def get_queryset(self, request):
-        return super()\
-            .get_queryset(request)\
-            .prefetch_related('comments')\
-            .annotate(
-                comments_count=Count('comments')
-            )
+def get_queryset(self, request):
+    return (
+        super()
+        .get_queryset(request)
+        .annotate(comments_count=Count('comments'))
+    )
+
 
     def inventory_status(self, product_object):
         if product_object.inventory < 10:
