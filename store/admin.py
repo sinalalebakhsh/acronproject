@@ -77,7 +77,7 @@ class Product_Admin(admin.ModelAdmin):
     def all_comments_number(self, product):
         return product.comments__count
         # خط بالا و پاینن ، تفاوتی با هم ندارند
-        # return order.name.count()
+        # return product.comments.count()
 
 # admin.site.register(Product, Product_Admin)
 
