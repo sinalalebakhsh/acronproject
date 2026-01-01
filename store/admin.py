@@ -103,4 +103,12 @@ class Comment_Admin(admin.ModelAdmin):
 
 
 @admin.register(Customer)
-    
+class Customer_Admin(admin.ModelAdmin):
+    list_display = ['id','first_name','last_name','email','phone_number','birth_date']
+    list_editable = ['first_name','last_name','email','phone_number','birth_date']
+    list_per_page = 20
+    ordering = ['id']
+
+
+
+
