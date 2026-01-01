@@ -18,7 +18,7 @@ class Product_Admin(admin.ModelAdmin):
     list_per_page = 20
     ordering = ['-datetime_created']
     list_select_related = ['category']
-    list_filter = ['datetime_created']
+    list_filter = ['datetime_created', 'category']
 
 
 
