@@ -58,7 +58,7 @@ class Product_Admin(admin.ModelAdmin):
             .get_queryset(request)\
             .prefetch_related('comments')\
             .annotate(
-                comments__count=Count('comments')
+                comments_count=Count('comments')
             )
 
     def inventory_status(self, product_object):
@@ -71,7 +71,7 @@ class Product_Admin(admin.ModelAdmin):
     
     @admin.display(ordering='comments')
     def all_comments_number(self, product):
-        return product.comments__count
+        return product.comments_count
         # خط بالا و پاینن ، تفاوتی با هم ندارند
         # return product.comments.count()
 
