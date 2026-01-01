@@ -37,7 +37,15 @@ class Inventory_Filter(admin.SimpleListFilter):
 
 @admin.register(Product)
 class Product_Admin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'inventory', 'inventory_status', 'unit_price', 'datetime_created', 'product_category']
+    list_display = [
+        'id', 
+        'name', 
+        'inventory', 
+        'unit_price', 
+
+        'all_comments_number',
+    ]
+
     list_editable = ['name', 'inventory', 'unit_price']
     list_per_page = 20
     ordering = ['-datetime_created']
@@ -68,7 +76,7 @@ class Product_Admin(admin.ModelAdmin):
     
     @admin.display(ordering='comments')
     def all_comments_number(self, order):
-        return order.name__count
+        return order.comments
         # خط بالا و پاینن ، تفاوتی با هم ندارند
         # return order.name.count()
 
