@@ -87,10 +87,10 @@ class Product_Admin(admin.ModelAdmin):
            reverse('admin:store_comment_changelist')
            + '?'
            + urlencode({
-               'product__id': product.id
+               'product__id': product.id,
            })
        )
-       return format_html('<a href="https://github.com/sinalalebakhsh">{}</a>', product.comments_count)
+       return format_html('<a href="{}">{}</a>', url, product.comments_count)
 
 
 
