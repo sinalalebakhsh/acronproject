@@ -24,6 +24,12 @@ class Inventory_Filter(admin.SimpleListFilter):
         ]
     
     def queryset(self, request, queryset):
+        if self.value() == '<10':
+            return queryset.filter(inventory__lt=10)
+        if self.value() == '==10':
+            return queryset.filter(inventory__lt=11,)
+        if self.value() == '<10':
+            return queryset.filter(inventory__lt=3)
         return super().queryset(request, queryset)
 
 
