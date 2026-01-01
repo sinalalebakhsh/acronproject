@@ -53,9 +53,13 @@ class Product_Admin(admin.ModelAdmin):
 #   list_filter = ['datetime_created', 'category']
 
 
-    @admin.display(ordering='category__title')
-    def product_category(self, product):
-        return product.category.title
+    def get_queryset(self, request):
+        return super()\
+            .get_queryset(request)\
+            .prefetch_related('comments')\
+            .annotate(
+                comments__count=Count('comments')
+            )
 
     def inventory_status(self, product_object):
         if product_object.inventory < 10:
@@ -64,20 +68,18 @@ class Product_Admin(admin.ModelAdmin):
             return 'equal with 10'
         else:
             return 'greater than 10'
-
-    def get_queryset(self, request):
-        return super()\
-            .get_queryset(request)\
-            .prefetch_related('comments')\
-            .annotate(
-                comments__count=Count('comments')
-            )
     
     @admin.display(ordering='comments')
     def all_comments_number(self, product):
         return product.comments__count
         # خط بالا و پاینن ، تفاوتی با هم ندارند
         # return product.comments.count()
+
+
+    @admin.display(ordering='category__title')
+    def product_category(self, product):
+        return product.category.title
+
 
 # admin.site.register(Product, Product_Admin)
 
