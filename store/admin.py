@@ -84,24 +84,28 @@ class Product_Admin(admin.ModelAdmin):
         # خط بالا و پاینن ، تفاوتی با هم ندارند
         # return product.comments.count()
        
-        # اگر کامنت نداشت
-        if product.comments_count == 0:
-            return format_html('<span style="color:#999;">0</span>')
-
-        url = (
-            reverse('admin:store_comment_changelist')
-            + f'?product__id__exact={product.id}'
-        )
-
-        return format_html(
-            '<a href="{}" style="font-weight:600;">{}</a>',
-            url,
-            product.comments_count
-        )
-
+       return format_html('<a href="https://github.com/sinalalebakhsh">{}</a>', product.comments_count)
     @admin.display(ordering='category__title')
     def product_category(self, product):
         return product.category.title
+
+        # اگر کامنت نداشت
+"""
+            if product.comments_count == 0:
+                return format_html('<span style="color:#999;">0</span>')
+
+            url = (
+                reverse('admin:store_comment_changelist')
+                + f'?product__id__exact={product.id}'
+            )
+
+            return format_html(
+                '<a href="{}" style="font-weight:600;">{}</a>',
+                url,
+                product.comments_count
+            )
+"""
+
 
 
 # admin.site.register(Product, Product_Admin)
