@@ -44,16 +44,16 @@ class Product_Admin(admin.ModelAdmin):
         'id', 
         'name', 
         'inventory', 
+        'inventory_status',
         'unit_price',
         'all_comments_number',
-        # Inventory_Filter,
     ]
 
-    # list_editable = ['name', 'inventory', 'unit_price']
+    list_editable = [ 'inventory' ]
     list_per_page = 20
     # ordering = ['-datetime_created']
     list_select_related = ['category']
-    list_filter = ['datetime_created', 'category', Inventory_Filter]
+    list_filter = ['datetime_created', 'category', Inventory_Filter,]
     actions = ['clear_inventory']
 
     #   list_filter = ['datetime_created', 'category']
@@ -75,11 +75,11 @@ class Product_Admin(admin.ModelAdmin):
 
     def inventory_status(self, product_object):
         if product_object.inventory < 10:
-            return 'less than 10'
+            return 'Low'
         if product_object.inventory == 10:
-            return 'equal with 10'
+            return 'Medium'
         else:
-            return 'greater than 10'
+            return 'High'
     
     @admin.display(description='All Comments Number', ordering='comments_count')
     def all_comments_number(self, product):
