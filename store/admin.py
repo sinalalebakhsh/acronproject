@@ -46,14 +46,15 @@ class Product_Admin(admin.ModelAdmin):
         'inventory', 
         'unit_price',
         'all_comments_number',
+        # Inventory_Filter,
     ]
 
-    list_editable = ['name', 'inventory', 'unit_price']
+    # list_editable = ['name', 'inventory', 'unit_price']
     list_per_page = 20
-    ordering = ['-datetime_created']
+    # ordering = ['-datetime_created']
     list_select_related = ['category']
     list_filter = ['datetime_created', 'category', Inventory_Filter]
-    actions
+    actions = ['clear_inventory']
 
     #   list_filter = ['datetime_created', 'category']
 
