@@ -61,6 +61,14 @@ class Product_Admin(admin.ModelAdmin):
         'slug': ['name', ],
     }
 
+    # is about create fields
+    # fields = ['name', 'slug', 'category']
+    # exclude = ['discounts', ]
+    readonly_fields = ['discounts', ]
+
+
+
+
 
     #   list_filter = ['datetime_created', 'category']
 
