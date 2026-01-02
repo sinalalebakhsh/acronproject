@@ -55,6 +55,7 @@ class Product_Admin(admin.ModelAdmin):
     list_select_related = ['category']
     list_filter = ['datetime_created', 'category', Inventory_Filter,]
     actions = ['clear_inventory']
+    search_fields = ['name',]
     prepopulated_fields = {
         'slug': ['name', ],
     }
@@ -181,6 +182,7 @@ class Comment_Admin(admin.ModelAdmin):
     list_editable = ['product']
     list_per_page = 20
     ordering = ['-datetime_created']
+    autocomplete_fields = ['product', ]
 
 
 
