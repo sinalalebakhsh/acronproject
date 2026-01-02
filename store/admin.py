@@ -12,6 +12,7 @@ from .models import (
     Order,
     Comment,
     Customer,
+    OrderItem,
 )
 
 
@@ -194,7 +195,7 @@ class Customer_Admin(admin.ModelAdmin):
     ordering = ['id']
     search_fields = ['first_name', 'last_name']
 
-
+@admin.register(OrderItem)
 class Order_Item(admin.ModelAdmin):
     list_display = ['id', 'order', 'product', 'quantity', 'unit_price']
     list_per_page = 20
