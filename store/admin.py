@@ -155,6 +155,8 @@ class Product_Admin(admin.ModelAdmin):
 class Order_Item_Inline(admin.TabularInline):
     model = OrderItem
     fields = ['product', 'quantity', 'unit_price']
+    # حداقل باید یک اوردر داشته باشه تا ساخته بشه
+    min_num = 1
 
 
 @admin.register(Order)
