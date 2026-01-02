@@ -55,6 +55,9 @@ class Product_Admin(admin.ModelAdmin):
     list_select_related = ['category']
     list_filter = ['datetime_created', 'category', Inventory_Filter,]
     actions = ['clear_inventory']
+    prepopulated_fields = {
+        'slug': ['name', ],
+    }
 
     #   list_filter = ['datetime_created', 'category']
 
