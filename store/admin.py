@@ -195,4 +195,10 @@ class Customer_Admin(admin.ModelAdmin):
     search_fields = ['first_name', 'last_name']
 
 
+class Order_Item(admin.ModelAdmin):
+    list_display = ['id', 'order', 'product', 'quantity', 'unit_price']
+    list_per_page = 20
+    
+
+
 
