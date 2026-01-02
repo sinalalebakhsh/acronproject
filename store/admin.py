@@ -198,7 +198,8 @@ class Customer_Admin(admin.ModelAdmin):
 class Order_Item(admin.ModelAdmin):
     list_display = ['id', 'order', 'product', 'quantity', 'unit_price']
     list_per_page = 20
-    
+    autocomplete_fields = ['product', ]
+
 
 
 
