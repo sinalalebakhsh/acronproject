@@ -104,7 +104,16 @@ class Product_Admin(admin.ModelAdmin):
 
     @admin.action(description='Clear Inventory')
     def clear_inventory(self, request, queryset):
-        queryset.update(inventory=0)
+        update_count = queryset.update(inventory=0)
+        self.message_user(
+            request,
+            f'{update_count} of products inventories cleared to zero.'
+        )
+
+
+
+
+
 
         # اگر کامنت نداشت
 """
