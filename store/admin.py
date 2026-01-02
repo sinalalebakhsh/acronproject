@@ -152,6 +152,12 @@ class Product_Admin(admin.ModelAdmin):
 # admin.site.register(Product, Product_Admin)
 
 
+class Order_Item_Inline(admin.TabularInline):
+    model = OrderItem
+    fields = ['product', 'quantity', 'unit_price']
+
+
+
 
 @admin.register(Order)
 class Order_Admin(admin.ModelAdmin):
