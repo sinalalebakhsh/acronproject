@@ -61,6 +61,7 @@ class Product_Admin(admin.ModelAdmin):
         'slug': ['name', ],
     }
 
+
     #   list_filter = ['datetime_created', 'category']
 
 
