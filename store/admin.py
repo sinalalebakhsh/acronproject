@@ -53,7 +53,9 @@ class Product_Admin(admin.ModelAdmin):
     ordering = ['-datetime_created']
     list_select_related = ['category']
     list_filter = ['datetime_created', 'category', Inventory_Filter]
-#   list_filter = ['datetime_created', 'category']
+    actions
+
+    #   list_filter = ['datetime_created', 'category']
 
 
     # def get_queryset(self, request):
@@ -98,6 +100,10 @@ class Product_Admin(admin.ModelAdmin):
     @admin.display(ordering='category__title')
     def product_category(self, product):
         return product.category.title
+
+    @admin.action(description='Clear Inventory')
+    def clear_inventory(self, request, queryset):
+        queryset.update(inventory=0)
 
         # اگر کامنت نداشت
 """
