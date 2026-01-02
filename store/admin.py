@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.db.models import Count
 from django.urls import reverse
 from django.utils.html import format_html
@@ -107,7 +107,8 @@ class Product_Admin(admin.ModelAdmin):
         update_count = queryset.update(inventory=0)
         self.message_user(
             request,
-            f'{update_count} of products inventories cleared to zero.'
+            f'{update_count} of products inventories cleared to zero.',
+            messages.WARNING
         )
 
 
