@@ -157,14 +157,13 @@ class Order_Item_Inline(admin.TabularInline):
     fields = ['product', 'quantity', 'unit_price']
 
 
-
-
 @admin.register(Order)
 class Order_Admin(admin.ModelAdmin):
     list_display = ['id', 'customer', 'status', 'datetime_created', 'all_items_number']
     list_editable = ['status']
     list_per_page = 20
     ordering = ['-datetime_created']
+    inlines = [Order_Item_Inline]
 
     def get_queryset(self, request):
         return super()\
