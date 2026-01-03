@@ -1,24 +1,11 @@
-<!DOCTYPE html>
 <html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
-</head>
-<body>
-
-
-    {% for item in query %}
-        <h2>item name: {{ item.id }}</h2>
-        <p>orders_customer:{{ item.body }} </p>
-        <p>status: {{ item.status  }}</p>
-        <h2>----------------------------------------------------------------</h2>
-    {% empty %}
-        <p>No items found in this order.</p>
-    {% endfor %}
-
-</body>
+    <body>
+        {% for order in orders %}
+            <h1>{{ order.id }} ({{ order.customer.first_name }})</h1>
+            {% for item in order.items.all %}
+                <p>{{ item.id }}. {{ item.quantity }} product name: {{ item.product.name }}</p>
+            {% endfor %}
+            <p>-----------</p>
+        {% endfor %}
+    </body>
 </html>

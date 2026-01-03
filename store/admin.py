@@ -1,224 +1,139 @@
+from typing import Any, List, Optional, Tuple
 from django.contrib import admin, messages
-from django.db.models import Count
-from django.urls import reverse
+from django.db.models.query import QuerySet
+from django.http.request import HttpRequest
+from django.db.models import Count, Prefetch
 from django.utils.html import format_html
+from django.urls import reverse
 from django.utils.http import urlencode
 
-
-from .models import (
-    Product,
-    Category,
-    Order,
-    Order,
-    Comment,
-    Customer,
-    OrderItem,
-)
+from .models import Category, Comment, Customer, Order, OrderItem, Product
 
 
-
-class Inventory_Filter(admin.SimpleListFilter):
+class InventoryFilter(admin.SimpleListFilter):
+    LESS_THAN_3 = '<3'
+    BETWEEN_3_and_10 = '3<=10'
+    MORE_THAN_10 = '>10'
     title = 'Critical Inventory Status'
     parameter_name = 'inventory'
 
     def lookups(self, request, model_admin):
         return [
-            ('<10', 'High'),
-            ('==10', 'Medium'),
-            ('>10', 'OK'),
+            (InventoryFilter.LESS_THAN_3, 'High'),
+            (InventoryFilter.BETWEEN_3_and_10, 'Medium'),
+            (InventoryFilter.MORE_THAN_10, 'OK'),
         ]
     
     def queryset(self, request, queryset):
-        if self.value() == '<10':
-            return queryset.filter(inventory__lt=10)
-        if self.value() == '==10':
-            return queryset.filter(inventory__lt=11, inventory__gt=9)
-        if self.value() == '>10':
+        if self.value() == InventoryFilter.LESS_THAN_3:
+            return queryset.filter(inventory__lt=3)
+        if self.value() == InventoryFilter.BETWEEN_3_and_10:
+            return queryset.filter(inventory__range=(3, 10))
+        if self.value() == InventoryFilter.MORE_THAN_10:
             return queryset.filter(inventory__gt=10)
 
 
-
-
 @admin.register(Product)
-class Product_Admin(admin.ModelAdmin):
-    list_display = [
-        'id', 
-        'name', 
-        'inventory', 
-        'inventory_status',
-        'unit_price',
-        'all_comments_number',
-    ]
-
-    list_editable = [ 'inventory' ]
-    list_per_page = 20
-    # ordering = ['-datetime_created']
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'inventory', 'unit_price', 'inventory_status', 'product_category', 'num_of_comments']
+    list_per_page = 10
+    list_editable = ['unit_price']
     list_select_related = ['category']
-    list_filter = ['datetime_created', 'category', Inventory_Filter,]
+    list_filter = ['datetime_created', InventoryFilter]
     actions = ['clear_inventory']
-    search_fields = ['name',]
+    search_fields = ['name', ]
     prepopulated_fields = {
-        'slug': ['name', ],
+        'slug': ['name', ]
     }
 
-    # is about create fields
-    # fields = ['name', 'slug', 'category']
-    # exclude = ['discounts', ]
-    readonly_fields = ['discounts', ]
-
-
-
-
-
-    #   list_filter = ['datetime_created', 'category']
-
-
-    # def get_queryset(self, request):
-    #     return (
-    #         super()
-    #         .get_queryset(request)
-    #         .annotate(comments_count=Count('comments'))
-    #     )
     def get_queryset(self, request):
-        return (
-            super()
-            .get_queryset(request)
-            .annotate(comments_count=Count('comments'))
-        )
+        return super().get_queryset(request) \
+                .prefetch_related('comments') \
+                .annotate(
+                    comments_count=Count('comments'),
+                )
 
-
-    def inventory_status(self, product_object):
-        if product_object.inventory < 10:
+    def inventory_status(self, product):
+        if product.inventory < 10:
             return 'Low'
-        if product_object.inventory == 10:
-            return 'Medium'
-        else:
+        if product.inventory > 50:
             return 'High'
+        return 'Medium'
     
-    @admin.display(description='All Comments Number', ordering='comments_count')
-    def all_comments_number(self, product):
-        # return product.comments_count
-        # خط بالا و پاینن ، تفاوتی با هم ندارند
-        # return product.comments.count()
-       url = (
-           reverse('admin:store_comment_changelist')
-           + '?'
-           + urlencode({
-               'product__id': product.id,
-           })
-       )
-       return format_html('<a href="{}">{}</a>', url, product.comments_count)
-
-
-
-
+    @admin.display(description='# comments', ordering='comments_count')
+    def num_of_comments(self, product):
+        url = (
+            reverse('admin:store_comment_changelist') 
+            + '?'
+            + urlencode({
+                'product__id': product.id,
+            })
+        )
+        return format_html('<a href="{}">{}</a>', url, product.comments_count)
+        
+    
     @admin.display(ordering='category__title')
     def product_category(self, product):
         return product.category.title
 
-    @admin.action(description='Clear Inventory')
+    
+    @admin.action(description='Clear inventory')
     def clear_inventory(self, request, queryset):
         update_count = queryset.update(inventory=0)
         self.message_user(
             request,
             f'{update_count} of products inventories cleared to zero.',
-            messages.WARNING
+            messages.ERROR,
         )
+    
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['id', 'product', 'status', ]
+    list_editable = ['status']
+    list_per_page = 10
+    autocomplete_fields = ['product', ]
 
 
-
-
-
-
-        # اگر کامنت نداشت
-"""
-            if product.comments_count == 0:
-                return format_html('<span style="color:#999;">0</span>')
-
-            url = (
-                reverse('admin:store_comment_changelist')
-                + f'?product__id__exact={product.id}'
-            )
-
-            return format_html(
-                '<a href="{}" style="font-weight:600;">{}</a>',
-                url,
-                product.comments_count
-            )
-"""
-
-
-
-# admin.site.register(Product, Product_Admin)
-
-
-class Order_Item_Inline(admin.TabularInline):
+class OrderItemInline(admin.TabularInline):
     model = OrderItem
     fields = ['product', 'quantity', 'unit_price']
-    # حداقل باید یک اوردر داشته باشه تا ساخته بشه
+    extra = 0
     min_num = 1
 
 
 @admin.register(Order)
-class Order_Admin(admin.ModelAdmin):
-    list_display = ['id', 'customer', 'status', 'datetime_created', 'all_items_number']
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['id', 'customer', 'status', 'datetime_created', 'num_of_items']
     list_editable = ['status']
-    list_per_page = 20
+    list_per_page = 10
     ordering = ['-datetime_created']
-    inlines = [Order_Item_Inline]
-
-
+    inlines = [OrderItemInline]
 
     def get_queryset(self, request):
-        return super()\
-            .get_queryset(request)\
-            .prefetch_related('items')\
-            .annotate(
-                items__count=Count('items')
-            )
-    
-    @admin.display(ordering='items__count')
-    def all_items_number(self, order):
-        return order.items__count
-        # خط بالا و پاینن ، تفاوتی با هم ندارند
-        # return order.items.count()
+        return super() \
+                .get_queryset(request) \
+                .prefetch_related('items') \
+                .annotate(
+                    items_count=Count('items')
+                )
 
+    @admin.display(ordering='items_count', description='# items')
+    def num_of_items(self, order):
+        return order.items_count
 
-    
-
-@admin.register(Category)
-class Category_Admin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'detetime_created', 'top_product']
-    list_editable = ['title', 'top_product']
-    list_per_page = 20
-    ordering = ['-detetime_created']
-# admin.site.register(Category)
-
-
-@admin.register(Comment)
-class Comment_Admin(admin.ModelAdmin):
-    list_display = ['id','product','name','status','datetime_created']
-    list_editable = ['product']
-    list_per_page = 20
-    ordering = ['-datetime_created']
-    autocomplete_fields = ['product', ]
-
+admin.site.register(Category)
 
 
 @admin.register(Customer)
-class Customer_Admin(admin.ModelAdmin):
-    list_display = ['id','full_name','email','birth_date']
-    list_editable = ['email','birth_date']
-    list_per_page = 20
-    ordering = ['id']
-    search_fields = ['first_name', 'last_name']
+class CustomerAdmin(admin.ModelAdmin):
+    list_display = ['first_name', 'last_name', 'email', ]
+    list_per_page = 10
+    ordering = ['last_name', 'first_name', ]
+    search_fields = ['first_name__istartswith', 'last_name__istartswith', ]
+
 
 @admin.register(OrderItem)
-class Order_Item(admin.ModelAdmin):
-    list_display = ['id', 'order', 'product', 'quantity', 'unit_price']
-    list_per_page = 20
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display = ['order', 'product', 'quantity', 'unit_price']
     autocomplete_fields = ['product', ]
-
-
-
-

@@ -2,15 +2,9 @@
 import random
 from faker import Faker
 from datetime import datetime, timedelta
-import factory
-from factory.fuzzy import FuzzyDateTime
 
 from django.db import transaction
-from django.utils import timezone
 from django.core.management.base import BaseCommand
-from django.utils.timezone import make_aware
-from django.utils.timezone import get_current_timezone
-from config import settings
 
 from store.models import Address, Cart, CartItem, Category, Comment, Order, OrderItem, Product, Discount, Customer
 from store.factories import (
@@ -49,8 +43,6 @@ class Command(BaseCommand):
 
         self.stdout.write("Creating new data...\n")
 
-        tz = timezone.get_current_timezone()
-
         # Categories data
         print(f"Adding {NUM_CATEGORIES} categories...", end='')
         all_categories = [CategoryFactory(top_product=None) for _ in range(NUM_CATEGORIES)]
@@ -66,15 +58,14 @@ class Command(BaseCommand):
         all_products = list()
         for _ in range(NUM_PRODUCTS):
             new_product = ProductFactory(category_id=random.choice(all_categories).id)
-            new_product.datetime_created = datetime(random.randrange(2019, 2023),random.randint(1,12),random.randint(1,12), tzinfo=timezone.utc)
-            new_product.datetime_modified = new_product.datetime_created + timedelta(hours=random.randint(1, 500))
-            new_product.save()
+            new_product.datetime_created = faker.date_time_ad(start_datetime=datetime(2022,1,1), end_datetime=datetime(2023,1,1))
+            new_product.datetime_modified = new_product.datetime_created + timedelta(hours=random.randint(1, 5000))
             all_products.append(new_product)
         print('DONE')
 
         # Customers data
         print(f"Adding {NUM_CUSTOMERS} customers...", end='')
-        all_customers = [(CustomerFactory() if (random.random() > 0.3) else CustomerFactory(birth_date=None)) for _ in range(NUM_CUSTOMERS) ]
+        all_customers = [CustomerFactory() for _ in range(NUM_CUSTOMERS)]
         print('DONE')
 
         # Addresses data
@@ -90,8 +81,7 @@ class Command(BaseCommand):
             customer_id=random.choice(all_customers).id
         ) for _ in range(NUM_ORDERS)]
         for order in all_orders:
-            order.datetime_created =  datetime(random.randrange(2019, 2023),random.randint(1,12),random.randint(1,12), tzinfo=timezone.utc)
-            order.save()
+            order.datetime_created = faker.date_time_ad(start_datetime=datetime(2022,6,1), end_datetime=datetime(2023,1,1))
         print('DONE')
 
         # OrderItems data
@@ -113,8 +103,7 @@ class Command(BaseCommand):
         for product in all_products:
             for _ in range(random.randint(1, 5)):
                 comment = CommentFactory(product_id=product.id)
-                comment.datetime_created = datetime(random.randrange(2019, 2023),random.randint(1,12),random.randint(1,12), tzinfo=timezone.utc)
-                comment.save()
+                comment.datetime_created = faker.date_time_ad(start_datetime=datetime(2015,1,1), end_datetime=datetime(2023,1,1))
         print('DONE')
 
         # Carts data

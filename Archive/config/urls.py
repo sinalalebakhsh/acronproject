@@ -2,7 +2,7 @@
 URL configuration for config project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
+    https://docs.djangoproject.com/en/5.2/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -16,16 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
-admin.site.site_header = 'Store'
-admin.site.index_title = 'Special Access'
+from debug_toolbar.toolbar import debug_toolbar_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('store/', include('store.urls')),
-    path("__debug__/", include("debug_toolbar.urls")),
-]
+    # path('__debug__', include('debug_toolbar.urls')),
+] + debug_toolbar_urls()
 
-# codingyar.com/store/
-# codingyar.com/store/a/bcd
-# codingyar.com/store/123
+
