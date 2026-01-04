@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # INSTALL Third party
-    ''
+    'rest_framework',
     'debug_toolbar',
 
 
