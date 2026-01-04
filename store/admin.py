@@ -188,10 +188,9 @@ class Order_Admin(admin.ModelAdmin):
 
 @admin.register(Category)
 class Category_Admin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'detetime_created', 'top_product']
+    list_display = ['id', 'title', 'top_product']
     list_editable = ['title', 'top_product']
     list_per_page = 20
-    ordering = ['-detetime_created']
 # admin.site.register(Category)
 
 
@@ -207,7 +206,7 @@ class Comment_Admin(admin.ModelAdmin):
 
 @admin.register(Customer)
 class Customer_Admin(admin.ModelAdmin):
-    list_display = ['id','full_name','email','birth_date']
+    list_display = ['id','email','birth_date']
     list_editable = ['email','birth_date']
     list_per_page = 20
     ordering = ['id']
