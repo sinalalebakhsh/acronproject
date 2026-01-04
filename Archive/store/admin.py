@@ -188,10 +188,10 @@ class Order_Admin(admin.ModelAdmin):
 
 @admin.register(Category)
 class Category_Admin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'datetime_created', 'top_product']
+    list_display = ['id', 'title', 'detetime_created', 'top_product']
     list_editable = ['title', 'top_product']
     list_per_page = 20
-    ordering = ['-datetime_created']
+    ordering = ['-detetime_created']
 # admin.site.register(Category)
 
 
