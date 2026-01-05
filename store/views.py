@@ -11,6 +11,9 @@ def products_list(request):
 
 
 
+@api_view()
+def products_detail(request, id):
+    return Response(id)
 
 
 
