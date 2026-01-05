@@ -6,13 +6,13 @@ from rest_framework.response import Response
 
 
 @api_view()
-def products_list(request):
+def product_list(request):
     return Response('Hello')
 
 
 
 @api_view()
-def products_detail(request, id):
+def product_detail(request, id):
     return Response(id)
 
 
