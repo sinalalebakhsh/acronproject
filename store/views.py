@@ -13,8 +13,10 @@ def product_list(request):
 
 @api_view()
 def product_detail(request, id):
-    product = models.Product.objects.get(pk=id)
-
+    try:
+        product = models.Product.objects.get(pk=id)
+    except:
+        return Response(status=404)
     serializer = serializers.Product_Serializer(product)
 
     return Response(serializer.data)
