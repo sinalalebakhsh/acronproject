@@ -8,12 +8,13 @@ from rest_framework import status
 
 from store import models 
 from store import serializers 
+# from store.serializers import ProductSerializer 
 
 @api_view()
 def product_list(request):
     products_queryset = models.Product.objects.all()
-    serializers = serializers.ProductSerializer(products_queryset)
-    return Response(serializers.data)
+    serializers__ = serializers.ProductSerializer(products_queryset, many=True)
+    return Response(serializers__.data)
 
 
 
