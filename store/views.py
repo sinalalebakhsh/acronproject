@@ -11,7 +11,9 @@ from store import serializers
 
 @api_view()
 def product_list(request):
-    return Response('Hello')
+    products_queryset = models.Product.objects.all()
+    serializers = serializers.ProductSerializer(products_queryset)
+    return Response(serializers.data)
 
 
 
@@ -24,7 +26,7 @@ def product_detail(request, id):
     # این خط دقیقا کار چهار خط بالا رو انجام میده
     product = get_object_or_404(models.Product, pk=id)
 
-    serializer = serializers.Product_Serializer(product)
+    serializer = serializers.ProductSerializer(product)
 
     return Response(serializer.data)
 
