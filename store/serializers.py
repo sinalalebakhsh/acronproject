@@ -3,8 +3,9 @@ from decimal import Decimal
 
 from rest_framework import serializers
 
+from store.
 
-DOLLORS_TO_TOMANS = 150000
+# DOLLORS_TO_TOMANS = 150000
 
 
 class ProductSerializer(serializers.Serializer):
@@ -14,13 +15,14 @@ class ProductSerializer(serializers.Serializer):
     # price = serializers.DecimalField(max_digits=6, decimal_places=2, source="unit_price")
     unit_price = serializers.DecimalField(max_digits=6, decimal_places=2)
     with_task = serializers.SerializerMethodField()
-    price_tomans = serializers.SerializerMethodField()
+    # price_tomans = serializers.SerializerMethodField()
     inventory = serializers.IntegerField()
-
-    def get_price_tomans(self, product):
-        return int(product.unit_price * DOLLORS_TO_TOMANS)
     def get_with_task(self, product):
         return round(product.unit_price * Decimal(1.09), 2)
+
+
+    # def get_price_tomans(self, product):
+    #     return int(product.unit_price * DOLLORS_TO_TOMANS)
 
 
 
