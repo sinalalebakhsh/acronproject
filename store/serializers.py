@@ -12,9 +12,14 @@ class ProductSerializer(serializers.Serializer):
     unit_price = serializers.DecimalField(max_digits=6, decimal_places=2)
     inventory = serializers.IntegerField()
     price_tomans = serializers.SerializerMethodField()
+    with_task = serializers.SerializerMethodField()
 
     def get_price_tomans(self, product):
-        return int(product.unit_price )
+        return int(product.unit_price * DOLLORS_TO_TOMANS)
+    def get_with_task(self, product):
+        return product.unit_price * 0.9
+
+
 
 
 
