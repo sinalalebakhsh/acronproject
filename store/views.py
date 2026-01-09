@@ -1,4 +1,8 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import (
+        get_object_or_404,
+        render,
+    )
+
 from django.http import JsonResponse, HttpResponse
 
 
@@ -39,30 +43,35 @@ def product_detail(request, id):
 
 
 def json(request):
-    data = {
-        "1": {
-            "id":"1",
-            "title":"first",
-            "description":"XYZ..... ZYX",
-        },
-        "2": {
-            "id":"2",
-            "title":"second",
-            "description":"XYZ..... ZYX",
-        },
-        "3": {
-            "id":"3",
-            "title":"third",
-            "description":"XYZ..... ZYX",
-        },
-        "4": {
-            "id":"4",
-            "title":"fourd",
-            "description":"XYZ..... ZYX",
-        },
+    json_data = {
+        "a11":{"sina":"lale", "asd":123},
+        "id":"1",
+        "job":"PRO",
     }
+        # "1": {
+        #     "id":"1",
+        #     "title":"first",
+        #     "description":"XYZ..... ZYX",
+        # },
+        # "2": {
+        #     "id":"2",
+        #     "title":"second",
+        #     "description":"XYZ..... ZYX",
+        # },
+        # "3": {
+        #     "id":"3",
+        #     "title":"third",
+        #     "description":"XYZ..... ZYX",
+        # },
+        # "4": {
+        #     "id":"4",
+        #     "title":"fourd",
+        #     "description":"XYZ..... ZYX",
+        # },
 
-    return JsonResponse(data)
+
+    my_dictionary = json_data
+    return render(request, "store/home.html", context=my_dictionary)
     # return JsonResponse({
     #     "KEY-1":"VALUE-1",
     #     "KEY-2":"VALUE-2",
