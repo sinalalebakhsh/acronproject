@@ -3,7 +3,7 @@ from decimal import Decimal
 
 from rest_framework import serializers
 
-from store.
+from store.models import Category
 
 # DOLLORS_TO_TOMANS = 150000
 
@@ -19,6 +19,11 @@ class ProductSerializer(serializers.Serializer):
     inventory = serializers.IntegerField()
     def get_with_task(self, product):
         return round(product.unit_price * Decimal(1.09), 2)
+
+    category = serializers.StringRelatedField()
+    # category = serializers.PrimaryKeyRelatedField(
+    #     queryset=Category.objects.all()
+    # )
 
 
     # def get_price_tomans(self, product):
