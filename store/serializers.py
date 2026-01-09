@@ -20,7 +20,10 @@ class ProductSerializer(serializers.Serializer):
     def get_price_tomans(self, product):
         return int(product.unit_price * DOLLORS_TO_TOMANS)
     def get_with_task(self, product):
-        return round(product.unit_price * Decimal(0.9), )
+        return round(product.unit_price * Decimal(1.09), 2)
+
+
+
 
 
 
