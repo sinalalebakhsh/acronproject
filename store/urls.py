@@ -7,8 +7,9 @@ from . import views
 app_name = "store"
 
 urlpatterns = [
-    path('products/', views.product_list, name="products"),
-    path('products/<int:id>/', views.product_detail, name="products_int_id"),
+    path("products/", views.product_list, name="products"),
+    path("products/<int:id>/", views.product_detail, name="products_int_id"),
+    path("json/", views.json, name="json"),
 
 ]
 

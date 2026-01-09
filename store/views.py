@@ -1,4 +1,7 @@
 from django.shortcuts import get_object_or_404
+from django.http import JsonResponse, HttpResponse
+
+
 
 
 from rest_framework.decorators import api_view
@@ -13,6 +16,8 @@ from store import serializers
 @api_view()
 def product_list(request):
     products_queryset = models.Product.objects.all()
+    # return JsonResponse(products_queryset)
+    # return JsonResponse(products_queryset)
     serializers__ = serializers.ProductSerializer(products_queryset, many=True)
     return Response(serializers__.data)
 
@@ -31,5 +36,38 @@ def product_detail(request, id):
 
     return Response(serializer.data)
 
+
+
+def json(request):
+    data = {
+        "1": {
+            "id":"1",
+            "title":"first",
+            "description":"XYZ..... ZYX",
+        },
+        "2": {
+            "id":"2",
+            "title":"second",
+            "description":"XYZ..... ZYX",
+        },
+        "3": {
+            "id":"3",
+            "title":"third",
+            "description":"XYZ..... ZYX",
+        },
+        "4": {
+            "id":"4",
+            "title":"fourd",
+            "description":"XYZ..... ZYX",
+        },
+    }
+
+    return JsonResponse(data)
+    # return JsonResponse({
+    #     "KEY-1":"VALUE-1",
+    #     "KEY-2":"VALUE-2",
+    #     "KEY-3":"VALUE-3",
+    #     "KEY-4":"VALUE-4",
+    # })
 
 
