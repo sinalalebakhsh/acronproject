@@ -27,24 +27,24 @@ def product_list(request):
 
 
 
-@api_view()
+@api_view(['GET', 'POST'])
 def product_detail(request, pk):
-    # try:
-    #     product = models.Product.objects.get(pk=pk)
-    # except models.Product.DoesNotExist:
-    #     return Response(status=status.HTTP_404_NOT_FOUND)
-    # این خط دقیقا کار چهار خط بالا رو انجام میده
-    product = get_object_or_404(
-        models.Product.objects.select_related("category"), 
-        pk=pk
-    )
-
-    serializer = serializers.ProductSerializer(
-        product,
-        context={"request": request},
-    )
-
-    return Response(serializer.data)
+    if request.method == 'GET':
+        product = get_object_or_404(
+            models.Product.objects.select_related("category"), 
+            pk=pk
+        )
+        serializer = serializers.ProductSerializer(
+            product,
+            context={"request": request},
+        )
+        return Response(serializer.data)
+        # try:
+        #     product = models.Product.objects.get(pk=pk)
+        # except models.Product.DoesNotExist:
+        #     return Response(status=status.HTTP_404_NOT_FOUND)
+        # این خط دقیقا کار چهار خط بالا رو انجام میده
+    
 
 
 @api_view()
