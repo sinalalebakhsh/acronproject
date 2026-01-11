@@ -5,12 +5,8 @@ from django.shortcuts import (
 
 from django.http import JsonResponse, HttpResponse
 
-
-
-
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
 
 
 from store import models 
@@ -19,26 +15,51 @@ from store import serializers
 
 @api_view()
 def product_list(request):
-    products_queryset = models.Product.objects.all()
+    products_queryset = models.Product.objects.select_related("category").all()
     # return JsonResponse(products_queryset)
     # return JsonResponse(products_queryset)
-    serializers__ = serializers.ProductSerializer(products_queryset, many=True)
-    return Response(serializers__.data)
+    serializer = serializers.ProductSerializer(
+            products_queryset, 
+            many=True,
+            context={"request": request},
+        )
+    return Response(serializer.data)
 
 
 
 @api_view()
-def product_detail(request, id):
+def product_detail(request, pk):
     # try:
-    #     product = models.Product.objects.get(pk=id)
+    #     product = models.Product.objects.get(pk=pk)
     # except models.Product.DoesNotExist:
     #     return Response(status=status.HTTP_404_NOT_FOUND)
     # این خط دقیقا کار چهار خط بالا رو انجام میده
-    product = get_object_or_404(models.Product, pk=id)
+    product = get_object_or_404(
+        models.Product.objects.select_related("category"), 
+        pk=pk
+    )
 
-    serializer = serializers.ProductSerializer(product)
+    serializer = serializers.ProductSerializer(
+        product,
+        context={"request": request},
+    )
 
     return Response(serializer.data)
+
+
+@api_view()
+def category_detail(request, pk):
+    category = get_object_or_404(models.Category, pk=pk)
+    serializer = serializers.CategorySerializer(category)
+    return Response(serializer.data)
+
+
+
+
+
+
+
+
 
 
 
