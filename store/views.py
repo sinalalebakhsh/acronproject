@@ -46,6 +46,10 @@ def product_detail(request, pk):
         # این خط دقیقا کار چهار خط بالا رو انجام میده
     elif request.method == 'POST':
         serializer = serializers.ProductSerializer(data=request.data)
+        if serializer.is_valid():
+            pass
+        else:
+            return Response(serializer.errors, status=status)
         return Response("All OK!")
 
 
