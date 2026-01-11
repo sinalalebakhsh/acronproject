@@ -7,6 +7,7 @@ from django.http import JsonResponse, HttpResponse
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import status
 
 
 from store import models 
@@ -47,9 +48,10 @@ def product_detail(request, pk):
     elif request.method == 'POST':
         serializer = serializers.ProductSerializer(data=request.data)
         if serializer.is_valid():
-            pass
+            serializer.validated_data
+            return Response("Everything is OK |||| serializer.validated_data")
         else:
-            return Response(serializer.errors, status=status)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response("All OK!")
 
 
