@@ -44,7 +44,9 @@ def product_detail(request, pk):
         # except models.Product.DoesNotExist:
         #     return Response(status=status.HTTP_404_NOT_FOUND)
         # این خط دقیقا کار چهار خط بالا رو انجام میده
-    
+    elif request.method == 'POST':
+        serializer = serializers.ProductSerializer(data=request.data)
+        return Response("All OK!")
 
 
 @api_view()
