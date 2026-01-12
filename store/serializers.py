@@ -15,7 +15,7 @@ class CategorySerializer(serializers.Serializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['id', 'name', 'price', 'with_task', 'category', 'inventory', 'slug', 'd']
+        fields = ['id', 'name', 'price', 'with_task', 'category', 'inventory', 'slug', 'description']
 
     price = serializers.DecimalField(max_digits=6, decimal_places=2, source='unit_price')
     # category = CategorySerializer()
