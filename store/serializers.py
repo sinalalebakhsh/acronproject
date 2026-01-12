@@ -15,10 +15,14 @@ class CategorySerializer(serializers.Serializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['id', 'name', 'price', 'inventory', 'category']
+        fields = ['id', 'name', 'price', 'with_task', 'category']
 
     price = serializers.DecimalField(max_digits=6, decimal_places=2, source='unit_price')
     category = CategorySerializer()
+
+    with_task = serializers.SerializerMethodField()
+    def get_with_task(self, product):
+        return round(product.unit_price * Decimal(1.09), 2)
 
     # category = serializers.HyperlinkedRelatedField(
     #     queryset=Category.objects.all(),
@@ -28,7 +32,6 @@ class ProductSerializer(serializers.ModelSerializer):
 
     # id = serializers.IntegerField()
     # name = serializers.CharField(max_length=255)
-    # with_task = serializers.SerializerMethodField()
     # inventory = serializers.IntegerField()
 
 
@@ -39,8 +42,6 @@ class ProductSerializer(serializers.ModelSerializer):
     # price_tomans = serializers.SerializerMethodField()
 
     
-    def get_with_task(self, product):
-        return round(product.unit_price * Decimal(1.09), 2)
 
 
 
