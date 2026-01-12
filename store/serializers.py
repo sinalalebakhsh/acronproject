@@ -15,10 +15,10 @@ class CategorySerializer(serializers.Serializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['id', 'name', 'price', 'with_task', 'category', 'inventory', 'slug']
+        fields = ['id', 'name', 'price', 'with_task', 'category', 'inventory', 'slug', 'd']
 
     price = serializers.DecimalField(max_digits=6, decimal_places=2, source='unit_price')
-    category = CategorySerializer()
+    # category = CategorySerializer()
 
     with_task = serializers.SerializerMethodField()
     def get_with_task(self, product):
