@@ -26,6 +26,8 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         print(data)
+        if len(data['name']) < 6:
+            raise serializers.ValidationError("Product title length < 6 !!!")
         return data
 
     # category = serializers.HyperlinkedRelatedField(
