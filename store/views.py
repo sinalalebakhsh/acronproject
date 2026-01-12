@@ -48,24 +48,26 @@ def product_just_POST(request):
 
 
 
-@api_view()
+@api_view(['GET', 'PUT'])
 def product_detail(request, pk):
-    product = get_object_or_404(
-        models.Product.objects.select_related("category"), 
-        pk=pk
-    )
-    serializer = serializers.ProductSerializer(
-        product,
-        context={"request": request},
-    )
-    return Response(serializer.data)
-    # try:
-    #     product = models.Product.objects.get(pk=pk)
-    # except models.Product.DoesNotExist:
-    #     return Response(status=status.HTTP_404_NOT_FOUND)
-    # این خط دقیقا کار چهار خط بالا رو انجام میده
+    if request.method == 'GET':
+        product = get_object_or_404(
+            models.Product.objects.select_related("category"), 
+            pk=pk
+        )
+        serializer = serializers.ProductSerializer(
+            product,
+            context={"request": request},
+        )
+        return Response(serializer.data)
+        # try:
+        #     product = models.Product.objects.get(pk=pk)
+        # except models.Product.DoesNotExist:
+        #     return Response(status=status.HTTP_404_NOT_FOUND)
+        # این خط دقیقا کار چهار خط بالا رو انجام میده
 
-
+    elif request.method == 'PUST':
+        
 
 @api_view()
 def category_detail(request, pk):
