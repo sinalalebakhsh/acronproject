@@ -66,7 +66,8 @@ def product_detail(request, pk):
         #     return Response(status=status.HTTP_404_NOT_FOUND)
         # این خط دقیقا کار چهار خط بالا رو انجام میده
 
-    elif request.method == 'PUST':
+    elif request.method == 'PUT':
+        serializer
         
 
 @api_view()
