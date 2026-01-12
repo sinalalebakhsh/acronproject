@@ -14,7 +14,7 @@ urlpatterns = [
 
 
     # POST
-    path("product/post", views.product_just_POST, name=)
+    path("product/post", views.product_just_POST, name="product_just_POST"),
 
 
 
