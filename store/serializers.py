@@ -1,5 +1,6 @@
-from decimal import Decimal
+from django.utils.text import slugify
 
+from decimal import Decimal
 
 from rest_framework import serializers
 
@@ -15,10 +16,9 @@ class CategorySerializer(serializers.Serializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['id', 'name', 'price', 'with_task', 'category', 'inventory', 'slug', 'description']
+        fields = ['id', 'name', 'price', 'with_task', 'category', 'inventory',  'description']
 
     price = serializers.DecimalField(max_digits=6, decimal_places=2, source='unit_price')
-    # category = CategorySerializer()
 
     with_task = serializers.SerializerMethodField()
     def get_with_task(self, product):
@@ -29,6 +29,16 @@ class ProductSerializer(serializers.ModelSerializer):
         if len(data['name']) < 6:
             raise serializers.ValidationError("Product title length < 6 !!!")
         return data
+
+    def create(self, validated_data):
+        product = Product(**validated_data)
+        product.slug = slugify(product.name)
+        
+
+
+
+    # category = CategorySerializer()
+
 
     # category = serializers.HyperlinkedRelatedField(
     #     queryset=Category.objects.all(),
