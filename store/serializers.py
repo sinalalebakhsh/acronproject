@@ -24,6 +24,10 @@ class ProductSerializer(serializers.ModelSerializer):
     def get_with_task(self, product):
         return round(product.unit_price * Decimal(1.09), 2)
 
+    def validate(self, data):
+        print(data)
+        return data
+
     # category = serializers.HyperlinkedRelatedField(
     #     queryset=Category.objects.all(),
     #     view_name="category-detailaaa",
