@@ -13,6 +13,8 @@ urlpatterns = [
     path("categories/<int:pk>/", views.category_detail, name="category-detailaaa"),
 
 
+    # POST
+    path("product/post", views.product_just_POST, name=)
 
 
 

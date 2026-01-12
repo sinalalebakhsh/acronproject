@@ -14,37 +14,19 @@ from store import models
 from store import serializers 
 # from store.serializers import ProductSerializer 
 
-@api_view()
-def product_list(request):
-    products_queryset = models.Product.objects.select_related("category").all()
-    # return JsonResponse(products_queryset)
-    # return JsonResponse(products_queryset)
-    serializer = serializers.ProductSerializer(
-            products_queryset, 
-            many=True,
-            context={"request": request},
-        )
-    return Response(serializer.data)
-
-
-
 @api_view(['GET', 'POST'])
-def product_detail(request, pk):
+def product_list(request):
     if request.method == 'GET':
-        product = get_object_or_404(
-            models.Product.objects.select_related("category"), 
-            pk=pk
-        )
+        products_queryset = models.Product.objects.select_related("category").all()
+        # return JsonResponse(products_queryset)
+        # return JsonResponse(products_queryset)
         serializer = serializers.ProductSerializer(
-            product,
-            context={"request": request},
-        )
+                products_queryset, 
+                many=True,
+                context={"request": request},
+            )
         return Response(serializer.data)
-        # try:
-        #     product = models.Product.objects.get(pk=pk)
-        # except models.Product.DoesNotExist:
-        #     return Response(status=status.HTTP_404_NOT_FOUND)
-        # این خط دقیقا کار چهار خط بالا رو انجام میده
+    
     elif request.method == 'POST':
         serializer = serializers.ProductSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -56,6 +38,33 @@ def product_detail(request, pk):
         # else:
         #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         # return Response("All OK!")
+
+@api_view(['POST'])
+def product_just_POST(request):
+    serializer = serializers.ProductSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return Response('Everything is OK!')
+
+
+
+@api_view()
+def product_detail(request, pk):
+    product = get_object_or_404(
+        models.Product.objects.select_related("category"), 
+        pk=pk
+    )
+    serializer = serializers.ProductSerializer(
+        product,
+        context={"request": request},
+    )
+    return Response(serializer.data)
+    # try:
+    #     product = models.Product.objects.get(pk=pk)
+    # except models.Product.DoesNotExist:
+    #     return Response(status=status.HTTP_404_NOT_FOUND)
+    # این خط دقیقا کار چهار خط بالا رو انجام میده
+
 
 
 @api_view()
