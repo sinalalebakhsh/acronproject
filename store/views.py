@@ -50,11 +50,11 @@ def product_just_POST(request):
 
 @api_view(['GET', 'PUT'])
 def product_detail(request, pk):
+    product = get_object_or_404(
+        models.Product.objects.select_related("category"), 
+        pk=pk
+    )
     if request.method == 'GET':
-        product = get_object_or_404(
-            models.Product.objects.select_related("category"), 
-            pk=pk
-        )
         serializer = serializers.ProductSerializer(
             product,
             context={"request": request},
@@ -67,8 +67,12 @@ def product_detail(request, pk):
         # این خط دقیقا کار چهار خط بالا رو انجام میده
 
     elif request.method == 'PUT':
-        serializer
-        
+        serializer = serializers.ProductSerializer(product , data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+
 
 @api_view()
 def category_detail(request, pk):
