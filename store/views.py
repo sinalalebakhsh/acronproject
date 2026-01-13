@@ -82,7 +82,12 @@ def product_detail(request, pk):
 
 @api_view()
 def categories(request):
-    categories_queryset = models.Category.objects.select_related()
+    categories_queryset = models.Category.objects.all()
+    serializer = serializers.CategorySerializer(
+        categories_queryset,
+        many=True,
+    )
+    return Response(serializer.data)
 
 
 @api_view()

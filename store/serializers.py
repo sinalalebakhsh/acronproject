@@ -14,9 +14,8 @@ from store.models import Category, Product
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['id', 'product','title', 'description',]
+        fields = ['id', 'title', 'description',]
 
-    product = Product.objects.select_related('products').all()
 
 
 # DOLLORS_TO_TOMANS = 150000
