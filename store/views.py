@@ -74,7 +74,7 @@ def product_detail(request, pk):
     
     elif request.method == 'DELETE':
         if product.order_items.count() > 0:
-            return Response({'Error': "Please remove the order items first"})
+            return Response({'Error': "1)First: remove the order items. 2) Remove this."})
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
