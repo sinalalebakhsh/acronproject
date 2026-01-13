@@ -16,6 +16,9 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ['id', 'product','title', 'description',]
 
+    product = Product.objects.select_related('products').all()
+
+
 # DOLLORS_TO_TOMANS = 150000
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -70,6 +73,17 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 
+
+    # category = serializers.StringRelatedField()
+
+
+    # category = serializers.PrimaryKeyRelatedField(
+    #     queryset=Category.objects.all()
+    # )
+
+
+    # def get_price_tomans(self, product):
+    #     return int(product.unit_price * DOLLORS_TO_TOMANS)
 
 
 
