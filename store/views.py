@@ -17,7 +17,7 @@ from store import serializers
 @api_view(['GET', 'POST'])
 def product_list(request):
     if request.method == 'GET':
-        products_queryset = models.Product.objects.all()
+        products_queryset = models.Product.objects.select_related("category").all()
         # return JsonResponse(products_queryset)
         # return JsonResponse(products_queryset)
         serializer = serializers.ProductSerializer(
@@ -82,7 +82,7 @@ def product_detail(request, pk):
 
 @api_view()
 def categories(request):
-    categories_queryset = models.Category.objects.select_related
+    categories_queryset = models.Category.objects.select_related()
 
 
 @api_view()

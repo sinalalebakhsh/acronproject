@@ -1,0 +1,14 @@
+چجوری این پروداکت رو به ترتیت آی دی سورتش کنم ؟
+
+def product_list(request):
+    if request.method == 'GET':
+        products_queryset = models.Product.objects.select_related("category").all()
+        # return JsonResponse(products_queryset)
+        # return JsonResponse(products_queryset)
+        serializer = serializers.ProductSerializer(
+                products_queryset, 
+                many=True,
+                context={"request": request},
+            )
+        return Response(serializer.data)
+    
