@@ -7,10 +7,14 @@ from rest_framework import serializers
 from store.models import Category, Product
 
 
-class CategorySerializer(serializers.Serializer):
-    title = serializers.CharField(max_length=255)
-    description = serializers.CharField(max_length=500)
-
+# این مدل اولیه بود
+# class CategorySerializer(serializers.Serializer):
+#     title = serializers.CharField(max_length=255)
+#     description = serializers.CharField(max_length=500)
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'product','title', 'description',]
 
 # DOLLORS_TO_TOMANS = 150000
 class ProductSerializer(serializers.ModelSerializer):
@@ -66,17 +70,6 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 
-
-    # category = serializers.StringRelatedField()
-
-
-    # category = serializers.PrimaryKeyRelatedField(
-    #     queryset=Category.objects.all()
-    # )
-
-
-    # def get_price_tomans(self, product):
-    #     return int(product.unit_price * DOLLORS_TO_TOMANS)
 
 
 
