@@ -166,7 +166,7 @@ class Order_Admin(admin.ModelAdmin):
     list_per_page = 20
     ordering = ['-datetime_created']
     inlines = [Order_Item_Inline]
-    autocomplete_fields = ['items', ]
+    search_fields = ['']
 
 
     def get_queryset(self, request):
@@ -216,7 +216,7 @@ class Customer_Admin(admin.ModelAdmin):
 class Order_Item(admin.ModelAdmin):
     list_display = ['id', 'order', 'product', 'quantity', 'unit_price']
     list_per_page = 20
-    autocomplete_fields = ['product', ]
+    autocomplete_fields = ['product', 'order']
 
 
 
