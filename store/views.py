@@ -73,7 +73,7 @@ def product_detail(request, pk):
         return Response(serializer.data)
     
     elif request.method == 'DELETE':
-        if product.order_items.count > 0:
+        if product.order_items.count() > 0:
             return Response({'Error': "Please remove the order items first"})
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
