@@ -157,6 +157,7 @@ class Order_Item_Inline(admin.TabularInline):
     fields = ['product', 'quantity', 'unit_price']
     # حداقل باید یک اوردر داشته باشه تا ساخته بشه
     min_num = 1
+    autocomplete_fields = ['product', 'order']
 
 
 @admin.register(Order)
@@ -166,7 +167,7 @@ class Order_Admin(admin.ModelAdmin):
     list_per_page = 20
     ordering = ['-datetime_created']
     inlines = [Order_Item_Inline]
-    search_fields = ['']
+    search_fields = ['order_items']
 
 
     def get_queryset(self, request):
