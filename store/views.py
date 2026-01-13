@@ -17,7 +17,7 @@ from store import serializers
 @api_view(['GET', 'POST'])
 def product_list(request):
     if request.method == 'GET':
-        products_queryset = models.Product.objects.select_related("category").all()
+        products_queryset = models.Product.objects.all()
         # return JsonResponse(products_queryset)
         # return JsonResponse(products_queryset)
         serializer = serializers.ProductSerializer(
