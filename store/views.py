@@ -75,6 +75,19 @@ class ProductDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+class CategoriesCBV(APIView):
+    def get(self, request):
+        categories_queryset = models.Category.objects.annotate(
+            products_count=Count("products")
+        ).all()
+        serializer = serializers.CategorySerializer(
+            categories_queryset,
+            many=True,
+        )
+        return Response(serializer.data)
+
+    def post(self, request)
+
 @api_view(['GET', 'POST'])
 def categories(request):
     if request.method == 'GET':
