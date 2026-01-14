@@ -86,24 +86,16 @@ class CategoriesCBV(APIView):
         )
         return Response(serializer.data)
 
-    def post(self, request)
-
-@api_view(['GET', 'POST'])
-def categories(request):
-    if request.method == 'GET':
-        categories_queryset = models.Category.objects.annotate(
-            products_count=Count("products")
-        ).all()
-        serializer = serializers.CategorySerializer(
-            categories_queryset,
-            many=True,
-        )
-        return Response(serializer.data)
-    elif request.method == 'POST':
+    def post(self, request):
         serializer = serializers.CategorySerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class CategorieDetail():
+    def get(self, request):
+    def put(self, request):
+    def get(self, request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def category_detail(request, pk):
@@ -125,6 +117,22 @@ def category_detail(request, pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+# @api_view(['GET', 'POST'])
+# def categories(request):
+#     if request.method == 'GET':
+#         categories_queryset = models.Category.objects.annotate(
+#             products_count=Count("products")
+#         ).all()
+#         serializer = serializers.CategorySerializer(
+#             categories_queryset,
+#             many=True,
+#         )
+#         return Response(serializer.data)
+#     elif request.method == 'POST':
+#         serializer = serializers.CategorySerializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 
@@ -134,12 +142,13 @@ def category_detail(request, pk):
 
 
 
-def json(request):
-    json_data = {
-        "a11":{"sina":"lale", "asd":123},
-        "id":"1",
-        "job":"PRO",
-    }
+
+# def json(request):
+#     json_data = {
+#         "a11":{"sina":"lale", "asd":123},
+#         "id":"1",
+#         "job":"PRO",
+#     }
         # "1": {
         #     "id":"1",
         #     "title":"first",
@@ -162,8 +171,8 @@ def json(request):
         # },
 
 
-    my_dictionary = json_data
-    return render(request, "store/home.html", context=my_dictionary)
+    # my_dictionary = json_data
+    # return render(request, "store/home.html", context=my_dictionary)
     # return JsonResponse({
     #     "KEY-1":"VALUE-1",
     #     "KEY-2":"VALUE-2",

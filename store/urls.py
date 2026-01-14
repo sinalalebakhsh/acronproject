@@ -14,7 +14,7 @@ urlpatterns = [
     
 
 
-    path("categories/", views.categories, name="categories"),
+    path("categories/", views.CategoriesCBV.as_view(), name="categories"),
     path("categories/<int:pk>/", views.category_detail, name="category-detailaaa"),
 
 
