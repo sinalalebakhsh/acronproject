@@ -7,17 +7,17 @@ from . import views
 app_name = "store"
 
 urlpatterns = [
+    # POST
+    path("products/post", views.products_just_POST, name="products_just_POST"),
     path("products/", views.product_list, name="products"),
     path("products/<int:pk>/", views.product_detail, name="products_int_pk"),
     
 
-    
+
     path("categories/", views.categories, name="categories"),
     path("categories/<int:pk>/", views.category_detail, name="category-detailaaa"),
 
 
-    # POST
-    path("product/post", views.product_just_POST, name="product_just_POST"),
 
 
 

@@ -31,7 +31,7 @@ def product_list(request):
         serializer = serializers.ProductSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response('Everything is OK!')
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
         # if serializer.is_valid():
         #     serializer.validated_data
         #     return Response("Everything is OK |||| serializer.validated_data")
@@ -40,11 +40,12 @@ def product_list(request):
         # return Response("All OK!")
 
 @api_view(['POST'])
-def product_just_POST(request):
+def products_just_POST(request):
     serializer = serializers.ProductSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     serializer.save()
-    return Response('Everything is OK!')
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 
 
@@ -90,7 +91,10 @@ def categories(request):
         )
         return Response(serializer.data)
     elif request.method == 'POST':
-        
+        serializer = serializers.CategorySerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view()
 def category_detail(request, pk):
