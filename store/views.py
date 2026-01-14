@@ -3,6 +3,8 @@ from django.shortcuts import (
         render,
     )
 
+from django.db.models import Count
+
 from django.http import JsonResponse, HttpResponse
 
 from rest_framework.decorators import api_view
@@ -84,7 +86,9 @@ def product_detail(request, pk):
 @api_view(['GET', 'POST'])
 def categories(request):
     if request.method == 'GET':
-        categories_queryset = models.Category.objects.prefetch_related("products").all()
+        categories_queryset = models.Category.objects.annotate(
+            products_count=Count("products")
+        ).all()
         serializer = serializers.CategorySerializer(
             categories_queryset,
             many=True,
