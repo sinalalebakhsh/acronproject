@@ -77,9 +77,7 @@ class ProductDetail(APIView):
 
 class CategoriesCBV(APIView):
     def get(self, request):
-        categories_queryset = models.Category.objects.annotate(
-            products_count=Count("products")
-        ).all()
+        categories_queryset = models.Category.objects.prefetch_related("products")
         serializer = serializers.CategorySerializer(
             categories_queryset,
             many=True,
@@ -94,24 +92,18 @@ class CategoriesCBV(APIView):
 
 class CategorieDetail(APIView):
     def get(self, request, pk):
-        category = get_object_or_404(models.Category.objects.annotate(
-            products_count=Count("products")
-        ).all(), pk=pk)
+        category = get_object_or_404(models.Category.objects.prefetch_related("products"), pk=pk)
         serializer = serializers.CategorySerializer(category)
         return Response(serializer.data)
     def put(self, request, pk):
-        category = get_object_or_404(models.Category.objects.annotate(
-            products_count=Count("products")
-        ).all(), pk=pk)
+        category = get_object_or_404(models.Category.objects.prefetch_related("products"), pk=pk)
         serializer = serializers.CategorySerializer(category , data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
 
     def delete(self, request, pk):
-        category = get_object_or_404(models.Category.objects.annotate(
-            products_count=Count("products")
-        ).all(), pk=pk)
+        category = get_object_or_404(models.Category.objects.prefetch_related("products"), pk=pk)
         if category.products.count() > 0:
             return Response({'Error': "1)First: remove the order items. 2) Remove this."})
         category.delete()

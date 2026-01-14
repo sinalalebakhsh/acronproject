@@ -45,7 +45,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
     all_products = serializers.SerializerMethodField()
     def get_all_products(self, category):
-        return category.products_count
+        return category.products.count()
 
 
 
