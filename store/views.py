@@ -19,8 +19,21 @@ from store import serializers
 
 
 class ProductList(APIView):
-    def get():
-        
+    def get(self, request):
+        products_queryset = models.Product.objects.select_related("category").all()
+        serializer = serializers.ProductSerializer(
+                products_queryset, 
+                many=True,
+                context={"request": request},
+            )
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = serializers.ProductSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 
 

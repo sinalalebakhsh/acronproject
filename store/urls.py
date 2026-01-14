@@ -9,7 +9,7 @@ app_name = "store"
 urlpatterns = [
     # POST
     path("products/post", views.products_just_POST, name="products_just_POST"),
-    path("products/", views.product_list, name="products"),
+    path("products/", views.ProductList.as_view(), name="products"),
     path("products/<int:pk>/", views.product_detail, name="products_int_pk"),
     
 
