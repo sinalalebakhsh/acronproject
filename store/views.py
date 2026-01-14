@@ -8,6 +8,7 @@ from django.db.models import Count
 from django.http import JsonResponse, HttpResponse
 
 from rest_framework.decorators import api_view
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -15,6 +16,13 @@ from rest_framework import status
 from store import models 
 from store import serializers 
 # from store.serializers import ProductSerializer 
+
+
+class ProductList(APIView):
+    def get():
+        
+
+
 
 @api_view(['GET', 'POST'])
 def product_list(request):
