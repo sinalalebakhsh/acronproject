@@ -1,2 +1,0 @@
-queryset = Product.objects.all()
-
