@@ -43,8 +43,12 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ['id', 'title', 'description', 'products']
 
-    products = Category.objects.select_related('products').all()
+    products = serializers.SerializerMethodField()
 
+    def get_products(self, category):
+        return len(Category.objects.select_related('products').all())
+
+    print(products)
 
     # ارور داد
     # lenght_products = len(product)
