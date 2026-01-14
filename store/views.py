@@ -27,7 +27,6 @@ class ProductList(APIView):
                 context={"request": request},
             )
         return Response(serializer.data)
-
     def post(self, request):
         serializer = serializers.ProductSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -35,14 +34,13 @@ class ProductList(APIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
+class ProductsPOST(APIView):
+    def post(self, request):
+        serializer = serializers.ProductSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-
-@api_view(['POST'])
-def products_just_POST(request):
-    serializer = serializers.ProductSerializer(data=request.data)
-    serializer.is_valid(raise_exception=True)
-    serializer.save()
-    return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class ProductDetail(APIView):
     def get(self, request, pk):
@@ -66,7 +64,7 @@ class ProductDetail(APIView):
         serializer.save()
         return Response(serializer.data)
 
-    def delete(self, request):
+    def delete(self, request, pk):
         product = get_object_or_404(
             models.Product.objects.select_related("category"), 
             pk=pk
@@ -75,38 +73,6 @@ class ProductDetail(APIView):
             return Response({'Error': "1)First: remove the order items. 2) Remove this."})
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-@api_view(['GET', 'PUT', 'DELETE'])
-def product_detail(request, pk):
-    product = get_object_or_404(
-        models.Product.objects.select_related("category"), 
-        pk=pk
-    )
-    if request.method == 'GET':
-        serializer = serializers.ProductSerializer(
-            product,
-            context={"request": request},
-        )
-        return Response(serializer.data)
-        # try:
-        #     product = models.Product.objects.get(pk=pk)
-        # except models.Product.DoesNotExist:
-        #     return Response(status=status.HTTP_404_NOT_FOUND)
-        # این خط دقیقا کار چهار خط بالا رو انجام میده
-
-    elif request.method == 'PUT':
-        serializer = serializers.ProductSerializer(product , data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
-    
-    elif request.method == 'DELETE':
-        if product.order_items.count() > 0:
-            return Response({'Error': "1)First: remove the order items. 2) Remove this."})
-        product.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
 
 
 @api_view(['GET', 'POST'])
@@ -218,3 +184,44 @@ def json(request):
 #         # else:
 #         #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 #         # return Response("All OK!")
+
+
+
+# @api_view(['GET', 'PUT', 'DELETE'])
+# def product_detail(request, pk):
+#     product = get_object_or_404(
+#         models.Product.objects.select_related("category"), 
+#         pk=pk
+#     )
+#     if request.method == 'GET':
+#         serializer = serializers.ProductSerializer(
+#             product,
+#             context={"request": request},
+#         )
+#         return Response(serializer.data)
+#         # try:
+#         #     product = models.Product.objects.get(pk=pk)
+#         # except models.Product.DoesNotExist:
+#         #     return Response(status=status.HTTP_404_NOT_FOUND)
+#         # این خط دقیقا کار چهار خط بالا رو انجام میده
+
+#     elif request.method == 'PUT':
+#         serializer = serializers.ProductSerializer(product , data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response(serializer.data)
+    
+#     elif request.method == 'DELETE':
+#         if product.order_items.count() > 0:
+#             return Response({'Error': "1)First: remove the order items. 2) Remove this."})
+#         product.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+# @api_view(['POST'])
+# def products_just_POST(request):
+#     serializer = serializers.ProductSerializer(data=request.data)
+#     serializer.is_valid(raise_exception=True)
+#     serializer.save()
+#     return Response(serializer.data, status=status.HTTP_201_CREATED)
