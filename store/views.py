@@ -102,7 +102,9 @@ def categories(request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def category_detail(request, pk):
-    category = get_object_or_404(models.Category, pk=pk)
+    category = get_object_or_404(models.Category.objects.annotate(
+            products_count=Count("products")
+        ).all(), pk=pk)
     if request.method == 'GET':
         serializer = serializers.CategorySerializer(category)
         return Response(serializer.data)
