@@ -84,7 +84,7 @@ def product_detail(request, pk):
 @api_view(['GET', 'POST'])
 def categories(request):
     if request.method == 'GET':
-        categories_queryset = models.Category.objects.all()
+        categories_queryset = models.Category.objects.prefetch_related("products").all()
         serializer = serializers.CategorySerializer(
             categories_queryset,
             many=True,
