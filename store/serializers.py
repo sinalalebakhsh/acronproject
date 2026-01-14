@@ -7,15 +7,7 @@ from rest_framework import serializers
 from store.models import Category, Product
 
 
-# این مدل اولیه بود
-# class CategorySerializer(serializers.Serializer):
-#     title = serializers.CharField(max_length=255)
-#     description = serializers.CharField(max_length=500)
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = ['id', 'title', 'description',]
-
+ 
 
 
 # DOLLORS_TO_TOMANS = 150000
@@ -42,7 +34,18 @@ class ProductSerializer(serializers.ModelSerializer):
         product.save()
         return product
 
+# این مدل اولیه بود
+# class CategorySerializer(serializers.Serializer):
+#     title = serializers.CharField(max_length=255)
+#     description = serializers.CharField(max_length=500)
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'title', 'description', 'products']
 
+    product = Category.objects.select_related('products').all()
+
+   
 
     # category = CategorySerializer()
 
