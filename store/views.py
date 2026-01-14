@@ -80,15 +80,17 @@ def product_detail(request, pk):
 
 
 
-@api_view()
+@api_view(['GET', 'POST'])
 def categories(request):
-    categories_queryset = models.Category.objects.all()
-    serializer = serializers.CategorySerializer(
-        categories_queryset,
-        many=True,
-    )
-    return Response(serializer.data)
-
+    if request.method == 'GET':
+        categories_queryset = models.Category.objects.all()
+        serializer = serializers.CategorySerializer(
+            categories_queryset,
+            many=True,
+        )
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        
 
 @api_view()
 def category_detail(request, pk):
