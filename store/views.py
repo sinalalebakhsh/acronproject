@@ -37,31 +37,6 @@ class ProductList(APIView):
 
 
 
-@api_view(['GET', 'POST'])
-def product_list(request):
-    if request.method == 'GET':
-        products_queryset = models.Product.objects.select_related("category").all()
-        # return JsonResponse(products_queryset)
-        # return JsonResponse(products_queryset)
-        serializer = serializers.ProductSerializer(
-                products_queryset, 
-                many=True,
-                context={"request": request},
-            )
-        return Response(serializer.data)
-    
-    elif request.method == 'POST':
-        serializer = serializers.ProductSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # if serializer.is_valid():
-        #     serializer.validated_data
-        #     return Response("Everything is OK |||| serializer.validated_data")
-        # else:
-        #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        # return Response("All OK!")
-
 @api_view(['POST'])
 def products_just_POST(request):
     serializer = serializers.ProductSerializer(data=request.data)
@@ -69,8 +44,17 @@ def products_just_POST(request):
     serializer.save()
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+class ProductDetail(APIView):
+    def get(self, request):
+        serializer = serializers.ProductSerializer(
+            product,
+            context={"request": request},
+        )
+        return Response(serializer.data)
 
+    def put(self, request):
 
+    def delete(self, request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def product_detail(request, pk):
@@ -188,3 +172,28 @@ def json(request):
     # })
 
 
+
+# @api_view(['GET', 'POST'])
+# def product_list(request):
+#     if request.method == 'GET':
+#         products_queryset = models.Product.objects.select_related("category").all()
+#         # return JsonResponse(products_queryset)
+#         # return JsonResponse(products_queryset)
+#         serializer = serializers.ProductSerializer(
+#                 products_queryset, 
+#                 many=True,
+#                 context={"request": request},
+#             )
+#         return Response(serializer.data)
+    
+#     elif request.method == 'POST':
+#         serializer = serializers.ProductSerializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         # if serializer.is_valid():
+#         #     serializer.validated_data
+#         #     return Response("Everything is OK |||| serializer.validated_data")
+#         # else:
+#         #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#         # return Response("All OK!")
