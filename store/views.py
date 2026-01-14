@@ -45,16 +45,37 @@ def products_just_POST(request):
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class ProductDetail(APIView):
-    def get(self, request):
+    def get(self, request, pk):
+        product = get_object_or_404(
+            models.Product.objects.select_related("category"), 
+            pk=pk
+        )
         serializer = serializers.ProductSerializer(
             product,
             context={"request": request},
         )
         return Response(serializer.data)
 
-    def put(self, request):
+    def put(self, request, pk):
+        product = get_object_or_404(
+            models.Product.objects.select_related("category"), 
+            pk=pk
+        )
+        serializer = serializers.ProductSerializer(product , data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
 
     def delete(self, request):
+        product = get_object_or_404(
+            models.Product.objects.select_related("category"), 
+            pk=pk
+        )
+        if product.order_items.count() > 0:
+            return Response({'Error': "1)First: remove the order items. 2) Remove this."})
+        product.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def product_detail(request, pk):
