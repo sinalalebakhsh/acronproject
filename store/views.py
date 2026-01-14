@@ -96,11 +96,12 @@ def categories(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-@api_view()
+@api_view(['GET', 'PUT', 'DELETE'])
 def category_detail(request, pk):
     category = get_object_or_404(models.Category, pk=pk)
-    serializer = serializers.CategorySerializer(category)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        serializer = serializers.CategorySerializer(category)
+        return Response(serializer.data)
 
 
 
