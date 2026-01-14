@@ -191,6 +191,8 @@ class Category_Admin(admin.ModelAdmin):
     list_display = ['id', 'title', 'top_product']
     list_editable = ['title', 'top_product']
     list_per_page = 20
+    autocomplete_fields = ['top_product', ]
+
 # admin.site.register(Category)
 
 
