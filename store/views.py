@@ -19,26 +19,17 @@ from store import serializers
 
 
 class ProductList(ListCreateAPIView):
-    def get_serializer_class(self):
-        return serializers.ProductSerializer
+    serializer_class = serializers.ProductSerializer
+    # 
+    # def get_serializer_class(self):
+    #     return serializers.ProductSerializer
     
     def get_queryset(self):
         return models.Product.objects.select_related("category").all()
 
-class ProductList(APIView):
-    def get(self, request):
-        products_queryset = models.Product.objects.select_related("category").all()
-        serializer = serializers.ProductSerializer(
-                products_queryset, 
-                many=True,
-                context={"request": request},
-            )
-        return Response(serializer.data)
-    def post(self, request):
-        serializer = serializers.ProductSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    def get_parser_context(self, http_request):
+        return {"request": self.request}
+
 
 
 class ProductsPOST(APIView):
@@ -116,6 +107,22 @@ class CategorieDetail(APIView):
         category.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+""" # class ProductList(APIView)
+class ProductList(APIView):
+    def get(self, request):
+        products_queryset = models.Product.objects.select_related("category").all()
+        serializer = serializers.ProductSerializer(
+                products_queryset, 
+                many=True,
+                context={"request": request},
+            )
+        return Response(serializer.data)
+    def post(self, request):
+        serializer = serializers.ProductSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+"""
 
 
 # @api_view(['GET', 'PUT', 'DELETE'])
