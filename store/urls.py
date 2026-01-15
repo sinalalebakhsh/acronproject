@@ -17,7 +17,7 @@ urlpatterns = [
     path("products/<int:pk>/", views.ProductDetail.as_view(), name="products_int_pk"),
     
     # GET
-    path("categories/", views.CategoriesCBV.as_view(), name="categories"),
+    path("categories/", views.CategoryList.as_view(), name="categories"),
 
 
     # GET + PUT + DELETE

@@ -20,15 +20,10 @@ from store import serializers
 
 class ProductList(ListCreateAPIView):
     serializer_class = serializers.ProductSerializer
-    # خط پایین رو در صورتی با خط بالا جایگزین میکنیم که بخوایم کد اضافه کنیم 
-    # def get_serializer_class(self):
-    #     return serializers.ProductSerializer
-    
     queryset = models.Product.objects.select_related("category").all()
    
     def get_parser_context(self, http_request):
         return {"request": self.request}
-
 
 
 class ProductsPOST(APIView):
@@ -71,8 +66,12 @@ class ProductDetail(APIView):
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
-class CategoriesCBV(APIView):
+class CategoryList(ListCreateAPIView):
+    serializer_class = serializers.CategorySerializer
+    queryset = models.Category.objects.prefetch_related("products")
+"""
+"""
+class CategoryList(APIView):
     def get(self, request):
         categories_queryset = models.Category.objects.prefetch_related("products")
         serializer = serializers.CategorySerializer(
