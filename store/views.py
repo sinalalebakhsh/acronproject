@@ -20,13 +20,12 @@ from store import serializers
 
 class ProductList(ListCreateAPIView):
     serializer_class = serializers.ProductSerializer
-    # 
+    # خط پایین رو در صورتی با خط بالا جایگزین میکنیم که بخوایم کد اضافه کنیم 
     # def get_serializer_class(self):
     #     return serializers.ProductSerializer
     
-    def get_queryset(self):
-        return models.Product.objects.select_related("category").all()
-
+    queryset = models.Product.objects.select_related("category").all()
+   
     def get_parser_context(self, http_request):
         return {"request": self.request}
 
@@ -107,7 +106,27 @@ class CategorieDetail(APIView):
         category.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-""" # class ProductList(APIView)
+
+""" 
+# برای اینکه تعداد خطوط کد ها کمتر بشه قابلیت ها، به کلاس اضافه شد 
+# ولی از کلاس بالا خطوط کامنت رو پاک کردم
+# تمام اون خطوط پاک شده زیر این خط موجود هست
+class ProductList(ListCreateAPIView):
+    serializer_class = serializers.ProductSerializer
+    # خط پایین رو در صورتی با خط بالا جایگزین میکنیم که بخوایم کد اضافه کنیم 
+    # def get_serializer_class(self):
+    #     return serializers.ProductSerializer
+    
+    queryset = models.Product.objects.select_related("category").all()
+    # خط پایین رو در صورتی با خط بالا جایگزین میکنیم که بخوایم کد اضافه کنیم 
+    # def get_queryset(self):
+    #     return models.Product.objects.select_related("category").all()
+
+    def get_parser_context(self, http_request):
+        return {"request": self.request}
+
+
+# class ProductList(APIView)
 class ProductList(APIView):
     def get(self, request):
         products_queryset = models.Product.objects.select_related("category").all()
