@@ -69,8 +69,11 @@ class ProductDetail(APIView):
 class CategoryList(ListCreateAPIView):
     serializer_class = serializers.CategorySerializer
     queryset = models.Category.objects.prefetch_related("products")
-"""
-"""
+
+
+# تمام کلاس پاینن در دو خط در کلاس بالا 
+# جمع شد و قابل استفاده با همان امکانات هست
+""" 
 class CategoryList(APIView):
     def get(self, request):
         categories_queryset = models.Category.objects.prefetch_related("products")
@@ -85,6 +88,8 @@ class CategoryList(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+"""
+
 
 class CategorieDetail(APIView):
     def get(self, request, pk):
