@@ -18,6 +18,13 @@ from store import serializers
 # from store.serializers import ProductSerializer 
 
 
+class ProductList(ListCreateAPIView):
+    def get_serializer_class(self):
+        return serializers.ProductSerializer
+    
+    def get_queryset(self):
+        return models.Product.objects.select_related("category").all()
+
 class ProductList(APIView):
     def get(self, request):
         products_queryset = models.Product.objects.select_related("category").all()
