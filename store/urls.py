@@ -4,6 +4,11 @@ from . import views
 app_name = "store"
 
 router = SimpleRouter()
+router.register("products", views.ProductViewSet)
+router.register("categories", views.CategoryViewSet)
+
+urls___ = router.urls
+print(urls___)
 
 # urlpatterns = [
 #     # POST
