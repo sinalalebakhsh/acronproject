@@ -34,8 +34,19 @@ class ProductsPOST(APIView):
 
 
 class ProductDetail(RetrieveUpdateDestroyAPIView):
-    serializer_class = serializers
+    serializer_class = serializers.ProductSerializer
     queryset = models.Product.objects.select_related("category").all()
+
+    def delete(self, request, pk):
+        product = get_object_or_404(
+            models.Product.objects.select_related("category"), 
+            pk=pk
+        )
+        if product.order_items.count() > 0:
+            return Response({'Error': "1)First: remove the order items. 2) Remove this."})
+        product.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 class CategoryList(ListCreateAPIView):
     serializer_class = serializers.CategorySerializer
