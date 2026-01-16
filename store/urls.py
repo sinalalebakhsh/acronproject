@@ -13,17 +13,13 @@ urlpatterns = router.urls
 # ]
 
 
-
-
-
-
 """ # urls___ = router.urls
 # urls___ = router.urls
 # print(urls___)
 """
 
-
 """ # urlpatterns = [
+# urlpatterns = [
 #     # POST
 #     path("products/post", views.ProductsPOST.as_view(), name="products_just_POST"),
     
@@ -41,6 +37,3 @@ urlpatterns = router.urls
 #     path("categories/<int:pk>/", views.CategorieDetail.as_view(), name="category-detailaaa"),
 # ]
 """
-
-
-
