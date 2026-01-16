@@ -16,6 +16,21 @@ class ProductViewSet(ModelViewSet):
     def get_parser_context(self, http_request):
         return {"request": self.request}
 
+
+class ProductsPOST(CreateAPIView):
+    serializer_class = serializers.ProductSerializer
+    
+class CategoryViewSet(ModelViewSet):
+    queryset = models.Category.objects.prefetch_related("products")
+    serializer_class = serializers.CategorySerializer
+    def delete(self, request, pk):
+        category = get_object_or_404(models.Category.objects.prefetch_related("products"), pk=pk)
+        if category.products.count() > 0:
+            return Response({'Error': "1)First: remove the order items. 2) Remove this."})
+        category.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 """ ## class ProductList(ListCreateAPIView): + class ProductDetail(RetrieveUpdateDestroyAPIView):
 # class ProductList(ListCreateAPIView):
 #     serializer_class = serializers.ProductSerializer
@@ -47,20 +62,7 @@ class ProductViewSet(ModelViewSet):
 #         return Response(status=status.HTTP_204_NO_CONTENT)
 """
 
-class ProductsPOST(CreateAPIView):
-    serializer_class = serializers.ProductSerializer
-    
-class CategoryViewSet(ModelViewSet):
-    queryset = models.Category.objects.prefetch_related("products")
-    serializer_class = serializers.CategorySerializer
-    def delete(self, request, pk):
-        category = get_object_or_404(models.Category.objects.prefetch_related("products"), pk=pk)
-        if category.products.count() > 0:
-            return Response({'Error': "1)First: remove the order items. 2) Remove this."})
-        category.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-""" ## class CategoryList(ListCreateAPIView): + """
+""" ## class CategoryList(ListCreateAPIView): + class CategorieDetail(RetrieveUpdateDestroyAPIView):
 # class CategoryList(ListCreateAPIView):
 #     queryset = models.Category.objects.prefetch_related("products")
 #     serializer_class = serializers.CategorySerializer
@@ -74,7 +76,7 @@ class CategoryViewSet(ModelViewSet):
 #             return Response({'Error': "1)First: remove the order items. 2) Remove this."})
 #         category.delete()
 #         return Response(status=status.HTTP_204_NO_CONTENT)
-
+"""
 
 """ class CategorieDetail(APIView):
 # class CategorieDetail(APIView):
