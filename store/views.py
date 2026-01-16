@@ -39,18 +39,9 @@ class CategoryList(ListCreateAPIView):
     serializer_class = serializers.CategorySerializer
     queryset = models.Category.objects.prefetch_related("products")
 
-
-class CategorieDetail(APIView):
-    def get(self, request, pk):
-        category = get_object_or_404(models.Category.objects.prefetch_related("products"), pk=pk)
-        serializer = serializers.CategorySerializer(category)
-        return Response(serializer.data)
-    def put(self, request, pk):
-        category = get_object_or_404(models.Category.objects.prefetch_related("products"), pk=pk)
-        serializer = serializers.CategorySerializer(category , data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
+class CategorieDetail(RetrieveUpdateDestroyAPIView):
+    queryset = models.Category.objects.prefetch_related("products").all()
+    serializer_class = serializers.CategorySerializer
     def delete(self, request, pk):
         category = get_object_or_404(models.Category.objects.prefetch_related("products"), pk=pk)
         if category.products.count() > 0:
@@ -59,9 +50,30 @@ class CategorieDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+""" class CategorieDetail(APIView):
+# class CategorieDetail(APIView):
+#     def get(self, request, pk):
+#         category = get_object_or_404(models.Category.objects.prefetch_related("products"), pk=pk)
+#         serializer = serializers.CategorySerializer(category)
+#         return Response(serializer.data)
+#     def put(self, request, pk):
+#         category = get_object_or_404(models.Category.objects.prefetch_related("products"), pk=pk)
+#         serializer = serializers.CategorySerializer(category , data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response(serializer.data)
+#     def delete(self, request, pk):
+#         category = get_object_or_404(models.Category.objects.prefetch_related("products"), pk=pk)
+#         if category.products.count() > 0:
+#             return Response({'Error': "1)First: remove the order items. 2) Remove this."})
+#         category.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
+"""
+
+
 # تمام کلاس پایین در دو خط در کلاس بالا 
 # جمع شد و قابل استفاده با همان امکانات هست
-""" 
+""" class CategoryList(APIView):
 class CategoryList(APIView):
     def get(self, request):
         categories_queryset = models.Category.objects.prefetch_related("products")
@@ -78,9 +90,7 @@ class CategoryList(APIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 """
 
-
-
-"""
+""" class ProductsPOST(APIView):
 # class ProductsPOST(APIView):
 #     def post(self, request):
 #         serializer = serializers.ProductSerializer(data=request.data)
@@ -90,9 +100,7 @@ class CategoryList(APIView):
 
 """
 
-
-
-"""
+""" class ProductDetail(APIView):
 # class ProductDetail(APIView):
 #     def get(self, request, pk):
 #         product = get_object_or_404(
@@ -127,8 +135,7 @@ class CategoryList(APIView):
 
 """
 
-
-""" 
+""" class ProductList(ListCreateAPIView):
 # برای اینکه تعداد خطوط کد ها کمتر بشه قابلیت ها، به کلاس اضافه شد 
 # ولی از کلاس بالا خطوط کامنت رو پاک کردم
 # تمام اون خطوط پاک شده زیر این خط موجود هست
@@ -164,7 +171,7 @@ class ProductList(APIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 """
 
-
+""" def category_detail(request, pk):
 # @api_view(['GET', 'PUT', 'DELETE'])
 # def category_detail(request, pk):
 #     category = get_object_or_404(models.Category.objects.annotate(
@@ -183,8 +190,9 @@ class ProductList(APIView):
 #             return Response({'Error': "1)First: remove the order items. 2) Remove this."})
 #         category.delete()
 #         return Response(status=status.HTTP_204_NO_CONTENT)
+"""
 
-
+"""def categories(request):
 # @api_view(['GET', 'POST'])
 # def categories(request):
 #     if request.method == 'GET':
@@ -201,16 +209,9 @@ class ProductList(APIView):
 #         serializer.is_valid(raise_exception=True)
 #         serializer.save()
 #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+"""
 
-
-
-
-
-
-
-
-
-
+"""def json(request):
 # def json(request):
 #     json_data = {
 #         "a11":{"sina":"lale", "asd":123},
@@ -247,9 +248,9 @@ class ProductList(APIView):
     #     "KEY-3":"VALUE-3",
     #     "KEY-4":"VALUE-4",
     # })
+"""
 
-
-
+"""def product_list(request):
 # @api_view(['GET', 'POST'])
 # def product_list(request):
 #     if request.method == 'GET':
@@ -274,9 +275,9 @@ class ProductList(APIView):
 #         # else:
 #         #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 #         # return Response("All OK!")
+"""
 
-
-
+"""def product_detail(request, pk):
 # @api_view(['GET', 'PUT', 'DELETE'])
 # def product_detail(request, pk):
 #     product = get_object_or_404(
@@ -306,12 +307,13 @@ class ProductList(APIView):
 #             return Response({'Error': "1)First: remove the order items. 2) Remove this."})
 #         product.delete()
 #         return Response(status=status.HTTP_204_NO_CONTENT)
+"""
 
-
-
+"""def products_just_POST(request):
 # @api_view(['POST'])
 # def products_just_POST(request):
 #     serializer = serializers.ProductSerializer(data=request.data)
 #     serializer.is_valid(raise_exception=True)
 #     serializer.save()
 #     return Response(serializer.data, status=status.HTTP_201_CREATED)
+"""
