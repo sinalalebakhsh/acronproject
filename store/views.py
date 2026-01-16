@@ -70,7 +70,6 @@ class CategorieDetail(RetrieveUpdateDestroyAPIView):
 #         return Response(status=status.HTTP_204_NO_CONTENT)
 """
 
-
 # تمام کلاس پایین در دو خط در کلاس بالا 
 # جمع شد و قابل استفاده با همان امکانات هست
 """ class CategoryList(APIView):
