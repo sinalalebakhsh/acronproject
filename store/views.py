@@ -1,18 +1,11 @@
-from django.shortcuts import (
-        get_object_or_404,
-        render,
-    )
-
+from django.shortcuts import get_object_or_404,render
 from django.db.models import Count
-
 from django.http import JsonResponse, HttpResponse
-
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
-
 from store import models 
 from store import serializers 
 
@@ -20,7 +13,6 @@ from store import serializers
 class ProductList(ListCreateAPIView):
     serializer_class = serializers.ProductSerializer
     queryset = models.Product.objects.select_related("category").all()
-   
     def get_parser_context(self, http_request):
         return {"request": self.request}
 
@@ -28,18 +20,10 @@ class ProductList(ListCreateAPIView):
 class ProductsPOST(CreateAPIView):
     serializer_class = serializers.ProductSerializer
     
-# class ProductsPOST(APIView):
-#     def post(self, request):
-#         serializer = serializers.ProductSerializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
-#         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
 
 class ProductDetail(RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.ProductSerializer
     queryset = models.Product.objects.select_related("category").all()
-
     def delete(self, request, pk):
         product = get_object_or_404(
             models.Product.objects.select_related("category"), 
@@ -54,6 +38,25 @@ class ProductDetail(RetrieveUpdateDestroyAPIView):
 class CategoryList(ListCreateAPIView):
     serializer_class = serializers.CategorySerializer
     queryset = models.Category.objects.prefetch_related("products")
+
+
+class CategorieDetail(APIView):
+    def get(self, request, pk):
+        category = get_object_or_404(models.Category.objects.prefetch_related("products"), pk=pk)
+        serializer = serializers.CategorySerializer(category)
+        return Response(serializer.data)
+    def put(self, request, pk):
+        category = get_object_or_404(models.Category.objects.prefetch_related("products"), pk=pk)
+        serializer = serializers.CategorySerializer(category , data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    def delete(self, request, pk):
+        category = get_object_or_404(models.Category.objects.prefetch_related("products"), pk=pk)
+        if category.products.count() > 0:
+            return Response({'Error': "1)First: remove the order items. 2) Remove this."})
+        category.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 # تمام کلاس پایین در دو خط در کلاس بالا 
@@ -76,24 +79,17 @@ class CategoryList(APIView):
 """
 
 
-class CategorieDetail(APIView):
-    def get(self, request, pk):
-        category = get_object_or_404(models.Category.objects.prefetch_related("products"), pk=pk)
-        serializer = serializers.CategorySerializer(category)
-        return Response(serializer.data)
-    def put(self, request, pk):
-        category = get_object_or_404(models.Category.objects.prefetch_related("products"), pk=pk)
-        serializer = serializers.CategorySerializer(category , data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
 
-    def delete(self, request, pk):
-        category = get_object_or_404(models.Category.objects.prefetch_related("products"), pk=pk)
-        if category.products.count() > 0:
-            return Response({'Error': "1)First: remove the order items. 2) Remove this."})
-        category.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+"""
+# class ProductsPOST(APIView):
+#     def post(self, request):
+#         serializer = serializers.ProductSerializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+"""
+
 
 
 """
