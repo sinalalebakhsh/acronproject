@@ -11,11 +11,10 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 from store import models 
 from store import serializers 
-# from store.serializers import ProductSerializer 
 
 
 class ProductList(ListCreateAPIView):
@@ -34,44 +33,16 @@ class ProductsPOST(APIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-class ProductDetail(APIView):
-    def get(self, request, pk):
-        product = get_object_or_404(
-            models.Product.objects.select_related("category"), 
-            pk=pk
-        )
-        serializer = serializers.ProductSerializer(
-            product,
-            context={"request": request},
-        )
-        return Response(serializer.data)
-
-    def put(self, request, pk):
-        product = get_object_or_404(
-            models.Product.objects.select_related("category"), 
-            pk=pk
-        )
-        serializer = serializers.ProductSerializer(product , data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
-
-    def delete(self, request, pk):
-        product = get_object_or_404(
-            models.Product.objects.select_related("category"), 
-            pk=pk
-        )
-        if product.order_items.count() > 0:
-            return Response({'Error': "1)First: remove the order items. 2) Remove this."})
-        product.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+class ProductDetail(RetrieveUpdateDestroyAPIView):
+    serializer_class = serializers
+    queryset = models.Product.objects.select_related("category").all()
 
 class CategoryList(ListCreateAPIView):
     serializer_class = serializers.CategorySerializer
     queryset = models.Category.objects.prefetch_related("products")
 
 
-# تمام کلاس پاینن در دو خط در کلاس بالا 
+# تمام کلاس پایین در دو خط در کلاس بالا 
 # جمع شد و قابل استفاده با همان امکانات هست
 """ 
 class CategoryList(APIView):
@@ -109,6 +80,42 @@ class CategorieDetail(APIView):
             return Response({'Error': "1)First: remove the order items. 2) Remove this."})
         category.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+"""
+# class ProductDetail(APIView):
+#     def get(self, request, pk):
+#         product = get_object_or_404(
+#             models.Product.objects.select_related("category"), 
+#             pk=pk
+#         )
+#         serializer = serializers.ProductSerializer(
+#             product,
+#             context={"request": request},
+#         )
+#         return Response(serializer.data)
+
+#     def put(self, request, pk):
+#         product = get_object_or_404(
+#             models.Product.objects.select_related("category"), 
+#             pk=pk
+#         )
+#         serializer = serializers.ProductSerializer(product , data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response(serializer.data)
+
+#     def delete(self, request, pk):
+#         product = get_object_or_404(
+#             models.Product.objects.select_related("category"), 
+#             pk=pk
+#         )
+#         if product.order_items.count() > 0:
+#             return Response({'Error': "1)First: remove the order items. 2) Remove this."})
+#         product.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
+
+"""
 
 
 """ 
