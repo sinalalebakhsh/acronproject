@@ -7,10 +7,7 @@ from rest_framework import serializers
 from store.models import Category, Product
 
 
- 
-
-
-# DOLLORS_TO_TOMANS = 150000
+""" PRODUCT """
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
@@ -34,75 +31,52 @@ class ProductSerializer(serializers.ModelSerializer):
         product.save()
         return product
 
-# این مدل اولیه بود
+
+""" CATEGORY """
+""" # این مدل اولیه بود
 # class CategorySerializer(serializers.Serializer):
 #     title = serializers.CharField(max_length=255)
 #     description = serializers.CharField(max_length=500)
+"""
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ['id', 'title', 'description', 'all_products']
 
     all_products = serializers.IntegerField(source="products.count", read_only=True)
+    """ این مدل اولیه بود
     # all_products = serializers.SerializerMethodField()
     # def get_all_products(self, category):
     #     return category.products.count()
+    """
+
+""" COMMENT """
 
 
 
-# ارور داد
+""" # ارور داد
 # products = serializers.SerializerMethodField()
 # def get_products(self, category):
 #     return len(Category.objects.select_related('products').all())
 # print(products)
 # ارور داد
 # lenght_products = len(product)
-
-
 # category = CategorySerializer()
-
-
 # category = serializers.HyperlinkedRelatedField(
 #     queryset=Category.objects.all(),
 #     view_name="category-detailaaa",
 # )
-
-
 # id = serializers.IntegerField()
 # name = serializers.CharField(max_length=255)
 # inventory = serializers.IntegerField()
-
-
-
 # -----------------------------------------------------------------
 # title = serializers.CharField(max_length=255, source="name")
 # price = serializers.DecimalField(max_digits=6, decimal_places=2, source="unit_price")
 # price_tomans = serializers.SerializerMethodField()
-
-
-
-
-
-
-
-
-
-
     # category = serializers.StringRelatedField()
-
-
     # category = serializers.PrimaryKeyRelatedField(
     #     queryset=Category.objects.all()
     # )
-
-
     # def get_price_tomans(self, product):
     #     return int(product.unit_price * DOLLORS_TO_TOMANS)
-
-
-
-
-
-
-
-
+"""

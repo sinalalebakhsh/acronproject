@@ -10,6 +10,7 @@ from rest_framework.viewsets import ModelViewSet
 from store import models 
 from store import serializers 
 
+""" PRODUCT """
 class ProductViewSet(ModelViewSet):
     serializer_class = serializers.ProductSerializer
     queryset = models.Product.objects.select_related("category").all()
@@ -19,7 +20,10 @@ class ProductViewSet(ModelViewSet):
 
 class ProductsPOST(CreateAPIView):
     serializer_class = serializers.ProductSerializer
-    
+
+
+
+""" CATEGORY """
 class CategoryViewSet(ModelViewSet):
     queryset = models.Category.objects.prefetch_related("products")
     serializer_class = serializers.CategorySerializer
@@ -29,6 +33,10 @@ class CategoryViewSet(ModelViewSet):
             return Response({'Error': "1)First: remove the order items. 2) Remove this."})
         category.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+""" COMMENT """
+
 
 
 """ ## class ProductList(ListCreateAPIView): + class ProductDetail(RetrieveUpdateDestroyAPIView):
