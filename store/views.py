@@ -11,7 +11,7 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
 
 from store import models 
 from store import serializers 
@@ -25,12 +25,15 @@ class ProductList(ListCreateAPIView):
         return {"request": self.request}
 
 
-class ProductsPOST(APIView):
-    def post(self, request):
-        serializer = serializers.ProductSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+class ProductsPOST(CreateAPIView):
+    serializer_class = serializers.ProductSerializer
+    
+# class ProductsPOST(APIView):
+#     def post(self, request):
+#         serializer = serializers.ProductSerializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class ProductDetail(RetrieveUpdateDestroyAPIView):
