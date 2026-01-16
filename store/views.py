@@ -10,38 +10,48 @@ from rest_framework.viewsets import ModelViewSet
 from store import models 
 from store import serializers 
 
-
-class ProductList(ListCreateAPIView):
+class ProductViewSet(ModelViewSet):
     serializer_class = serializers.ProductSerializer
     queryset = models.Product.objects.select_related("category").all()
     def get_parser_context(self, http_request):
         return {"request": self.request}
 
+""" ## class ProductList(ListCreateAPIView): + class ProductDetail(RetrieveUpdateDestroyAPIView):
+# class ProductList(ListCreateAPIView):
+#     serializer_class = serializers.ProductSerializer
+#     queryset = models.Product.objects.select_related("category").all()
+#     def get_parser_context(self, http_request):
+#         return {"request": self.request}
+#     def delete(self, request, pk):
+#         product = get_object_or_404(
+#             models.Product.objects.select_related("category"), 
+#             pk=pk
+#         )
+#         if product.order_items.count() > 0:
+#             return Response({'Error': "1)First: remove the order items. 2) Remove this."})
+#         product.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# class ProductDetail(RetrieveUpdateDestroyAPIView):
+#     serializer_class = serializers.ProductSerializer
+#     queryset = models.Product.objects.select_related("category").all()
+#     def delete(self, request, pk):
+#         product = get_object_or_404(
+#             models.Product.objects.select_related("category"), 
+#             pk=pk
+#         )
+#         if product.order_items.count() > 0:
+#             return Response({'Error': "1)First: remove the order items. 2) Remove this."})
+#         product.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
+"""
 
 class ProductsPOST(CreateAPIView):
     serializer_class = serializers.ProductSerializer
     
-
-class ProductDetail(RetrieveUpdateDestroyAPIView):
-    serializer_class = serializers.ProductSerializer
-    queryset = models.Product.objects.select_related("category").all()
-    def delete(self, request, pk):
-        product = get_object_or_404(
-            models.Product.objects.select_related("category"), 
-            pk=pk
-        )
-        if product.order_items.count() > 0:
-            return Response({'Error': "1)First: remove the order items. 2) Remove this."})
-        product.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-class CategoryList(ListCreateAPIView):
-    serializer_class = serializers.CategorySerializer
+class CategoryViewSet(ModelViewSet):
     queryset = models.Category.objects.prefetch_related("products")
-
-class CategorieDetail(RetrieveUpdateDestroyAPIView):
-    queryset = models.Category.objects.prefetch_related("products").all()
     serializer_class = serializers.CategorySerializer
     def delete(self, request, pk):
         category = get_object_or_404(models.Category.objects.prefetch_related("products"), pk=pk)
@@ -49,6 +59,21 @@ class CategorieDetail(RetrieveUpdateDestroyAPIView):
             return Response({'Error': "1)First: remove the order items. 2) Remove this."})
         category.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+""" ## class CategoryList(ListCreateAPIView): + """
+# class CategoryList(ListCreateAPIView):
+#     queryset = models.Category.objects.prefetch_related("products")
+#     serializer_class = serializers.CategorySerializer
+
+# class CategorieDetail(RetrieveUpdateDestroyAPIView):
+#     queryset = models.Category.objects.prefetch_related("products").all()
+#     serializer_class = serializers.CategorySerializer
+#     def delete(self, request, pk):
+#         category = get_object_or_404(models.Category.objects.prefetch_related("products"), pk=pk)
+#         if category.products.count() > 0:
+#             return Response({'Error': "1)First: remove the order items. 2) Remove this."})
+#         category.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 """ class CategorieDetail(APIView):
