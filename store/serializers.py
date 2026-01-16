@@ -43,9 +43,10 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ['id', 'title', 'description', 'all_products']
 
-    all_products = serializers.SerializerMethodField()
-    def get_all_products(self, category):
-        return category.products.count()
+    all_products = serializers.IntegerField(source="products.count", read_only=True)
+    # all_products = serializers.SerializerMethodField()
+    # def get_all_products(self, category):
+    #     return category.products.count()
 
 
 
