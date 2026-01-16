@@ -1,16 +1,29 @@
-from django.urls import path
+from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 from . import views
 app_name = "store"
 
 router = SimpleRouter()
-router.register("products", views.ProductViewSet)
-router.register("categories", views.CategoryViewSet)
+router.register("products", views.ProductViewSet, basename="product")
+router.register("categories", views.CategoryViewSet, basename="category")
 
-urls___ = router.urls
-print(urls___)
-
+urlpatterns = router.urls
 # urlpatterns = [
+#     path("", include(router.urls)),
+# ]
+
+
+
+
+
+
+""" # urls___ = router.urls
+# urls___ = router.urls
+# print(urls___)
+"""
+
+
+""" # urlpatterns = [
 #     # POST
 #     path("products/post", views.ProductsPOST.as_view(), name="products_just_POST"),
     
@@ -27,7 +40,7 @@ print(urls___)
 #     # GET + PUT + DELETE
 #     path("categories/<int:pk>/", views.CategorieDetail.as_view(), name="category-detailaaa"),
 # ]
-
+"""
 
 
 
