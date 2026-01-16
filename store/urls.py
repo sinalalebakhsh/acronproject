@@ -1,9 +1,9 @@
 from django.urls import path, include
-from rest_framework.routers import SimpleRouter
+from rest_framework.routers import DefaultRouter,SimpleRouter
 from . import views
 app_name = "store"
 
-router = SimpleRouter()
+router = DefaultRouter()
 router.register("products", views.ProductViewSet, basename="product")
 router.register("categories", views.CategoryViewSet, basename="category")
 
