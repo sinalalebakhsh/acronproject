@@ -51,7 +51,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ["product", "status", "name", ]
+        fields = ["id", "name", "product", "body"  ]
 
 
 """ # ارور داد

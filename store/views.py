@@ -36,7 +36,9 @@ class CategoryViewSet(ModelViewSet):
 
 
 """ COMMENT """
-
+class CommentViewSet(ModelViewSet):
+    queryset = models.Comment.objects.all()
+    serializer_class = serializers.CommentSerializer
 
 
 """ ## class ProductList(ListCreateAPIView): + class ProductDetail(RetrieveUpdateDestroyAPIView):
