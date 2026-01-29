@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "daf1c0d9416fc5a2566c93edea196cf6cfda49ca33181431755ee44c8969cc33"
+            "sha256": "a701bfa873114b8329bc86225c54af0ba5a317e06bf7236a429f1d9d7997cf03"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -9,9 +9,9 @@
         },
         "sources": [
             {
-                "name": "pypi",
-                "url": "https://pypi.org/simple",
-                "verify_ssl": true
+                "name": "runflare",
+                "url": "https://mirror-pypi.runflare.com/simple/",
+                "verify_ssl": false
             }
         ]
     },
@@ -153,12 +153,12 @@
         },
         "django": {
             "hashes": [
-                "sha256:1cc2c7344303bbfb7ba5070487c17f7fc0b7174bbb0a38cebf03c675f5f19b6d",
-                "sha256:7b0c1f50c0759bbe6331c6a39c89ae022a84672674aeda908784617ef47d8e26"
+                "sha256:a92a4ff14f664a896f9849009cb8afaca7abe0d6fc53325f3d1895a15253433d",
+                "sha256:ed76a7af4da21551573b3d9dfc1f53e20dd2e6c7d70a3adc93eedb6338130a5f"
             ],
-            "index": "pypi",
+            "index": "runflare",
             "markers": "python_version >= '3.12'",
-            "version": "==6.0"
+            "version": "==6.0.1"
         },
         "django-debug-toolbar": {
             "hashes": [
@@ -174,9 +174,18 @@
                 "sha256:166809528b1aced0a17dc66c24492af18049f2c9420dbd0be29422029cfc3ff7",
                 "sha256:33a59f47fb9c85ede792cbf88bde71893bcda0667bc573f784649521f1102cec"
             ],
-            "index": "pypi",
+            "index": "runflare",
             "markers": "python_version >= '3.9'",
             "version": "==3.16.1"
+        },
+        "drf-nested-routers": {
+            "hashes": [
+                "sha256:815978f802e578fd7035c74040c104909cbe97615de89a275d77e928f4029891",
+                "sha256:dd489c33d667aaa81383ffaa8c74781d2b353d8f0795716ae37fc59ee297b7c4"
+            ],
+            "index": "runflare",
+            "markers": "python_version >= '3.8'",
+            "version": "==0.95.0"
         },
         "factory-boy": {
             "hashes": [

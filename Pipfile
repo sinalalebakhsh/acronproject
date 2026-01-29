@@ -1,7 +1,7 @@
 [[source]]
-url = "https://pypi.org/simple"
-verify_ssl = true
-name = "pypi"
+url = "https://mirror-pypi.runflare.com/simple/"
+verify_ssl = false
+name = "runflare"
 
 [packages]
 django = "*"
@@ -12,6 +12,7 @@ faker = "*"
 jdatetime = "*"
 requests = "*"
 djangorestframework = "*"
+drf-nested-routers = "*"
 
 [dev-packages]
 

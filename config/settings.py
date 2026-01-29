@@ -146,3 +146,4 @@ REST_FRAMEWORK = {
     "COERCE_DECIMAL_TO_STRING": False,
 }
 
+# source C:/Users/sina/.virtualenvs/acronproject-K_vsw8H6/Scripts/activate

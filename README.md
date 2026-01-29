@@ -1,4 +1,11 @@
-
+# pipenv change host
+```
+set PIP_TRUSTED_HOST=mirror-pypi.runflare.com
+```
+than
+```
+pipenv install drf-nested-routers
+```
 
 # Select Related:
 ```
@@ -48,5 +55,11 @@ class Order_Admin(admin.ModelAdmin):
         return order.items__count
         # خط بالا و پاینن ، تفاوتی با هم ندارند
         # return order.items.count()
+```
+
+## dipendent ...
+
+```
+pipenv install drf-nested-routers
 ```
 
