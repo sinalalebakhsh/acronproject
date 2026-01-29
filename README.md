@@ -60,6 +60,7 @@ class Order_Admin(admin.ModelAdmin):
 ## dipendent ...
 
 ```
+python push_py.py 
 pipenv install drf-nested-routers
 ```
 
