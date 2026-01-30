@@ -47,11 +47,15 @@ class CategorySerializer(serializers.ModelSerializer):
     #     return category.products.count()
     """
 
+
+
 """ COMMENT """
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ["id", "name", "product", "body"  ]
+
+
 
 
 """ # ارور داد
