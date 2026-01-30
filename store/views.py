@@ -37,9 +37,13 @@ class CategoryViewSet(ModelViewSet):
 
 """ COMMENT """
 class CommentViewSet(ModelViewSet):
-    queryset = models.Comment.objects.all()
+    # queryset = models.Comment.objects.all()
     serializer_class = serializers.CommentSerializer
 
+
+    def get_queryset(self):
+        product_pk = self.kwargs["product_pk"]
+        return models.Comment.objects.filter(product_id=product_pk).all()
 
 """ ## class ProductList(ListCreateAPIView): + class ProductDetail(RetrieveUpdateDestroyAPIView):
 # class ProductList(ListCreateAPIView):
