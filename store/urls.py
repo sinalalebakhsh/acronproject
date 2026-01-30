@@ -20,7 +20,7 @@ products_router.register("comments", views.CommentViewSet, basename="product-com
 
 
 
-urlpatterns = router.urls
+urlpatterns = router.urls + products_router.ur
 
 
 
