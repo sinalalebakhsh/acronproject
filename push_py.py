@@ -29,6 +29,7 @@ def load_version():
     global CURRENT_VERSION
     version_file = CONFIG['version_file']
     
+    
     if os.path.exists(version_file):
         try:
             with open(version_file, 'r') as f:
