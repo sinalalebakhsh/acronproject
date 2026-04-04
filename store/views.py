@@ -7,17 +7,23 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
+from rest_framework.filters import OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
 
 
 from store import models 
 from store import serializers 
+from .filters import ProductFilter
 
 """ PRODUCT """
 class ProductViewSet(ModelViewSet):
     serializer_class = serializers.ProductSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['category_id', 'unit_price' , 'inventory' ]
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    ordering_fields = ['name', 'unit_price', 'inventory']
+    
+    # filterset_fields = ['category_id', 'unit_price' , 'inventory' ]
+    filterset_class = ProductFilter
+
     queryset = models.Product.objects.all()    
     def get_parser_context(self, http_request):
         return {"request": self.request}
