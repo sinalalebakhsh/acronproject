@@ -17,7 +17,7 @@ from store import serializers
 class ProductViewSet(ModelViewSet):
     serializer_class = serializers.ProductSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['category_id']
+    filterset_fields = ['category_id', 'unit_price' , 'inventory' ]
     queryset = models.Product.objects.all()    
     def get_parser_context(self, http_request):
         return {"request": self.request}
