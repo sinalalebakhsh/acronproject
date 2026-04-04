@@ -7,25 +7,27 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
+from django_filters.rest_framework import DjangoFilterBackend
+
+
 from store import models 
 from store import serializers 
 
 """ PRODUCT """
 class ProductViewSet(ModelViewSet):
     serializer_class = serializers.ProductSerializer
-    
-    # queryset = models.Product.objects.select_related("category").all()
-
-    def get_queryset(self):
-        queryset = models.Product.objects.all()
-        category_id_parameter = self.request.query_params.get('category_id') 
-        if category_id_parameter is not None:
-            queryset = queryset.filter(category_id=category_id_parameter)
-        return queryset
-
-
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['category_id']
+    queryset = models.Product.objects.all()    
     def get_parser_context(self, http_request):
         return {"request": self.request}
+    # def get_queryset(self):
+    #     queryset = models.Product.objects.all()
+    #     category_id_parameter = self.request.query_params.get('category_id') 
+    #     if category_id_parameter is not None:
+    #         queryset = queryset.filter(category_id=category_id_parameter)
+    #     return queryset
+    # queryset = models.Product.objects.select_related("category").all()
 
 
 class ProductsPOST(CreateAPIView):
