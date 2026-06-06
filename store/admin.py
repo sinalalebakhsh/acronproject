@@ -13,7 +13,9 @@ from .models import (
     Comment,
     Customer,
     OrderItem,
+    Cart,
 )
+from store import models
 
 
 
@@ -220,6 +222,20 @@ class Order_Item(admin.ModelAdmin):
     list_per_page = 20
     autocomplete_fields = ['product', ]
 
+
+
+class Cart_Item_Inline(admin.TabularInline):
+    model = models.CartItem
+    fields = ['id','product', 'quantity']
+    extra = 0
+    min_num = 1
+    
+
+
+@admin.register(models.Cart)
+class CartAdmin(admin.ModelAdmin):
+    list_display = ['id', 'created_at']
+    inlines = [Cart_Item_Inline]
 
 
 

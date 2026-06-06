@@ -7,11 +7,13 @@ app_name = "store"
 
 router = routers.DefaultRouter()
 
-router.register("products", views.ProductViewSet, basename="product")
-router.register("categories", views.CategoryViewSet, basename="category")
+router.register('products', views.ProductViewSet, basename='product')
+router.register('categories', views.CategoryViewSet, basename='category')
+router.register('carts', views.CartViewSet)
 
-products_router = routers.NestedDefaultRouter(router, "products", lookup="product")
-products_router.register("comments", views.CommentViewSet, basename="product-comments")
+
+products_router = routers.NestedDefaultRouter(router, 'products', lookup='product')
+products_router.register('comments', views.CommentViewSet, basename='product-comments')
 
 urlpatterns = router.urls + products_router.urls
 
