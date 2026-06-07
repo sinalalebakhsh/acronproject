@@ -10,7 +10,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 from rest_framework.viewsets import GenericViewSet, ModelViewSet, ReadOnlyModelViewSet
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin
+from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyModelMixin
 
 
 from django_filters.rest_framework import DjangoFilterBackend
@@ -80,11 +80,14 @@ class CommentViewSet(ModelViewSet):
 
 
 
+
+
 class CartViewSet(CreateModelMixin,
                    RetrieveModelMixin,
+                   DestroyModelMixin,
                    GenericViewSet):
     serializer_class = serializers.CartSerializer
-    queryset = models.Cart.objects.all()
+    queryset = models.Cart.objects.prefetch_related('items__product').all()
 
 
 """ درس 431 دیده شد"""
