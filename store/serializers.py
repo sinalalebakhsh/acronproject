@@ -63,12 +63,19 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 
-
+""" PRODUCT SERILIZIER FOR CART PAGE """
+class CartProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['id', 'name', 'unit_price']
 
 
 
 """ CART ITEM """
 class CartItemSerializer(serializers.ModelSerializer):
+    product = CartProductSerializer()
+    
+
     class Meta:
         model = CartItem
         fields = ['id', 'product', 'quantity',]
