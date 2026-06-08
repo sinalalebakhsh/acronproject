@@ -80,6 +80,7 @@ class CommentViewSet(ModelViewSet):
 
 
 class CartItemViewSet(ModelViewSet):
+    http_method_names = ['get', 'post', 'path', 'delete', ]
     # serializer_class = serializers.CartItemSerializer
     
     def get_queryset(self):
@@ -90,6 +91,8 @@ class CartItemViewSet(ModelViewSet):
     def get_serializer_class(self):
         if self.request.method == 'POST':
             return serializers.AddCartItemSerializer
+        elif self.request.method == 'PATH':
+            return serializers.UpdateCartItemSerializer
         return serializers.CartItemSerializer
 
     def get_serializer_context(self):
@@ -103,7 +106,7 @@ class CartViewSet(CreateModelMixin,
                    GenericViewSet):
     serializer_class = serializers.CartSerializer
     queryset = models.Cart.objects.prefetch_related('items__product').all()
-
+    lookup_value_regex = '[0-9a-fA-F]{8}\-?[0-9a-fA-F]{4}\-?[0-9a-fA-F]{4}\-?[0-9a-fA-F]{4}\-?[0-9a-fA-F]{12}'
 
 """ درس 431 دیده شد"""
 

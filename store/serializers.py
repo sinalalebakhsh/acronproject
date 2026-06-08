@@ -69,6 +69,13 @@ class CartProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = ['id', 'name', 'unit_price']
 
+""" CHANGE QUANTITY IN CART ITEMS """
+class UpdateCartItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CartItem
+        fields = ['quantity', ] 
+
+
 
 """ ADDING TO CART SERIALIZER """
 class AddCartItemSerializer(serializers.ModelSerializer):
