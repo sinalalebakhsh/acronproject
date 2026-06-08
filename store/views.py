@@ -79,6 +79,21 @@ class CommentViewSet(ModelViewSet):
         return {'product_pk': self.kwargs['product_pk']}
 
 
+class CartItemViewSet(ModelViewSet):
+    # serializer_class = serializers.CartItemSerializer
+    
+    def get_queryset(self):
+        cart_pk = self.kwargs['cart_pk']
+        return models.CartItem.objects.select_related('product').filter(cart_id=cart_pk).all()
+
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return serializers.AddCartItemSerializer
+        return serializers.CartItemSerializer
+
+    def get_serializer_context(self):
+        return {'cart_pk': self.kwargs['cart_pk']}
 
 
 

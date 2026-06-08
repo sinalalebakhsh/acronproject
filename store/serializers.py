@@ -70,6 +70,41 @@ class CartProductSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'unit_price']
 
 
+""" ADDING TO CART SERIALIZER """
+class AddCartItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CartItem
+        fields = ['id', 'product', 'quantity']
+
+    def create(self, validated_data):
+        cart_id = self.context['cart_pk']
+        product = validated_data.get('product')
+        quantity = validated_data.get('quantity')
+
+        """ if a product also is exists """
+        try:
+            cart_item = CartItem.objects.get(cart_id=cart_id, product_id=product.id)
+            cart_item.quantity += quantity
+            cart_item.save()
+        except CartItem.DoesNotExist:
+            cart_item = CartItem.objects.create(cart_id=cart_id, **validated_data)
+
+
+        self.instance = cart_item
+        return cart_item
+
+        """ ANOTHER WAY for up codes """
+        # if CartItem.objects.filter(cart_id=cart_id, product_id=product.id).exists():
+        #     cart_item = CartItem.objects.get(cart_id=cart_id, product_id=product.id)
+        #     cart_item.quantity += quantity
+        #     cart_item.save()
+        # else:
+        #     cart_item = CartItem.objects.create(cart_id=cart_id, **validated_data)
+
+        # return cart_item
+
+
+
 
 """ CART ITEM """
 class CartItemSerializer(serializers.ModelSerializer):

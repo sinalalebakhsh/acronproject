@@ -12,10 +12,19 @@ router.register('categories', views.CategoryViewSet, basename='category')
 router.register('carts', views.CartViewSet)
 
 
+""" PRODUCT """
 products_router = routers.NestedDefaultRouter(router, 'products', lookup='product')
 products_router.register('comments', views.CommentViewSet, basename='product-comments')
 
-urlpatterns = router.urls + products_router.urls
+
+""" CART """
+cart_items_router = routers.NestedDefaultRouter(router, 'carts', lookup='cart')
+cart_items_router.register('items', views.CartItemViewSet, basename='cart-items')
+
+
+
+urlpatterns = router.urls + products_router.urls + cart_items_router.urls
+                
 
 # urlpatterns = [
 #     path("", include(router.urls)),
