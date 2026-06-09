@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     # CREATE by me 
     'store',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -150,3 +151,8 @@ REST_FRAMEWORK = {
 }
 
 # source C:/Users/sina/.virtualenvs/acronproject-K_vsw8H6/Scripts/activate
+
+
+AUTH_USER_MODEL = 'core.CustomUser'
+
+

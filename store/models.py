@@ -4,6 +4,7 @@ from django.core.validators import MinValueValidator
 from uuid import uuid4
 
 
+
 class Category(models.Model):
     title = models.CharField(max_length=255)
     description = models.CharField(max_length=500, blank=True)
@@ -37,11 +38,9 @@ class Product(models.Model):
         return self.name
 
 
-
+from django.conf import settings
 class Customer(models.Model):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    email = models.EmailField()
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     phone_number = models.CharField(max_length=255)
     birth_date = models.DateField(null=True, blank=True)
 
