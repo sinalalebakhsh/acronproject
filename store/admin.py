@@ -210,11 +210,22 @@ class Comment_Admin(admin.ModelAdmin):
 
 @admin.register(Customer)
 class Customer_Admin(admin.ModelAdmin):
-    list_display = ['id','email','birth_date']
-    list_editable = ['email','birth_date']
+    list_display = ['id','email', 'first_name', 'last_name','birth_date']
+    # list_editable = ['email','birth_date']
     list_per_page = 20
     ordering = ['id']
     search_fields = ['first_name', 'last_name']
+
+    def id(self, customer):
+        return customer.user.id
+    def first_name(self, customer):
+        return customer.user.first_name
+    def last_name(self, customer):
+        return customer.user.last_name
+    def email(self, customer):
+        return customer.user.email
+    def birth_date(self, customer):
+        return customer.user.birth_date
 
 @admin.register(OrderItem)
 class Order_Item(admin.ModelAdmin):
