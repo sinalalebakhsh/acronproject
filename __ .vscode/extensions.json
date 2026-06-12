@@ -9,4 +9,5 @@
     "redhat.telemetry.enabled": true,
     "terminal.integrated.enableMultiLinePasteWarning": "never",
     "git.autofetch": true
+
 }

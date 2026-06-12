@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 admin.site.site_header = 'Store'
 admin.site.index_title = 'Special Access'
@@ -23,6 +23,8 @@ admin.site.index_title = 'Special Access'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('store/', include('store.urls')),
+    re_path(r'^auth/', include('djoser.urls')), 
+    re_path(r'^auth/', include('djoser.urls.jwt')), 
     path("__debug__/", include("debug_toolbar.urls")),
 ]
 

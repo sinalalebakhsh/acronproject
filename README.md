@@ -64,3 +64,29 @@ python push_py.py
 pipenv install drf-nested-routers
 ```
 
+last old Pipfile file for block entire Iran Internet from GOV:
+```
+[[source]]
+url = "https://mirror-pypi.runflare.com/simple/"
+verify_ssl = false
+name = "runflare"
+
+[packages]
+django = "*"
+django-debug-toolbar = "*"
+mysqlclient = "*"
+factory-boy = "*"
+faker = "*"
+jdatetime = "*"
+requests = "*"
+djangorestframework = "*"
+drf-nested-routers = "*"
+django-filter = "*"
+djoser = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.13"
+
+```
