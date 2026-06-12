@@ -158,6 +158,12 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT', ),
 }
 
+DJOSER = {
+    'SERIALIZERS': {
+        'user_create': 'core.serializers.UserCreateSerializer',
+    }
+}
+
 # source C:/Users/sina/.virtualenvs/acronproject-K_vsw8H6/Scripts/activate
 
 
