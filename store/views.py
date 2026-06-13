@@ -1,17 +1,17 @@
 from django.shortcuts import get_object_or_404,render
 from django.db.models import Count
-from django.http import JsonResponse, HttpResponse
+# from django.http import JsonResponse, HttpResponse
 
 from rest_framework.decorators import api_view
-from rest_framework.views import APIView
+# from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
 from rest_framework.viewsets import GenericViewSet, ModelViewSet, ReadOnlyModelViewSet
 from rest_framework.filters import OrderingFilter, SearchFilter
-from rest_framework.pagination import PageNumberPagination
+# from rest_framework.pagination import PageNumberPagination
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyModelMixin
-
+from rest_framework.decorators import action
 
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -108,8 +108,26 @@ class CartViewSet(CreateModelMixin,
     queryset = models.Cart.objects.prefetch_related('items__product').all()
     lookup_value_regex = r'[0-9a-fA-F]{8}\-?[0-9a-fA-F]{4}\-?[0-9a-fA-F]{4}\-?[0-9a-fA-F]{4}\-?[0-9a-fA-F]{12}'
 
-""" درس 431 دیده شد"""
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
+class CustomerViewSet(ModelViewSet):
+    serializer_class = serializers.CustomerSerializer
+    queryset = models.Customer.objects.all()
+    permission_classes = [IsAdminUser]
+
+
+    @action(detail=False, methods=['GET', 'PUT'], permission_classes=[IsAuthenticated])
+    def me(self, request):
+        user_id = request.user.id
+        customer = models.Customer.objects.get(user_id=user_id)
+        if request.method == 'GET':
+            serializer = serializers.CustomerSerializer(customer)
+            return Response(serializer.data)
+        elif request.method == 'PUT':
+            serializer = serializers.CustomerSerializer(customer, data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data)
 
 
 

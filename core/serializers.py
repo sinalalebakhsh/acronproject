@@ -9,6 +9,15 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
 
 
 
+# class UserSerializer(DjoserUserSerializer):
+#     class Meta(DjoserUserSerializer.Meta):
+#         fields = ['id', 'username', 'password', 'email']
+
+
+
+
+
+
 
 
 
