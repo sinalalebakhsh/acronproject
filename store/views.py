@@ -12,7 +12,7 @@ from rest_framework.filters import OrderingFilter, SearchFilter
 # from rest_framework.pagination import PageNumberPagination
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyModelMixin
 from rest_framework.decorators import action
-from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated, DjangoModelPermissions
 
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -21,7 +21,7 @@ from .paginations import DefaultPagination
 from store import models 
 from store import serializers 
 from .filters import ProductFilter
-from .permissions import IsAdminOrReadOnly
+from .permissions import CustomDjangoModelPermissions, IsAdminOrReadOnly, SendPrivateEmailToCustomerPermission
 
 
 """ PRODUCT """
@@ -30,6 +30,8 @@ class ProductViewSet(ModelViewSet):
     filter_backends = [SearchFilter, DjangoFilterBackend, OrderingFilter, ]
     ordering_fields = ['name', 'unit_price', 'inventory',]
     search_fields = ['name', ]
+
+    permission_classes = [IsAdminOrReadOnly]
 
     pagination_class = DefaultPagination
     # pagination_class = PageNumberPagination
@@ -134,11 +136,21 @@ class CustomerViewSet(ModelViewSet):
             serializer.save()
             return Response(serializer.data)
 
-    @action(detail=True, permission_classes=[AllowAny])
+    @action(detail=True, permission_classes=[SendPrivateEmailToCustomerPermission])
     def send_private_email(self, request, pk):
         customer = self.get_object()
         # send email to customer by the button
         return Response({'message': 'Email sent successfully.', 'Private Key User ID': f'{pk}'})
+
+
+class OrderViewSet(ModelViewSet):
+    serializer_class = serializers.OrderSerializer
+
+    
+    #                      .prefetch_related('items__product').
+    queryset = models.Order.objects.all()
+
+
 
 
 """ ## class ProductList(ListCreateAPIView): + class ProductDetail(RetrieveUpdateDestroyAPIView):
