@@ -2,20 +2,18 @@
 This is my best options about Django REST Framework programming.
 
 # I used these:
-*** *Django ORM ***
-*** *DRF: Django REST Framework ***
-*** *JWT: JSON Web Tokens ***
-*** *REST Full APIs ***
-*** *Permissions in DRF ***
-*** *Authorization in DRF ***
-*** *Ensuring that there is no occurrence N+1 ***
-*** *Event-Driven Architecture ***
-*** *Celery ***
-*** *Redis ***
-*** *Docker ***
-*** *Ensuring that there is no occurrence Similar Queries ***
-
-
+- Django ORM
+- DRF: Django REST Framework
+- JWT: JSON Web Tokens
+- RESTful APIs
+- Permissions in DRF
+- Authorization in DRF
+- Ensuring that there are no N+1 Queries
+- Event-Driven Architecture
+- Celery
+- Redis
+- Docker
+- Ensuring that there are no Similar Queries
 
 
 #### pipenv change host
