@@ -148,6 +148,26 @@ class CustomerSerializer(serializers.ModelSerializer):
         read_only_fields = ['user']
 
 
+
+""" ORDER about ...
+این سریالایزر کاستومر مخصوص نمایش داخل اوردر هستش
+"""
+class CustomerOrderSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(source='user.first_name')
+    last_name = serializers.CharField(source='user.last_name')
+    email = serializers.EmailField(source='user.email')
+
+    class Meta:
+        model = models.Customer
+        fields = [
+            'id',
+            'first_name',
+            'last_name',
+            'email',
+            'phone_number',
+            'birth_date',
+        ]
+
 class OrderItemProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Product
@@ -162,11 +182,12 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    customer = CustomerOrderSerializer(read_only=True)
     items = OrderItemSerializer(many=True)
 
     class Meta:
         model = models.Order
-        fields = ['id', 'customer_id', 'status', 'datetime_created', 'items']
+        fields = ['id', 'customer', 'status', 'datetime_created', 'items']
 
 
 
