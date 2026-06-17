@@ -146,9 +146,9 @@ class CustomerViewSet(ModelViewSet):
 class OrderViewSet(ModelViewSet):
     serializer_class = serializers.OrderSerializer
 
-    
+
     #                      .prefetch_related('items__product').
-    queryset = models.Order.objects.all()
+    queryset = models.Order.objects.prefetch_related('items__product').all()
 
 
 
