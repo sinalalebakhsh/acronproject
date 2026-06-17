@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404,render
-from django.db.models import Count
+from django.db.models import Prefetch
 # from django.http import JsonResponse, HttpResponse
 
 from rest_framework.decorators import api_view
@@ -148,7 +148,16 @@ class OrderViewSet(ModelViewSet):
 
 
     #                      .prefetch_related('items__product').
-    queryset = models.Order.objects.prefetch_related('items__product').all()
+    # queryset = models.Order.objects.prefetch_related('items').all()
+
+    def get_queryset(self):
+        # return models.Order.objects.prefetch_related('items__product').all()
+        return models.Order.objects.prefetch_related(
+            Prefetch(
+                'items',
+                queryset = models.OrderItem.objects.select_related('product'),
+            )
+        ).all()
 
 
 
