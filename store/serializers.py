@@ -153,8 +153,8 @@ class CustomerSerializer(serializers.ModelSerializer):
 این سریالایزر کاستومر مخصوص نمایش داخل اوردر هستش
 """
 class CustomerOrderSerializer(serializers.ModelSerializer):
-    first_name = serializers.CharField(source='user.first_name')
-    last_name = serializers.CharField(source='user.last_name')
+    first_name = serializers.CharField(max_length=255, source='user.first_name')
+    last_name = serializers.CharField(max_length=255, source='user.last_name')
     email = serializers.EmailField(source='user.email')
 
     class Meta:

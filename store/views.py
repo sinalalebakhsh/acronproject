@@ -153,7 +153,7 @@ class OrderViewSet(ModelViewSet):
     def get_queryset(self):
         # return models.Order.objects.prefetch_related('items__product').all()
         return models.Order.objects\
-            .select_related('customer')\
+            .select_related('customer__user')\
             .prefetch_related(
                 Prefetch(
                     'items',
