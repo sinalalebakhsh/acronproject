@@ -38,16 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     # INSTALL Third party
     'django_filters',
     'rest_framework',
     'djoser',
     'debug_toolbar',
-
-
-
-
     # CREATE by me 
     'store',
     'core',

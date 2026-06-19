@@ -181,7 +181,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 
 
-class OrderSerializer(serializers.ModelSerializer):
+class OrderForAdminSerializer(serializers.ModelSerializer):
     customer = CustomerOrderSerializer(read_only=True)
     items = OrderItemSerializer(many=True)
 
@@ -189,6 +189,14 @@ class OrderSerializer(serializers.ModelSerializer):
         model = models.Order
         fields = ['id', 'customer', 'status', 'datetime_created', 'items']
 
+
+class OrderForCustomerSerializer(serializers.ModelSerializer):
+    # customer = CustomerOrderSerializer(read_only=True)
+    items = OrderItemSerializer(many=True)
+
+    class Meta:
+        model = models.Order
+        fields = ['id', 'status', 'datetime_created', 'items']
 
 
 
