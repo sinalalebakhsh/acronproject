@@ -199,6 +199,8 @@ class OrderForCustomerSerializer(serializers.ModelSerializer):
         fields = ['id', 'status', 'datetime_created', 'items']
 
 
+class OrderCreateSerializer(serializers.Serializer):
+    cart_id = serializers.UUIDField()
 
 
 

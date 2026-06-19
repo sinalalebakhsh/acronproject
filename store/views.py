@@ -173,6 +173,11 @@ class OrderViewSet(ModelViewSet):
         return serializers.OrderForCustomerSerializer
 
 
+
+
+
+
+
 """ ## class ProductList(ListCreateAPIView): + class ProductDetail(RetrieveUpdateDestroyAPIView):
 # class ProductList(ListCreateAPIView):
 #     serializer_class = serializers.ProductSerializer
