@@ -146,8 +146,7 @@ class CustomerViewSet(ModelViewSet):
 class OrderViewSet(ModelViewSet):
     permission_classes =  [IsAuthenticated]
     #                      .prefetch_related('items__product').
-    # queryset = models.Order.objects.prefetch_related('items').all()
-    
+    # queryset = models.Order.objects.prefetch_related('items').all()    
     def get_queryset(self):
         # return models.Order.objects.prefetch_related('items__product').all()
         queryset =  models.Order.objects\
@@ -158,20 +157,20 @@ class OrderViewSet(ModelViewSet):
                     queryset = models.OrderItem.objects.select_related('product'),
                 )
         ).all()
-
-
         USER = self.request.user
         if USER.is_staff:
             return queryset
-
         return queryset.filter(customer__user_id=USER.id)
 
     def get_serializer_class(self):
-        USER = self.request.user
-        if USER.is_staff:
+        if self.request.method == 'POST':
+            return serializers.OrderCreateSerializer
+        if self.request.user.is_staff:
             return serializers.OrderForAdminSerializer
         return serializers.OrderForCustomerSerializer
 
+    def get_serializer_context(self):
+        return {'user_id': self.request.user.id}
 
 
 

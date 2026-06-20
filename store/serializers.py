@@ -202,6 +202,39 @@ class OrderForCustomerSerializer(serializers.ModelSerializer):
 class OrderCreateSerializer(serializers.Serializer):
     cart_id = serializers.UUIDField()
 
+    def validate_cart_id(self, cart_id):
+        if not models.Cart.objects.filter(id=cart_id).exists():
+            raise serializers.ValidationError('There is not cart with cart id.')
+    
+        if models.CartItem.objects.filter(cart_id=cart_id).count == 0:
+            raise serializers.ValidationError('cart is empty.')
+        """ خط پایین همین کار دو خط بالایی را انجام میدهد """
+        # try:
+        #     if models.Cart.objects.prefetch_related('items').get(id=cart_id).items.count() == 0:
+        #         raise serializers.ValidationError('cart is empty.')
+        # except models.Cart.DoesNotExist:
+        #     raise serializers.ValidationError('There is not cart with cart id.')
+        return cart_id
+    
+    def save(self, **kwargs):
+        cart_id = self.validated_data['cart_id']
+        user_id = self.context['user_id']
+        customer = Customer.objects.get(user_id=user_id)
+
+        order = models.Order()
+        order.customer = customer
+        
+        """ 
+        خط پایین یک راهکار برای ذخیره است ولی دو عدد کوئری تولید میکند
+        """
+        # models.Cart.objects.prefetch_related('items').get(id=cart_id).items.all()
+
+        order.save()
+
+        """ خط پایین داخل ترمینال نمایش داده میشود تا صرفا متوجه بشی که
+          چه شخصی با چه اطلاعاتی در حال ثبت سفارش از سبد خرید است """
+        # print(f'cart_id={cart_id=}, user_id={user_id=}, customer={customer.user.first_name=}')
+
 
 
 """ # ارور داد
